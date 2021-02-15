@@ -34,5 +34,6 @@ namespace ORP_API.Models
         [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
         public virtual Account Account { get; set; }
+        public virtual List<OvertimeFormEmployee> OvertimeFormEmployees { get; set; } = new List<OvertimeFormEmployee>();
     }
 }

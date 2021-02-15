@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ORP_API.Repositories.Data
 {
-    public class AccountRepository : GeneralRepository<Account, MyContext, int>
+    public class AccountRepository : GeneralRepository<Account, MyContext, string>
     {
         public AccountRepository(MyContext myContext) : base(myContext)
         {

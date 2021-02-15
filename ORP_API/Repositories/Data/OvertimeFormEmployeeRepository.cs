@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ORP_API.Repositories.Data
 {
-    public class EmployeeRepository : GeneralRepository<Employee, MyContext, string>
+    public class OvertimeFormEmployeeRepository : GeneralRepository<OvertimeFormEmployee, MyContext, int>
     {
-        public EmployeeRepository(MyContext myContext) : base(myContext)
+        public OvertimeFormEmployeeRepository(MyContext myContext) : base(myContext)
         {
 
         }

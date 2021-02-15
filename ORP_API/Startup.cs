@@ -34,6 +34,8 @@ namespace ORP_API
             services.AddScoped<CustomerRepository>();
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<AccountRepository>();
+            services.AddScoped<OvertimeFormRepository>();
+            services.AddScoped<OvertimeFormEmployeeRepository>();
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

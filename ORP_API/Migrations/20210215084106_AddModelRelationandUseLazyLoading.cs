@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ORP_API.Migrations
 {
-    public partial class AddModelRelationandLazyLoading : Migration
+    public partial class AddModelRelationandUseLazyLoading : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,6 +18,25 @@ namespace ORP_API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_m_customer", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tb_m_overtime_form",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    SubmissionDate = table.Column<DateTime>(nullable: false),
+                    CustomerName = table.Column<string>(nullable: true),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    Activity = table.Column<string>(maxLength: 100, nullable: false),
+                    AdditionalSalary = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tb_m_overtime_form", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,6 +102,34 @@ namespace ORP_API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "tb_m_overtime_form_employee",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<string>(nullable: false),
+                    CustomerName = table.Column<string>(nullable: true),
+                    NIK = table.Column<string>(nullable: true),
+                    OvertimeFormId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tb_m_overtime_form_employee", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_tb_m_overtime_form_employee_tb_m_employee_NIK",
+                        column: x => x.NIK,
+                        principalTable: "tb_m_employee",
+                        principalColumn: "NIK",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_tb_m_overtime_form_employee_tb_m_overtime_form_OvertimeFormId",
+                        column: x => x.OvertimeFormId,
+                        principalTable: "tb_m_overtime_form",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_tb_m_employee_CustomerId",
                 table: "tb_m_employee",
@@ -91,6 +139,16 @@ namespace ORP_API.Migrations
                 name: "IX_tb_m_employee_RoleId",
                 table: "tb_m_employee",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tb_m_overtime_form_employee_NIK",
+                table: "tb_m_overtime_form_employee",
+                column: "NIK");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tb_m_overtime_form_employee_OvertimeFormId",
+                table: "tb_m_overtime_form_employee",
+                column: "OvertimeFormId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -99,7 +157,13 @@ namespace ORP_API.Migrations
                 name: "tb_m_account");
 
             migrationBuilder.DropTable(
+                name: "tb_m_overtime_form_employee");
+
+            migrationBuilder.DropTable(
                 name: "tb_m_employee");
+
+            migrationBuilder.DropTable(
+                name: "tb_m_overtime_form");
 
             migrationBuilder.DropTable(
                 name: "tb_m_customer");

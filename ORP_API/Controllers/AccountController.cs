@@ -12,7 +12,7 @@ namespace ORP_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : BaseController<Account, AccountRepository, int>
+    public class AccountController : BaseController<Account, AccountRepository, string>
     {
         public AccountController(AccountRepository accountRepository) : base(accountRepository)
         {

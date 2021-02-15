@@ -12,9 +12,9 @@ namespace ORP_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : BaseController<Employee, EmployeeRepository, string>
+    public class OvertimeFormEmployeeController : BaseController<OvertimeFormEmployee, OvertimeFormEmployeeRepository, int>
     {
-        public EmployeeController(EmployeeRepository employeeRepository) : base(employeeRepository)
+        public OvertimeFormEmployeeController(OvertimeFormEmployeeRepository overtimeFormEmployeeRepository) : base(overtimeFormEmployeeRepository)
         {
 
         }
