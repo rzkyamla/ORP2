@@ -10,7 +10,7 @@ using ORP_API.Context;
 namespace ORP_API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210215084106_AddModelRelationandUseLazyLoading")]
+    [Migration("20210215094648_AddModelRelationandUseLazyLoading")]
     partial class AddModelRelationandUseLazyLoading
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,9 +157,8 @@ namespace ORP_API.Migrations
                     b.Property<int>("OvertimeFormId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

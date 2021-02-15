@@ -13,7 +13,7 @@ namespace ORP_API.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string Status { get; set; }
+        public StatusRequest Status { get; set; }
         public string CustomerName { get; set; }
         public string NIK { get; set; }
         [ForeignKey("NIK")]
@@ -21,5 +21,11 @@ namespace ORP_API.Models
         public int OvertimeFormId { get; set; }
         [ForeignKey("OvertimeFormId")]
         public virtual OvertimeForm OvertimeForm { get; set; }
+    }
+    public enum StatusRequest
+    {
+        Waiting,
+        Approve,
+        Reject
     }
 }

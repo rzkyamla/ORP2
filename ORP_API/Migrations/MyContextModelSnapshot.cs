@@ -155,9 +155,8 @@ namespace ORP_API.Migrations
                     b.Property<int>("OvertimeFormId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

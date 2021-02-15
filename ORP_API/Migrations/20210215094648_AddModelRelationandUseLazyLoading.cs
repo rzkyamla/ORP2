@@ -108,7 +108,7 @@ namespace ORP_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Status = table.Column<string>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
                     CustomerName = table.Column<string>(nullable: true),
                     NIK = table.Column<string>(nullable: true),
                     OvertimeFormId = table.Column<int>(nullable: false)
