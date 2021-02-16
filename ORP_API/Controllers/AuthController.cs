@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ORP_API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -33,9 +33,9 @@ namespace ORP_API.Controllers
         }
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] LoginViewModels loginVM)
+        public IActionResult Authenticate([FromBody] LoginViewModels loginViewModels)
         {
-            var token = jWTAuthenticationManager.Generate(Login(loginVM));
+            var token = jWTAuthenticationManager.Generate(Login(loginViewModels));
             if (token == null)
                 return Unauthorized();
             return Ok(token);
