@@ -17,6 +17,7 @@ namespace ORP_API.Repositories.Data
     public class AccountRepository : GeneralRepository<Account, MyContext, string>
     {
         private readonly MyContext myContext;
+        private DbSet<Account> accounts;
         private readonly EmployeeRepository employeeRepository;
         private readonly SendEmail sendEmail = new SendEmail();
         public IConfiguration Configuration { get; }
@@ -39,14 +40,13 @@ namespace ORP_API.Repositories.Data
                 Religion = registerViewModels.Religion,
                 Email = registerViewModels.Email,
                 PhoneNumber = registerViewModels.PhoneNumber,
-                RoleId = registerViewModels.RoleId,
-                CustomerId = registerViewModels.CustomerId,
-                Password = registerViewModels.Password
+                RoleId = 4,
+                CustomerId = registerViewModels.CustomerId
             };
             var account = new Account()
             {
                 NIK = registerViewModels.NIK,
-                Password = registerViewModels.Password
+                Password = Hashing.HashPassword("B0o7c@mp")
             };
 
             var resultEmployee = employeeRepository.Create(employee);
@@ -55,6 +55,7 @@ namespace ORP_API.Repositories.Data
 
             if (resultEmployee > 0 && resultAccount > 0)
             {
+                sendEmail.SendPassword(employee.Email);
                 return 1;
             }
             else
@@ -63,17 +64,26 @@ namespace ORP_API.Repositories.Data
             }
         }
 
-        public LoginViewModels Login(string email, string password)
+        public LoginViewModels Login(LoginViewModels loginViewModels)
         {
             LoginViewModels result = null;
 
             string connectStr = Configuration.GetConnectionString("MyConnection");
+            var employeeCondition = myContext.Employee.Where(a => a.Email == loginViewModels.Email).FirstOrDefault();
 
-            using (IDbConnection db = new SqlConnection(connectStr))
+            if (employeeCondition != null)
             {
-                string readSp = "sp_retrieve_login";
-                var parameter = new { Email = email, Password = password };
-                result = db.Query<LoginViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                //var accountCondition = myContext.Account.Any(a => a.Password == loginViewModels.Password);
+
+                if (Hashing.ValidatePassword(loginViewModels.Password, employeeCondition.Name))
+                {
+                    using (IDbConnection db = new SqlConnection(connectStr))
+                    {
+                        string readSp = "sp_retrieve_login";
+                        var parameter = new { Email = loginViewModels.Email, Password = loginViewModels.Password };
+                        result = db.Query<LoginViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    }
+                }
             }
             return result;
         }
