@@ -28,7 +28,7 @@ namespace ORP_API.Controllers
         [HttpPost("Login")]
         public LoginViewModels Login([FromBody] LoginViewModels loginViewModels)
         {
-            var user = accountRepository.Login(loginViewModels.Email, loginViewModels.Password);
+            var user = accountRepository.Login(loginViewModels);
             return user;
         }
         [AllowAnonymous]
