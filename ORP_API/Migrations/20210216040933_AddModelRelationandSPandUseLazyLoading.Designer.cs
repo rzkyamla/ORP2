@@ -10,8 +10,8 @@ using ORP_API.Context;
 namespace ORP_API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210215094648_AddModelRelationandUseLazyLoading")]
-    partial class AddModelRelationandUseLazyLoading
+    [Migration("20210216040933_AddModelRelationandSPandUseLazyLoading")]
+    partial class AddModelRelationandSPandUseLazyLoading
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
