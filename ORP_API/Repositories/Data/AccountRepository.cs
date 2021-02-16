@@ -88,7 +88,7 @@ namespace ORP_API.Repositories.Data
             {
                 myContext.Entry(account).State = EntityState.Modified;
                 var result = myContext.SaveChanges();
-                sendEmail.Send(email);
+                sendEmail.SendNotification(email);
                 return result;
             }
         }

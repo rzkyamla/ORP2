@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ORP_API.Context;
+using ORP_API.Handler;
 using ORP_API.Repositories.Data;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ namespace ORP_API
             services.AddScoped<AccountRepository>();
             services.AddScoped<OvertimeFormRepository>();
             services.AddScoped<OvertimeFormEmployeeRepository>();
+            services.JwtConfigure(Configuration);
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -50,11 +52,9 @@ namespace ORP_API
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

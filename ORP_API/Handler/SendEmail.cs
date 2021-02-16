@@ -9,7 +9,7 @@ namespace ORP_API.Handler
 {
     public class SendEmail
     {
-        public void Send(string email)
+        public void SendNotification(string email)
         {
             var time24 = DateTime.Now.ToString("HH:mm:ss");
 

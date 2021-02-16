@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ORP_API.Migrations
 {
-    public partial class AddModelRelationandSPandUseLazyLoading : Migration
+    public partial class AddModelRelationandSPandUseLazyLoadingandJWT : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

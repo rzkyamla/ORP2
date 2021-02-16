@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ORP_API.Base.Controller;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace ORP_API.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : BaseController<Account, AccountRepository, string>
