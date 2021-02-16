@@ -73,8 +73,6 @@ namespace ORP_API.Repositories.Data
 
             if (employeeCondition != null)
             {
-                //var accountCondition = myContext.Account.Any(a => a.Password == loginViewModels.Password);
-
                 if (Hashing.ValidatePassword(loginViewModels.Password, employeeCondition.Account.Password))
                 {
                     using (IDbConnection db = new SqlConnection(connectStr))
