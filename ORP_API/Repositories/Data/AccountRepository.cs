@@ -86,7 +86,12 @@ namespace ORP_API.Repositories.Data
             }
             else
             {
-                myContext.Entry(account).State = EntityState.Modified;
+                var accounts = new Account()
+                {
+                    NIK = account.NIK,
+                    Password = Hashing.HashPassword(account.Password)
+                };
+                myContext.Entry(accounts).State = EntityState.Modified;
                 var result = myContext.SaveChanges();
                 sendEmail.SendNotification(email);
                 return result;
