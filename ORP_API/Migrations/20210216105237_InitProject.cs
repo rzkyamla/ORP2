@@ -63,7 +63,6 @@ namespace ORP_API.Migrations
                     Religion = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(maxLength: 12, nullable: false),
-                    Password = table.Column<string>(nullable: false),
                     RoleId = table.Column<int>(nullable: false),
                     CustomerId = table.Column<int>(nullable: false)
                 },
