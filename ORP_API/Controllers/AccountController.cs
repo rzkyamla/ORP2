@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ORP_API.Base.Controller;
+using ORP_API.Handler;
 using ORP_API.Models;
 using ORP_API.Repositories.Data;
 using ORP_API.ViewModels;
@@ -59,7 +60,7 @@ namespace ORP_API.Controllers
             var acc = accountRepository.Get(NIK);
             if (acc != null)
             {
-                if (acc.Password == changePasswordVM.OldPassword)
+                if (Hashing.ValidatePassword(changePasswordVM.OldPassword, acc.Password))
                 {
                     var data = accountRepository.ChangePassword(NIK, changePasswordVM.NewPassword);
                     return Ok(data);

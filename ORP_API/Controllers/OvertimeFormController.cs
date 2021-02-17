@@ -16,7 +16,6 @@ namespace ORP_API.Controllers
     {
         public OvertimeFormController(OvertimeFormRepository overtimeFormRepository) : base(overtimeFormRepository)
         {
-
         }
     }
 }

@@ -11,11 +11,6 @@ namespace ORP_API.Handler
 {
     public class SendEmail
     {
-       /* private readonly MyContext myContext;
-        public SendEmail(MyContext myContext)
-        {
-            this.myContext = myContext;
-        }*/
         public void SendNotification(string resetCode, string email)
         { 
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
@@ -26,7 +21,7 @@ namespace ORP_API.Handler
             NetworkCredential nc = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
             smtp.Credentials = nc;
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("1997HelloWorld1997@gmail.com", "Leave Request Reset Password");
+            mailMessage.From = new MailAddress("1997HelloWorld1997@gmail.com", "Overtime Request Reset Password");
             mailMessage.To.Add(new MailAddress(email));
             mailMessage.Subject = "Reset Password " + DateTime.Now.ToString("HH:mm:ss");
             mailMessage.IsBodyHtml = false;
