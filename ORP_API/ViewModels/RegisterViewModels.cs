@@ -24,8 +24,6 @@ namespace ORP_API.ViewModels
         [Required(ErrorMessage = "Tidak boleh kosong"), RegularExpression(@"^08[0-9]{10,12}$", ErrorMessage = "Harus berupa angka diawali 08"), MinLength(10, ErrorMessage = "Minimal 10 karakter"), MaxLength(12, ErrorMessage = "Maksimal 12 karakter")]
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Tidak boleh kosong"), DataType(DataType.Password)]
-        public int RoleId { get; set; }
         public int CustomerId { get; set; }
-        public string Password { get; set; }
     }
 }

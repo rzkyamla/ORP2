@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ORP_API.Migrations
 {
-    public partial class AddModelRelationUseLazyLoadingJwtandSP : Migration
+    public partial class InitProject : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,7 +63,6 @@ namespace ORP_API.Migrations
                     Religion = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(maxLength: 12, nullable: false),
-                    Password = table.Column<string>(nullable: false),
                     RoleId = table.Column<int>(nullable: false),
                     CustomerId = table.Column<int>(nullable: false)
                 },

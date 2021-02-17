@@ -10,8 +10,8 @@ using ORP_API.Context;
 namespace ORP_API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210216093117_AddModelRelationUseLazyLoadingJwtandSP")]
-    partial class AddModelRelationUseLazyLoadingJwtandSP
+    [Migration("20210216105237_InitProject")]
+    partial class InitProject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,10 +78,6 @@ namespace ORP_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()

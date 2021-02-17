@@ -18,9 +18,9 @@ namespace ORP_API.Handler
         {
             this.tokenKey = tokenKey;
         }
-        public string Generate(LoginViewModels loginVM)
+        public string Generate(LoginViewModels loginViewModels)
         {
-            if (loginVM != null)
+            if (loginViewModels != null)
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(tokenKey);
@@ -28,9 +28,9 @@ namespace ORP_API.Handler
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                    new Claim("Name", loginVM.Name),
-                    new Claim("Email", loginVM.Email),
-                    new Claim(ClaimTypes.Role, "Employee")
+                    new Claim("Name", loginViewModels.Name),
+                    new Claim("Email", loginViewModels.Email),
+                    new Claim(ClaimTypes.Role, loginViewModels.RoleName)
                     }),
                     Expires = DateTime.UtcNow.AddMinutes(20),
                     SigningCredentials = new SigningCredentials(
@@ -45,7 +45,7 @@ namespace ORP_API.Handler
     }
     public interface IJWTAuthenticationManager
     {
-        string Generate(LoginViewModels loginVM);
+        string Generate(LoginViewModels loginViewModels);
     }
 
 }
