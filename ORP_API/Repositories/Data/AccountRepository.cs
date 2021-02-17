@@ -41,7 +41,7 @@ namespace ORP_API.Repositories.Data
                 Religion = registerViewModels.Religion,
                 Email = registerViewModels.Email,
                 PhoneNumber = registerViewModels.PhoneNumber,
-                RoleId = 1,
+                RoleId = 4,
                 CustomerId = registerViewModels.CustomerId
             };
             var account = new Account()
