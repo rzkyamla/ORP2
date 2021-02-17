@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ORP_API.Migrations
 {
-    public partial class AddModelRelationUseLazyLoadingandStoreProcedure : Migration
+    public partial class InitProject : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,14 +25,7 @@ namespace ORP_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    SubmissionDate = table.Column<DateTime>(nullable: false),
-                    CustomerName = table.Column<string>(nullable: true),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false),
-                    Activity = table.Column<string>(maxLength: 100, nullable: false),
-                    AdditionalSalary = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -50,6 +43,32 @@ namespace ORP_API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_m_role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Details",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    SubmissionDate = table.Column<DateTime>(nullable: false),
+                    CustomerName = table.Column<string>(nullable: true),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    Activity = table.Column<string>(maxLength: 100, nullable: false),
+                    AdditionalSalary = table.Column<int>(nullable: false),
+                    OvertimeFormId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Details", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Details_tb_m_overtime_form_OvertimeFormId",
+                        column: x => x.OvertimeFormId,
+                        principalTable: "tb_m_overtime_form",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -130,6 +149,11 @@ namespace ORP_API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Details_OvertimeFormId",
+                table: "Details",
+                column: "OvertimeFormId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tb_m_employee_CustomerId",
                 table: "tb_m_employee",
                 column: "CustomerId");
@@ -152,6 +176,9 @@ namespace ORP_API.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Details");
+
             migrationBuilder.DropTable(
                 name: "tb_m_account");
 

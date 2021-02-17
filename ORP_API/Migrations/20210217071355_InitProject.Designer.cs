@@ -10,8 +10,8 @@ using ORP_API.Context;
 namespace ORP_API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210217033018_AddModelRelationUseLazyLoadingandStoreProcedure")]
-    partial class AddModelRelationUseLazyLoadingandStoreProcedure
+    [Migration("20210217071355_InitProject")]
+    partial class InitProject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,48 @@ namespace ORP_API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tb_m_customer");
+                });
+
+            modelBuilder.Entity("ORP_API.Models.Details", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Activity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<int>("AdditionalSalary")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int?>("OvertimeFormId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("SubmissionDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OvertimeFormId");
+
+                    b.ToTable("Details");
                 });
 
             modelBuilder.Entity("ORP_API.Models.Employee", b =>
@@ -106,31 +148,6 @@ namespace ORP_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Activity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<int>("AdditionalSalary")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("SubmissionDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -189,6 +206,13 @@ namespace ORP_API.Migrations
                         .HasForeignKey("ORP_API.Models.Account", "NIK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ORP_API.Models.Details", b =>
+                {
+                    b.HasOne("ORP_API.Models.OvertimeForm", null)
+                        .WithMany("Details")
+                        .HasForeignKey("OvertimeFormId");
                 });
 
             modelBuilder.Entity("ORP_API.Models.Employee", b =>
