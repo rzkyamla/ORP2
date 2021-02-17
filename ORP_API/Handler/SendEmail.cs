@@ -11,11 +11,6 @@ namespace ORP_API.Handler
 {
     public class SendEmail
     {
-       /* private readonly MyContext myContext;
-        public SendEmail(MyContext myContext)
-        {
-            this.myContext = myContext;
-        }*/
         public void SendNotification(string resetCode, string email)
         { 
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);

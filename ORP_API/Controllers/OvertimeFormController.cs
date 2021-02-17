@@ -14,9 +14,23 @@ namespace ORP_API.Controllers
     [ApiController]
     public class OvertimeFormController : BaseController<OvertimeForm, OvertimeFormRepository, int>
     {
+        private readonly OvertimeFormRepository overtimeFormRepository;
         public OvertimeFormController(OvertimeFormRepository overtimeFormRepository) : base(overtimeFormRepository)
         {
-
+            this.overtimeFormRepository = overtimeFormRepository;
+        }
+        [HttpPost("Apply")]
+        public IActionResult AddOvertime([FromBody] OvertimeForm overtimeForm)
+        {
+            try
+            {
+                var data = overtimeFormRepository.Create(overtimeForm);
+                return Ok(new { data = data, status = "Ok" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }
