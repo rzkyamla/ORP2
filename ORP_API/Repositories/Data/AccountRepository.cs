@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace ORP_API.Repositories.Data
@@ -87,22 +89,51 @@ namespace ORP_API.Repositories.Data
         }
         public int ResetPassword(Account account, string email)
         {
-            var data = myContext.Employee.Where(x => x.Email == email).FirstOrDefault();
-            if (data == null)
+            string resetCode = Guid.NewGuid().ToString();
+            var time24 = DateTime.Now.ToString("HH:mm:ss");
+            var getuser = myContext.Employee.Where(a => a.Email == email).FirstOrDefault();
+            if (getuser == null)
             {
                 return 0;
             }
             else
             {
-                var accounts = new Account()
-                {
-                    NIK = account.NIK,
-                    Password = Hashing.HashPassword(account.Password)
-                };
-                myContext.Entry(accounts).State = EntityState.Modified;
+                var password = Hashing.HashPassword(resetCode);
+                getuser.Password = password;
                 var result = myContext.SaveChanges();
-                sendEmail.SendNotification(email);
+
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.Credentials = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                NetworkCredential nc = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
+                smtp.Credentials = nc;
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("1997HelloWorld1997@gmail.com", "Leave Request Reset Password");
+                mailMessage.To.Add(new MailAddress(getuser.Email));
+                mailMessage.Subject = "Reset Password " + time24;
+                mailMessage.IsBodyHtml = false;
+                mailMessage.Body = "Hi " + getuser.Name + "\nThis is new password for your account.\n\n " + resetCode + "\nThank You";
+                smtp.Send(mailMessage);
                 return result;
+                /*var data = myContext.Employee.Where(x => x.Email == email).FirstOrDefault();
+                if (data == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    var accounts = new Account()
+                    {
+                        NIK = account.NIK,
+                        Password = Hashing.HashPassword(account.Password)
+                    };
+                    myContext.Entry(accounts).State = EntityState.Modified;
+                    var result = myContext.SaveChanges();
+                    sendEmail.SendNotification(email);
+                    return result;
+                }*/
             }
         }
         public int ChangePassword(string NIK, string password)
