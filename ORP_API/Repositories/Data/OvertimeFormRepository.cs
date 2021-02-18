@@ -9,7 +9,6 @@ namespace ORP_API.Repositories.Data
 {
     public class OvertimeFormRepository : GeneralRepository<OvertimeForm, MyContext, int>
     {
-        
         public OvertimeFormRepository(MyContext myContext) : base(myContext)
         {
         }

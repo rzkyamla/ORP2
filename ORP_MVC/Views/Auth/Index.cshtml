@@ -1,0 +1,124 @@
+﻿<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Register">Register</a>
+<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Login">Login</a>
+
+<div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Register</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="roleform" action="Auth/Register">
+                    <div class="form-group">
+                        <label for="id" class="col-form-label">NIK</label>
+                        <input type="text" class="form-control" id="nik" name="nik">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">BirthDate</label>
+                        <input type="text" class="form-control" id="birthdate" name="birthdate">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Gender</label>
+                        <input type="text" class="form-control" id="gender" me="gender">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Religion</label>
+                        <input type="text" class="form-control" id="religion" name="religion">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Email</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group" hidden>
+                        <label for="name" class="col-form-label">Password</label>
+                        <input type="text" class="form-control" id="password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">PhoneNumber</label>
+                        <input type="text" class="form-control" id="hp" name="hp">
+                    </div>
+                    <div class="form-group" hidden>
+                        <label for="name" class="col-form-label">RoleId</label>
+                        <input type="text" class="form-control" id="roleid" name="roleid">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">CustomerId</label>
+                        <input type="text" class="form-control" id="customerid" name="customerid">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="roleform" action="Auth/">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Email</label>
+                        <input type="text" class="form-control" id="emaillogin" name="emaillogin">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Password</label>
+                        <input type="text" class="form-control" id="passwordlogin" name="passwordlogin">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Submit()" >Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Coba() {
+        alert("Nampil dong");
+    }
+    function Submit() {
+       
+        var Employee = new Object();
+        Employee.NIK = $("#nik").val();
+        Employee.Name = $("#name").val();
+        Employee.BirthDate = $("#birthdate").val();
+        Employee.Gender = $("#gender").val();
+        Employee.Religion = $("#religion").val();
+        Employee.Email = $("#email").val();
+        Employee.PhoneNumber = $("#hp").val();
+        Employee.CustomerId = $("#customerid").val();
+
+        console.log(Employee);
+        $.ajax({
+            type: 'post',
+            url: '/auth/register',
+            data: Employee
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Successed to Add Data!");
+                
+            }
+            }).fail((result) => {
+                console.log(result);
+                alert("Failed to Add Data!");
+            })
+    }
+</script>

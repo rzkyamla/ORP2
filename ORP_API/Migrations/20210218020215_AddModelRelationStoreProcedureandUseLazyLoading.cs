@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ORP_API.Migrations
 {
-    public partial class InitProject : Migration
+    public partial class AddModelRelationStoreProcedureandUseLazyLoading : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,7 +25,10 @@ namespace ORP_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    SubmissionDate = table.Column<DateTime>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,21 +54,18 @@ namespace ORP_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    SubmissionDate = table.Column<DateTime>(nullable: false),
-                    CustomerName = table.Column<string>(nullable: true),
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     Activity = table.Column<string>(maxLength: 100, nullable: false),
                     AdditionalSalary = table.Column<int>(nullable: false),
-                    OvertimeFormId = table.Column<int>(nullable: true)
+                    CustomerId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Details", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Details_tb_m_overtime_form_OvertimeFormId",
-                        column: x => x.OvertimeFormId,
+                        name: "FK_Details_tb_m_overtime_form_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "tb_m_overtime_form",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -127,7 +127,7 @@ namespace ORP_API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<int>(nullable: false),
-                    CustomerName = table.Column<string>(nullable: true),
+                    CustomerId = table.Column<int>(nullable: false),
                     NIK = table.Column<string>(nullable: true),
                     OvertimeFormId = table.Column<int>(nullable: false)
                 },
@@ -149,9 +149,9 @@ namespace ORP_API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Details_OvertimeFormId",
+                name: "IX_Details_CustomerId",
                 table: "Details",
-                column: "OvertimeFormId");
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_m_employee_CustomerId",
