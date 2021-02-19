@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ORP_API.Base.Controller;
+using ORP_API.Handler;
 using ORP_API.Models;
 using ORP_API.Repositories.Data;
 using ORP_API.ViewModels;
@@ -46,7 +47,7 @@ namespace ORP_API.Controllers
                 return BadRequest(new { status = "Bad request", errorMessage = "Data input is not valid" });
             }
         }
-        [HttpPut("reset/{email}/{id}")]
+        [HttpPut("reset/{email}/")]
         public ActionResult ResetPassword(Account account, string email)
         {
             var data = accountRepository.ResetPassword(account, email);
@@ -54,14 +55,14 @@ namespace ORP_API.Controllers
         }
 
         [HttpPut("ChangePassword/{NIK}")]
-        public ActionResult ChangePassword(string NIK, ChangePasswordViewModels changePasswordVM)
+        public ActionResult ChangePassword(string NIK, ChangePasswordViewModels changePasswordViewModels)
         {
             var acc = accountRepository.Get(NIK);
             if (acc != null)
             {
-                if (acc.Password == changePasswordVM.OldPassword)
+                if (Hashing.ValidatePassword(changePasswordViewModels.OldPassword, acc.Password))
                 {
-                    var data = accountRepository.ChangePassword(NIK, changePasswordVM.NewPassword);
+                    var data = accountRepository.ChangePassword(NIK, changePasswordViewModels.NewPassword);
                     return Ok(data);
                 }
                 else

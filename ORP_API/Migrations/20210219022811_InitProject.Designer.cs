@@ -10,7 +10,7 @@ using ORP_API.Context;
 namespace ORP_API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210218102500_InitProject")]
+    [Migration("20210219022811_InitProject")]
     partial class InitProject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,8 +138,8 @@ namespace ORP_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORP_API", "ORP_API\ORP_API.csproj", "{AF73B336-332A-45C6-91A8-51B032DCE5D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORP_API", "ORP_API\ORP_API.csproj", "{AF73B336-332A-45C6-91A8-51B032DCE5D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORP_MVC", "ORP_MVC\ORP_MVC.csproj", "{90E323A6-0CB1-4CF7-9E4A-167334D33B92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{AF73B336-332A-45C6-91A8-51B032DCE5D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF73B336-332A-45C6-91A8-51B032DCE5D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF73B336-332A-45C6-91A8-51B032DCE5D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90E323A6-0CB1-4CF7-9E4A-167334D33B92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E323A6-0CB1-4CF7-9E4A-167334D33B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E323A6-0CB1-4CF7-9E4A-167334D33B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E323A6-0CB1-4CF7-9E4A-167334D33B92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,168 @@
+﻿<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Register">Register</a>
+<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Login">Login</a>
+
+<div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Register</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="roleform" action="Auth/Register">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="id" class="col-form-label">NIK</label>
+                                <input type="text" class="form-control" id="nik" name="nik">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">BirthDate</label>
+                                <input type="text" class="form-control" id="birthdate" name="birthdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Gender</label>
+                                <select id="gender" class="form-control" name="gender">
+                                    <option value="Laki - laki">Laki - Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Email</label>
+                                <input type="text" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group" hidden>
+                                <label for="name" class="col-form-label">Password</label>
+                                <input type="text" class="form-control" id="password" name="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">PhoneNumber</label>
+                                <input type="text" class="form-control" id="hp" name="hp">
+                            </div>
+                            <div class="form-group" hidden>
+                                <label for="name" class="col-form-label">RoleId</label>
+                                <input type="text" class="form-control" id="roleid" name="roleid">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Customer</label>
+                                <input type="text" class="form-control" id="customerid" name="customerid">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Religion</label>
+                                <select id="religion" class="form-control" name="religion">
+                                    <option value="Islam">Islam</option>
+                                    <option value="Kristen">Kristen</option>
+                                    <option value="Buddha">Budhha</option>
+                                    <option value="Hindu">Hindu</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="roleform" action="Auth/">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div id="r_Field_One" class="form-group">
+                            <label id="elh_sample_Field_One" for="x_Field_One" class="col-sm-2 control-label ewLabel">
+                                Test
+                            </label>
+                            <div class="col-sm-4">Test Value</div>
+                        </div>
+
+                        <div id="r_Field_Two" class="form-group">
+                            <label id="elh_sample_Field_Two" for="x_Field_Two" class="col-sm-2 control-label ewLabel">
+                                Test 2
+                            </label>
+                            <div class="col-sm-4">Test 2 Value</div>
+                        </div>
+
+                        <div id="r_Field_Three" class="form-group">
+                            <label id="elh_sample_Field_Three" for="x_Field_Three" class="col-sm-2 control-label ewLabel">
+                                Test 3
+                            </label>
+                            <div class="col-sm-4">Test 3 Value</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div id="r_Field_Four" class="form-group">
+                            <label id="elh_sample_Field_Four" for="x_Field_Four" class="col-sm-2 control-label ewLabel">
+                                Test 4
+                            </label>
+                            <div class="col-sm-4">Test 4 Value</div>
+                        </div>
+
+                        <div id="r_Field_Five" class="form-group">
+                            <label id="elh_sample_Field_Five" for="x_Field_Five" class="col-sm-2 control-label ewLabel">
+                                Test 5
+                            </label>
+                            <div class="col-sm-4">Test 5 Value</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Coba() {
+        alert("Nampil dong");
+    }
+    function Submit() {
+
+        var Employee = new Object();
+        Employee.NIK = $("#nik").val();
+        Employee.Name = $("#name").val();
+        Employee.BirthDate = $("#birthdate").val();
+        Employee.Gender = $("#gender").val();
+        Employee.Religion = $("#religion").val();
+        Employee.Email = $("#email").val();
+        Employee.PhoneNumber = $("#hp").val();
+        Employee.CustomerId = $("#customerid").val();
+        console.log(Employee);
+        $.ajax({
+            type: 'post',
+            url: '/auth/register',
+            data: Employee
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Successed to Add Data!");
+
+            }
+            }).fail((result) => {
+                console.log(result);
+                alert("Failed to Add Data!");
+            })
+    }
+</script>
