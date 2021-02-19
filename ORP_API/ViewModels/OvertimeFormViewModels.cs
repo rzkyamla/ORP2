@@ -10,7 +10,7 @@ namespace ORP_API.ViewModels
     {
         [Required(ErrorMessage = "Data tidak boleh kosong"), MaxLength(50, ErrorMessage = "Maksimal 50 Karakter")]
         public string Name { get; set; }
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
         [Required(ErrorMessage = "Data tidak boleh kosong"), DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{HH:mm:ss}")]
         public DateTime StartTime { get; set; }

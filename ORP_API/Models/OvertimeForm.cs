@@ -17,7 +17,7 @@ namespace ORP_API.Models
         [Required(ErrorMessage = "Data tidak boleh kosong"), DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime SubmissionDate { get; set; }
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public virtual List<Details> Details { get; set; }
         public virtual List<OvertimeFormEmployee> OvertimeFormEmployees { get; set; } = new List<OvertimeFormEmployee>();
     }
