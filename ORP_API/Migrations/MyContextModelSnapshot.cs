@@ -66,24 +66,13 @@ namespace ORP_API.Migrations
                     b.Property<int>("AdditionalSalary")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<int?>("OvertimeFormId")
+                    b.Property<int>("OvertimeFormId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("SubmissionDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -147,6 +136,17 @@ namespace ORP_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("SubmissionDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("tb_m_overtime_form");
@@ -159,8 +159,8 @@ namespace ORP_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(10)");
@@ -210,7 +210,9 @@ namespace ORP_API.Migrations
                 {
                     b.HasOne("ORP_API.Models.OvertimeForm", null)
                         .WithMany("Details")
-                        .HasForeignKey("OvertimeFormId");
+                        .HasForeignKey("OvertimeFormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ORP_API.Models.Employee", b =>

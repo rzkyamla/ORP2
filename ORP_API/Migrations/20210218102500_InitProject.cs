@@ -25,7 +25,10 @@ namespace ORP_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    SubmissionDate = table.Column<DateTime>(nullable: false),
+                    CustomerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,14 +54,11 @@ namespace ORP_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    SubmissionDate = table.Column<DateTime>(nullable: false),
-                    CustomerName = table.Column<string>(nullable: true),
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     Activity = table.Column<string>(maxLength: 100, nullable: false),
                     AdditionalSalary = table.Column<int>(nullable: false),
-                    OvertimeFormId = table.Column<int>(nullable: true)
+                    OvertimeFormId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,7 @@ namespace ORP_API.Migrations
                         column: x => x.OvertimeFormId,
                         principalTable: "tb_m_overtime_form",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,7 +127,7 @@ namespace ORP_API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<int>(nullable: false),
-                    CustomerName = table.Column<string>(nullable: true),
+                    CustomerId = table.Column<int>(nullable: false),
                     NIK = table.Column<string>(nullable: true),
                     OvertimeFormId = table.Column<int>(nullable: false)
                 },
