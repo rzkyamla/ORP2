@@ -24,8 +24,11 @@ namespace ORP_API.Models
     }
     public enum StatusRequest
     {
-        Waiting,
-        Approve,
-        Reject
+        [Display(Name = "Waiting For Approval")]
+        Waiting = 0,
+        [Display(Name = "Request Approved")]
+        Approve = 1,
+        [Display(Name = "Request Rejected")]
+        Reject = 2
     }
 }

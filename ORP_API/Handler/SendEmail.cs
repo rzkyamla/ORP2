@@ -52,5 +52,53 @@ namespace ORP_API.Handler
             smtp.Port = 587;
             smtp.Send(mm);
         }
+
+        public void SendNotificationToEmployee(string email)
+        {
+            var time24 = DateTime.Now.ToString("HH:mm:ss");
+
+
+            MailMessage mm = new MailMessage("1997HelloWorld1997@gmail.com", email)
+            {
+                Subject = "Email Confirmation - " + time24 + ",",
+                Body = "Hi," + "<br/> Your approval has been sent to your Supervisor" + "<br/> Please Wait for a momment",
+
+                IsBodyHtml = true
+            };
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                EnableSsl = true
+            };
+            NetworkCredential NetworkCred = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.Port = 587;
+            smtp.Send(mm);
+        }
+
+        public void SendNotificationToSupervisor(string email)
+        {
+            var time24 = DateTime.Now.ToString("HH:mm:ss");
+
+
+            MailMessage mm = new MailMessage("1997HelloWorld1997@gmail.com", email)
+            {
+                Subject = "Email Confirmation - " + time24 + ",",
+                Body = "Hi," + "<br/> Your Employee Ask for Your Approval" + "<br/> Please Open Your Actual History",
+
+                IsBodyHtml = true
+            };
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                EnableSsl = true
+            };
+            NetworkCredential NetworkCred = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.Port = 587;
+            smtp.Send(mm);
+        }
     }
 }
