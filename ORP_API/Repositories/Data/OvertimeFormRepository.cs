@@ -20,9 +20,6 @@ namespace ORP_API.Repositories.Data
 
         public int Apply(OvertimeFormViewModels overtimeFormViewModels)
         {
-            TimeSpan difference = overtimeFormViewModels.EndTime - overtimeFormViewModels.StartTime;
-            int totalHours = difference.Hours;
-
             DateTime date = DateTime.Now;
             var overtimeForm = new OvertimeForm()
             {
@@ -41,19 +38,20 @@ namespace ORP_API.Repositories.Data
             };
             myContext.Add(overtimeformemployee);
             var resulthistory = myContext.SaveChanges();
-
-           /* for (int i = 0; i < 3; i++)
-            {*/
-            var detail = new DetailOvertimeRequest()
+            List<DetailOvertimeRequest> data = new List<DetailOvertimeRequest>();
+            for(int i = 0; i < overtimeFormViewModels.listdetails.Count; i++)
             {
-                StartTime = overtimeFormViewModels.StartTime,
-                EndTime = overtimeFormViewModels.EndTime,
-                Act = overtimeFormViewModels.Act,
-                AdditionalSalary = totalHours * 100000,
-                OvertimeFormId = overtimeForm.Id
+                TimeSpan difference = overtimeFormViewModels.listdetails[i].EndTime - overtimeFormViewModels.listdetails[i].StartTime;
+                int totalHours = difference.Hours;
+                var listdata = new DetailOvertimeRequest();
+                listdata.StartTime = overtimeFormViewModels.listdetails[i].StartTime;
+                listdata.EndTime = overtimeFormViewModels.listdetails[i].EndTime;
+                listdata.Act = overtimeFormViewModels.listdetails[i].Act;
+                listdata.AdditionalSalary = totalHours * 100000;
+                listdata.OvertimeFormId = overtimeForm.Id;
+                data.Add(listdata);
+                myContext.Add(listdata);
             };
-                myContext.Add(detail);
-            //}
             var resultDetails = myContext.SaveChanges();
 
             if (resultOvertimeForm > 0 && resultDetails > 0 && resulthistory > 0)
