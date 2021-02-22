@@ -40,7 +40,7 @@ namespace ORP_API.Handler
                 var token = tokenHandler.CreateToken(tokenDescriptor);
                 return tokenHandler.WriteToken(token);
             }
-            return "";
+            return null;
         }
     }
     public interface IJWTAuthenticationManager

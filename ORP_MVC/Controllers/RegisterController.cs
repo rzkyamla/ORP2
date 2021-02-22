@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ORP_MVC.Controllers
 {
-    public class AuthController : Controller
+    public class RegisterController : Controller
     {
         public IActionResult Index()
         {
@@ -19,11 +19,11 @@ namespace ORP_MVC.Controllers
         }
 
         [HttpPost]
-        public HttpStatusCode Register(RegisterViewModels registerVM)
+        public HttpStatusCode Register(RegisterViewModels registerViewModels)
         {
             var httpClient = new HttpClient();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(registerVM), Encoding.UTF8, "application/json");
-            var result = httpClient.PostAsync("https://localhost:44346/api/Account/Register/", content).Result;
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(registerViewModels), Encoding.UTF8, "application/json");
+            var result = httpClient.PostAsync("https://localhost:44346/api/Account/Register/", stringContent).Result;
             return result.StatusCode;
         }
     }
