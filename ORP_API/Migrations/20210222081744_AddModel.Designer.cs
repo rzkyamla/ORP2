@@ -10,13 +10,8 @@ using ORP_API.Context;
 namespace ORP_API.Migrations
 {
     [DbContext(typeof(MyContext))]
-<<<<<<< HEAD:ORP_API/Migrations/20210218020215_AddModelRelationStoreProcedureandUseLazyLoading.Designer.cs
-    [Migration("20210218020215_AddModelRelationStoreProcedureandUseLazyLoading")]
-    partial class AddModelRelationStoreProcedureandUseLazyLoading
-=======
-    [Migration("20210219022811_InitProject")]
-    partial class InitProject
->>>>>>> tresna:ORP_API/Migrations/20210219022811_InitProject.Designer.cs
+    [Migration("20210222081744_AddModel")]
+    partial class AddModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,14 +53,14 @@ namespace ORP_API.Migrations
                     b.ToTable("tb_m_customer");
                 });
 
-            modelBuilder.Entity("ORP_API.Models.Details", b =>
+            modelBuilder.Entity("ORP_API.Models.DetailOvertimeRequest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Activity")
+                    b.Property<string>("Act")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
@@ -73,29 +68,20 @@ namespace ORP_API.Migrations
                     b.Property<int>("AdditionalSalary")
                         .HasColumnType("int");
 
-<<<<<<< HEAD:ORP_API/Migrations/20210218020215_AddModelRelationStoreProcedureandUseLazyLoading.Designer.cs
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
-
-=======
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("OvertimeFormId")
                         .HasColumnType("int");
 
->>>>>>> tresna:ORP_API/Migrations/20210219022811_InitProject.Designer.cs
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("OvertimeFormId");
 
-                    b.ToTable("Details");
+                    b.ToTable("tb_m_detail_overtime_request");
                 });
 
             modelBuilder.Entity("ORP_API.Models.Employee", b =>
@@ -178,6 +164,9 @@ namespace ORP_API.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DetailOvertimeRequestId")
+                        .HasColumnType("int");
+
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(10)");
 
@@ -188,6 +177,8 @@ namespace ORP_API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DetailOvertimeRequestId");
 
                     b.HasIndex("NIK");
 
@@ -222,17 +213,13 @@ namespace ORP_API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ORP_API.Models.Details", b =>
+            modelBuilder.Entity("ORP_API.Models.DetailOvertimeRequest", b =>
                 {
-                    b.HasOne("ORP_API.Models.OvertimeForm", null)
-                        .WithMany("Details")
-<<<<<<< HEAD:ORP_API/Migrations/20210218020215_AddModelRelationStoreProcedureandUseLazyLoading.Designer.cs
-                        .HasForeignKey("CustomerId");
-=======
+                    b.HasOne("ORP_API.Models.OvertimeForm", "OvertimeForm")
+                        .WithMany("DetailOvertimeReq")
                         .HasForeignKey("OvertimeFormId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
->>>>>>> tresna:ORP_API/Migrations/20210219022811_InitProject.Designer.cs
                 });
 
             modelBuilder.Entity("ORP_API.Models.Employee", b =>
@@ -252,6 +239,10 @@ namespace ORP_API.Migrations
 
             modelBuilder.Entity("ORP_API.Models.OvertimeFormEmployee", b =>
                 {
+                    b.HasOne("ORP_API.Models.DetailOvertimeRequest", null)
+                        .WithMany("OvertimeFormEmployees")
+                        .HasForeignKey("DetailOvertimeRequestId");
+
                     b.HasOne("ORP_API.Models.Employee", "Employee")
                         .WithMany("OvertimeFormEmployees")
                         .HasForeignKey("NIK");

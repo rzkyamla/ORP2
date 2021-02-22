@@ -11,21 +11,19 @@ using System.Threading.Tasks;
 
 namespace ORP_MVC.Controllers
 {
-    public class RegisterController : Controller
+    public class ForgotPasswordController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
-        [HttpPost]
-        public HttpStatusCode Register(RegisterViewModels registerViewModels)
+        [HttpPut]
+        public HttpStatusCode ForgotPassword(RegisterViewModels registerVM)
         {
             var httpClient = new HttpClient();
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(registerViewModels), Encoding.UTF8, "application/json");
-            var result = httpClient.PostAsync("https://localhost:44346/api/Account/Register/", stringContent).Result;
+            StringContent content = new StringContent(JsonConvert.SerializeObject(registerVM), Encoding.UTF8, "application/json");
+            var result = httpClient.PutAsync("https://localhost:44346/api/Account/reset/", content).Result;
             return result.StatusCode;
         }
-        
     }
 }

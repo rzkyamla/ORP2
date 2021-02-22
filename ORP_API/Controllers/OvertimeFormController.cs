@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ORP_API.Base.Controller;
+using ORP_API.Context;
 using ORP_API.Models;
 using ORP_API.Repositories.Data;
 using ORP_API.ViewModels;
@@ -20,7 +22,7 @@ namespace ORP_API.Controllers
         {
             this.overtimeFormRepository = overtimeFormRepository;
         }
-        [HttpPost("Apply")]
+        [HttpPost("add")]
         public IActionResult AddOvertime(OvertimeFormViewModels overtimeFormViewModels)
         {
             if (ModelState.IsValid)

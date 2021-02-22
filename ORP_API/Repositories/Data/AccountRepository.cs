@@ -117,7 +117,7 @@ namespace ORP_API.Repositories.Data
         {
             Account acc = myContext.Account.Where(a => a.NIK == changePasswordViewModels.NIK).FirstOrDefault();
             acc.Password = Hashing.HashPassword(changePasswordViewModels.NewPassword);
-            myContext.Entry(acc).State = EntityState.Modified;
+            //myContext.Entry(acc).State = EntityState.Modified;
             var result = myContext.SaveChanges();
             return result;
         }

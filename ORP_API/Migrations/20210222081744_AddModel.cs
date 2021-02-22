@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ORP_API.Migrations
 {
-    public partial class AddModelRelationStoreProcedureandUseLazyLoading : Migration
+    public partial class AddModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,27 +49,23 @@ namespace ORP_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Details",
+                name: "tb_m_detail_overtime_request",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
-                    Activity = table.Column<string>(maxLength: 100, nullable: false),
+                    Act = table.Column<string>(maxLength: 100, nullable: false),
                     AdditionalSalary = table.Column<int>(nullable: false),
-<<<<<<< HEAD:ORP_API/Migrations/20210218020215_AddModelRelationStoreProcedureandUseLazyLoading.cs
-                    CustomerId = table.Column<int>(nullable: true)
-=======
                     OvertimeFormId = table.Column<int>(nullable: false)
->>>>>>> tresna:ORP_API/Migrations/20210219022811_InitProject.cs
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Details", x => x.Id);
+                    table.PrimaryKey("PK_tb_m_detail_overtime_request", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Details_tb_m_overtime_form_CustomerId",
-                        column: x => x.CustomerId,
+                        name: "FK_tb_m_detail_overtime_request_tb_m_overtime_form_OvertimeFormId",
+                        column: x => x.OvertimeFormId,
                         principalTable: "tb_m_overtime_form",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -133,11 +129,18 @@ namespace ORP_API.Migrations
                     Status = table.Column<int>(nullable: false),
                     CustomerId = table.Column<int>(nullable: false),
                     NIK = table.Column<string>(nullable: true),
-                    OvertimeFormId = table.Column<int>(nullable: false)
+                    OvertimeFormId = table.Column<int>(nullable: false),
+                    DetailOvertimeRequestId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_m_overtime_form_employee", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_tb_m_overtime_form_employee_tb_m_detail_overtime_request_DetailOvertimeRequestId",
+                        column: x => x.DetailOvertimeRequestId,
+                        principalTable: "tb_m_detail_overtime_request",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_tb_m_overtime_form_employee_tb_m_employee_NIK",
                         column: x => x.NIK,
@@ -153,9 +156,9 @@ namespace ORP_API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Details_CustomerId",
-                table: "Details",
-                column: "CustomerId");
+                name: "IX_tb_m_detail_overtime_request_OvertimeFormId",
+                table: "tb_m_detail_overtime_request",
+                column: "OvertimeFormId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_m_employee_CustomerId",
@@ -166,6 +169,11 @@ namespace ORP_API.Migrations
                 name: "IX_tb_m_employee_RoleId",
                 table: "tb_m_employee",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tb_m_overtime_form_employee_DetailOvertimeRequestId",
+                table: "tb_m_overtime_form_employee",
+                column: "DetailOvertimeRequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_m_overtime_form_employee_NIK",
@@ -181,13 +189,13 @@ namespace ORP_API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Details");
-
-            migrationBuilder.DropTable(
                 name: "tb_m_account");
 
             migrationBuilder.DropTable(
                 name: "tb_m_overtime_form_employee");
+
+            migrationBuilder.DropTable(
+                name: "tb_m_detail_overtime_request");
 
             migrationBuilder.DropTable(
                 name: "tb_m_employee");

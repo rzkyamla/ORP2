@@ -20,24 +20,6 @@ namespace ORP_MVC.Controllers
         {
             return View();
         }
-
-        [HttpPost]
-        public HttpStatusCode Register(RegisterViewModels registerVM)
-        {
-            ViewBag.Id_Customer = new SelectList(myContext.Customer, "Id", "Name");
-            var httpClient = new HttpClient();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(registerVM), Encoding.UTF8, "application/json");
-            var result = httpClient.PostAsync("https://localhost:44346/api/Account/Register/", content).Result;
-            return result.StatusCode;
-        }
-        [HttpPut]
-        public HttpStatusCode ForgotPassword(RegisterViewModels registerVM)
-        {
-            var httpClient = new HttpClient();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(registerVM), Encoding.UTF8, "application/json");
-            var result = httpClient.PutAsync("https://localhost:44346/api/Account/reset/", content).Result;
-            return result.StatusCode;
-        }
         [HttpPut]
         public HttpStatusCode ChangePassword(ChangePasswordViewModels changePasswordViewModels)
         {

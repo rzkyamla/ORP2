@@ -96,7 +96,9 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-6">
-                            <a href="#" class="text-dark"><small>Forgot password?</small></a>
+                            @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")
+                            @*<a href="#" class="text-dark" onclick="ForgotPassword()"><small>Forgot password?</small></a>*@
+                            @*<a href="javascript:void(0)" class="text-dark" data-toggle="modal" data-target="#forgotpassword"><small>Forgot password?</small></a>*@
                         </div>
                     </div>
                 </form>
@@ -109,9 +111,6 @@
 </div>
 
 <script>
-    function Coba() {
-        alert("Nampil dong");
-    }
     function Register() {
 
         var Register = new Object();
@@ -154,11 +153,11 @@
             console.log(result);
             if (result == 200) {
                 alert("Successed to Login");
-                window.location.href = "https://localhost:44345/register";
+                window.location.href = "https://www.google.com/";
             }
             else {
                 alert("Failed to Login");
-                window.location.href = "https://localhost:44345/register";
+                window.location.href = "https://www.youtube.com/";
             }
         }).fail((result) => {
             console.log(result);
@@ -168,4 +167,5 @@
             }
         })
     }
+
 </script>

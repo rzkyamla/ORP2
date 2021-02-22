@@ -37,6 +37,7 @@ namespace ORP_API
             services.AddScoped<AccountRepository>();
             services.AddScoped<OvertimeFormRepository>();
             services.AddScoped<OvertimeFormEmployeeRepository>();
+            services.AddScoped<DetailOvertimeRequestRepository>();
             services.JwtConfigure(Configuration);
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
