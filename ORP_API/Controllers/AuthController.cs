@@ -33,7 +33,7 @@ namespace ORP_API.Controllers
         }
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] LoginViewModels loginViewModels)
+        public IActionResult Authenticate(LoginViewModels loginViewModels)
         {
             var token = jWTAuthenticationManager.Generate(Login(loginViewModels));
             if (token == null)

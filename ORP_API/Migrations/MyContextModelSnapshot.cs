@@ -72,6 +72,9 @@ namespace ORP_API.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("OvertimeFormId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
@@ -211,6 +214,9 @@ namespace ORP_API.Migrations
                     b.HasOne("ORP_API.Models.OvertimeForm", null)
                         .WithMany("Details")
                         .HasForeignKey("CustomerId");
+                        .HasForeignKey("OvertimeFormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ORP_API.Models.Employee", b =>

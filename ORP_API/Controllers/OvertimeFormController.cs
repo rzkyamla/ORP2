@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ORP_API.Base.Controller;
 using ORP_API.Models;
 using ORP_API.Repositories.Data;
+using ORP_API.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +21,23 @@ namespace ORP_API.Controllers
             this.overtimeFormRepository = overtimeFormRepository;
         }
         [HttpPost("Apply")]
-        public IActionResult AddOvertime([FromBody] OvertimeForm overtimeForm)
+        public IActionResult AddOvertime(OvertimeFormViewModels overtimeFormViewModels)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var data = overtimeFormRepository.Create(overtimeForm);
-                return Ok(new { data = data, status = "Ok" });
+                var data = overtimeFormRepository.Apply(overtimeFormViewModels);
+                if (data > 0)
+                {
+                    return Ok(new { status = "Request Added" });
+                }
+                else
+                {
+                    return StatusCode(500, new { status = "Internal server error" });
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, "Internal server error");
+                return BadRequest(new { status = "Bad request", errorMessage = "Data input is not valid" });
             }
         }
     }

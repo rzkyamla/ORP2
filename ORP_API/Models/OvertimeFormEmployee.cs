@@ -15,7 +15,6 @@ namespace ORP_API.Models
         [Required]
         public StatusRequest Status { get; set; }
         public int CustomerId { get; set; }
-        [ForeignKey("CustomerId")]
         public string NIK { get; set; }
         [ForeignKey("NIK")]
         public virtual Employee Employee { get; set; }

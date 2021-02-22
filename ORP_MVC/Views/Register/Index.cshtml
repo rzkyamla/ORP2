@@ -1,0 +1,171 @@
+﻿<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Register">Register</a>
+<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Login">Login</a>
+
+<div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Register</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="roleform" action="Auth/Register">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="id" class="col-form-label">NIK</label>
+                                <input type="text" class="form-control" id="nik" name="nik">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">BirthDate</label>
+                                <input type="text" class="form-control" id="birthdate" name="birthdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Gender</label>
+                                <select id="gender" class="form-control" name="gender">
+                                    <option value="Laki - laki">Laki - Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Email</label>
+                                <input type="text" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group" hidden>
+                                <label for="name" class="col-form-label">Password</label>
+                                <input type="text" class="form-control" id="password" name="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">PhoneNumber</label>
+                                <input type="text" class="form-control" id="hp" name="hp">
+                            </div>
+                            <div class="form-group" hidden>
+                                <label for="name" class="col-form-label">RoleId</label>
+                                <input type="text" class="form-control" id="roleid" name="roleid">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Customer</label>
+                                <input type="text" class="form-control" id="customerid" name="customerid">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Religion</label>
+                                <select id="religion" class="form-control" name="religion">
+                                    <option value="Islam">Islam</option>
+                                    <option value="Kristen">Kristen</option>
+                                    <option value="Buddha">Budhha</option>
+                                    <option value="Hindu">Hindu</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Register()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="roleform" action="Auth/">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Email</label>
+                        <input type="text" class="form-control" id="emaillogin" name="emaillogin">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Password</label>
+                        <input type="text" class="form-control" id="passwordlogin" name="passwordlogin">
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <a href="#" class="text-dark"><small>Forgot password?</small></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Login()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Coba() {
+        alert("Nampil dong");
+    }
+    function Register() {
+
+        var Register = new Object();
+        Register.NIK = $("#nik").val();
+        Register.Name = $("#name").val();
+        Register.BirthDate = $("#birthdate").val();
+        Register.Gender = $("#gender").val();
+        Register.Religion = $("#religion").val();
+        Register.Email = $("#email").val();
+        Register.PhoneNumber = $("#hp").val();
+        Register.CustomerId = $("#customerid").val();
+        console.log(Register);
+        $.ajax({
+            type: 'post',
+            url: '/register/register',
+            data: Register
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Successed to Add Data!");
+                window.location.href = "https://localhost:44345/register";
+            }
+            }).fail((result) => {
+                console.log(result);
+                alert("Failed to Add Data!");
+                window.location.href = "https://localhost:44345/register";
+            })
+    }
+
+    function Login() {
+        var Login = new Object();
+        Login.Email = $("#emaillogin").val();
+        Login.Password = $("#passwordlogin").val();
+        console.log(Login);
+        $.ajax({
+            type: 'post',
+            url: '/login/login',
+            data: Login
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Successed to Login");
+                window.location.href = "https://localhost:44345/register";
+            }
+            else {
+                alert("Failed to Login");
+                window.location.href = "https://localhost:44345/register";
+            }
+        }).fail((result) => {
+            console.log(result);
+            if (result != 200) {
+                alert("Failed to Login");
+                window.location.href = "https://localhost:44345/register";
+            }
+        })
+    }
+</script>
