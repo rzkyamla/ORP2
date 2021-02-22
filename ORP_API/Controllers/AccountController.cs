@@ -47,22 +47,23 @@ namespace ORP_API.Controllers
                 return BadRequest(new { status = "Bad request", errorMessage = "Data input is not valid" });
             }
         }
-        [HttpPut("reset/{email}/{id}")]
-        public ActionResult ResetPassword(Account account, string email)
+        [HttpPut("reset")]
+        public ActionResult ResetPassword(RegisterViewModels registerViewModels)
         {
-            var data = accountRepository.ResetPassword(account, email);
+            var data = accountRepository.ResetPassword(registerViewModels.Email);
             return (data > 0) ? (ActionResult)Ok(new { message = "Email has been Sent, password changed", status = "Ok" }) : NotFound(new { message = "Data not exist in our database, please register first", status = 404 });
         }
 
-        [HttpPut("ChangePassword/{NIK}")]
-        public ActionResult ChangePassword(string NIK, ChangePasswordViewModels changePasswordVM)
+        /*[HttpPut("ChangePassword/{NIK}")]*/
+        [HttpPut("ChangePassword")]
+        public ActionResult ChangePassword(ChangePasswordViewModels changePasswordVM)
         {
-            var acc = accountRepository.Get(NIK);
+            var acc = accountRepository.Get(changePasswordVM.NIK);
             if (acc != null)
             {
                 if (Hashing.ValidatePassword(changePasswordVM.OldPassword, acc.Password))
                 {
-                    var data = accountRepository.ChangePassword(NIK, changePasswordVM.NewPassword);
+                    var data = accountRepository.ChangePassword(changePasswordVM);
                     return Ok(data);
                 }
                 else

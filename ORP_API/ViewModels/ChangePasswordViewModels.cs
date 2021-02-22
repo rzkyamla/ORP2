@@ -9,6 +9,8 @@ namespace ORP_API.ViewModels
     public class ChangePasswordViewModels
     {
         [Required]
+        public string NIK { get; set; }
+        [Required]
         public string OldPassword { get; set; }
         [Required]
         public string NewPassword { get; set; }

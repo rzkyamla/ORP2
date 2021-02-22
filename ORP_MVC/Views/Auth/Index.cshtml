@@ -1,5 +1,7 @@
 ﻿<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Register">Register</a>
 <a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Login">Login</a>
+<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#forgotpassword">Forgot Password</a>
+<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#changepassword">Change Password</a>
 
 <div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -11,7 +13,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="roleform" action="Auth/Register">
+                <form id="registerform" action="Auth/Register">
                     <div class="form-group">
                         <label for="id" class="col-form-label">NIK</label>
                         <input type="text" class="form-control" id="nik" name="nik">
@@ -50,12 +52,81 @@
                     </div>
                     <div class="form-group">
                         <label for="name" class="col-form-label">CustomerId</label>
-                        <input type="text" class="form-control" id="customerid" name="customerid">
+                        @Html.DropDownList("CustomerName",
+                                new SelectList(Enumerable.Empty<SelectListItem>(), "customerid", "customername"),
+                                new { @class = "form-control", @onchange = "FillCustomer()" })
                     </div>
+                    @*<div class="form-group">
+                            <label for="name" class="col-form-label">Customer Name</label>
+                            @Html.DropDownList((SelectList)ViewBag.Id_Customer, new { @class = "form-control", @onchange = "FillCustomer()" })
+                             @Html.DropDownList("CustomerName",
+                             new SelectList(Enumerable.Empty<SelectListItem>(), "customerid", "customername"),
+                             new { @class = "form-control", @onchange = "FillCustomer()" })
+                        </div>*@
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="Submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="forgotpassword" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Forgot Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="registerform" action="Auth/ForgotPassword">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Email</label>
+                        <input type="text" class="form-control" id="emailforgot" name="emailforgot">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="ForgotPassword()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changepassword" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="registerform" action="Auth/ChangePassword">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">NIK</label>
+                        <input type="text" class="form-control" id="NIKchange" name="NIKchange">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Old Password</label>
+                        <input type="text" class="form-control" id="oldpassword" name="oldpassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">New Password</label>
+                        <input type="text" class="form-control" id="newpassword" name="newpassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Confirm Password</label>
+                        <input type="text" class="form-control" id="confirmpassword" name="confirmpassword">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="ChangePassword()">Submit</button>
             </div>
         </div>
     </div>
@@ -83,18 +154,15 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="Submit()" >Submit</button>
+                <button type="button" class="btn btn-primary" onclick="Submit()">Submit</button>
             </div>
         </div>
     </div>
 </div>
 
+
 <script>
-    function Coba() {
-        alert("Nampil dong");
-    }
     function Submit() {
-       
         var Employee = new Object();
         Employee.NIK = $("#nik").val();
         Employee.Name = $("#name").val();
@@ -104,8 +172,6 @@
         Employee.Email = $("#email").val();
         Employee.PhoneNumber = $("#hp").val();
         Employee.CustomerId = $("#customerid").val();
-
-        console.log(Employee);
         $.ajax({
             type: 'post',
             url: '/auth/register',
@@ -114,11 +180,68 @@
             console.log(result);
             if (result == 200) {
                 alert("Successed to Add Data!");
-                
+
             }
-            }).fail((result) => {
-                console.log(result);
-                alert("Failed to Add Data!");
-            })
+        }).fail((result) => {
+            console.log(result);
+            alert("Failed to Add Data!");
+        })
+    }
+
+    function ForgotPassword() {
+        console.log("test");
+        var Employee = new Object();
+        Employee.Email = $("#emailforgot").val();
+        $.ajax({
+            type: 'PUT',
+            url: '/Auth/ForgotPassword',
+            data: Employee
+        }).done((result) => {
+            if (result == 200) {
+                alert("Check Your Email for New Password!");
+            }
+        }).fail((result) => {
+            console.log(result);
+            alert("Failed to Send Email!");
+        })
+    }
+
+    function ChangePassword() {
+        console.log("test");
+        var Account = new Object();
+        Account.NIK = $("#NIKchange").val();
+        Account.NewPassword = $("#newpassword").val();
+        Account.OldPassword = $("#oldpassword").val();
+        Account.ConfirmPassword = $("#confirmpassword").val();
+        $.ajax({
+            type: 'PUT',
+            url: '/Auth/ChangePassword',
+            data: Account
+        }).done((result) => {
+            if (result == 200) {
+                alert("Your Password has been Changed!");
+            }
+        }).fail((result) => {
+            console.log(result);
+            alert("Can Not Change Your Password");
+        })
     }
 </script>
+
+@*<script>
+        function FillCustomer() {
+            $.ajax({
+                url: 'https://localhost:44346/api/customer/',
+                type: "GET",
+                dataType: "JSON",
+                data: "",
+                success: function (customer) {
+                    $("#customerid").html(""); // clear before appending new list
+                    $.each(customer, function (i, customer) {
+                        $("#customerid").append(
+                            $('<option></option>').val(customer.CustomerId).html(customer.CustomerId));
+                    });
+                }
+            });
+        }
+    </script>*@
