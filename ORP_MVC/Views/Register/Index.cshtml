@@ -55,9 +55,9 @@
                                 <label for="name" class="col-form-label">Customer</label>
                                 <select id="customerid" class="form-control" name="customer">
                                     <option value="1">Metrodata MII</option>
-                                    <option value="2">Bnak BNI</option>
-                                    <option value="3">Bank BRI</option>
-                                    <option value="4">Bank Mandiri</option>
+                                    <option value="2">Bnak BCA</option>
+                                    <option value="3">Bank BNI</option>
+                                    <option value="4">Bank BRI</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -97,11 +97,14 @@
                     </div>
                     <div class="form-group">
                         <label for="name" class="col-form-label">Password</label>
-                        <input type="text" class="form-control" id="passwordlogin" name="passwordlogin">
+                        <input type="password" class="form-control" id="passwordlogin" name="passwordlogin">
+                        <input type="checkbox" class="col-form-label" onclick="myFunction1()"> Show Password
                     </div>
                     <div class="row mt-3">
                         <div class="col-6">
-                            <a href="#" class="text-dark"><small>Forgot password?</small></a>
+                            @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")
+                            @*<a href="#" class="text-dark" onclick="ForgotPassword()"><small>Forgot password?</small></a>*@
+                            @*<a href="javascript:void(0)" class="text-dark" data-toggle="modal" data-target="#forgotpassword"><small>Forgot password?</small></a>*@
                         </div>
                     </div>
                 </form>
@@ -114,9 +117,15 @@
 </div>
 
 <script>
-    function Coba() {
-        alert("Nampil dong");
+    function myFunction1() {
+        var x = document.getElementById("passwordlogin");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
     }
+
     function Register() {
 
         var Register = new Object();

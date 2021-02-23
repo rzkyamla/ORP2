@@ -17,6 +17,7 @@ namespace ORP_API.Context
         public DbSet<Account> Account { get; set; }
         public DbSet<OvertimeForm> OvertimeForm { get; set; }
         public DbSet<OvertimeFormEmployee> OvertimeFormEmployee { get; set; }
+        public DbSet<DetailOvertimeRequest> DetailOvertimeRequests { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().HasOne(x => x.Role).WithMany(z => z.Employees);
@@ -24,6 +25,7 @@ namespace ORP_API.Context
             modelBuilder.Entity<Account>().HasOne(a => a.Employee).WithOne(b => b.Account).HasForeignKey<Account>(a => a.NIK);
             modelBuilder.Entity<OvertimeFormEmployee>().HasOne(x => x.OvertimeForm).WithMany(z => z.OvertimeFormEmployees);
             modelBuilder.Entity<OvertimeFormEmployee>().HasOne(x => x.Employee).WithMany(z => z.OvertimeFormEmployees);
+            modelBuilder.Entity<DetailOvertimeRequest>().HasOne(x => x.OvertimeForm).WithMany(z => z.DetailOvertimeReq);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

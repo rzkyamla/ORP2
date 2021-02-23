@@ -86,10 +86,11 @@ namespace ORP_API.Repositories.Data
             }
             return result;
         }
-        public int ResetPassword(Account account, string email)
+        public int ResetPassword(string email)
         {
             string resetCode = Guid.NewGuid().ToString();
             var getuser = myContext.Employee.Where(a => a.Email == email).FirstOrDefault();
+            var getaccount = myContext.Account.Where(a => a.NIK == getuser.NIK).FirstOrDefault();
             if (getuser == null)
             {
                 return 0;
@@ -97,22 +98,17 @@ namespace ORP_API.Repositories.Data
             else
             {
                 var password = Hashing.HashPassword(resetCode);
-                var accounts = new Account()
-                {
-                    NIK = account.NIK,
-                    Password = password
-                };
-                myContext.Entry(accounts).State = EntityState.Modified;
+                getaccount.Password = password;
                 var result = myContext.SaveChanges();
                 sendEmail.SendNotification(resetCode, email);
                 return result;
             }
         }
-        public int ChangePassword(string NIK, string password)
+
+        public int ChangePassword(ChangePasswordViewModels changePasswordViewModels)
         {
-            Account acc = myContext.Account.Where(a => a.NIK == NIK).FirstOrDefault();
-            acc.Password = Hashing.HashPassword(password);
-            myContext.Entry(acc).State = EntityState.Modified;
+            Account acc = myContext.Account.Where(a => a.NIK == changePasswordViewModels.NIK).FirstOrDefault();
+            acc.Password = Hashing.HashPassword(changePasswordViewModels.NewPassword);
             var result = myContext.SaveChanges();
             return result;
         }

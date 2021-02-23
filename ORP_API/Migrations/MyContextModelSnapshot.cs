@@ -51,14 +51,14 @@ namespace ORP_API.Migrations
                     b.ToTable("tb_m_customer");
                 });
 
-            modelBuilder.Entity("ORP_API.Models.Details", b =>
+            modelBuilder.Entity("ORP_API.Models.DetailOvertimeRequest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Activity")
+                    b.Property<string>("Act")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
@@ -79,7 +79,7 @@ namespace ORP_API.Migrations
 
                     b.HasIndex("OvertimeFormId");
 
-                    b.ToTable("Details");
+                    b.ToTable("tb_m_detail_overtime_request");
                 });
 
             modelBuilder.Entity("ORP_API.Models.Employee", b =>
@@ -162,6 +162,9 @@ namespace ORP_API.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DetailOvertimeRequestId")
+                        .HasColumnType("int");
+
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(10)");
 
@@ -172,6 +175,8 @@ namespace ORP_API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DetailOvertimeRequestId");
 
                     b.HasIndex("NIK");
 
@@ -206,10 +211,10 @@ namespace ORP_API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ORP_API.Models.Details", b =>
+            modelBuilder.Entity("ORP_API.Models.DetailOvertimeRequest", b =>
                 {
-                    b.HasOne("ORP_API.Models.OvertimeForm", null)
-                        .WithMany("Details")
+                    b.HasOne("ORP_API.Models.OvertimeForm", "OvertimeForm")
+                        .WithMany("DetailOvertimeReq")
                         .HasForeignKey("OvertimeFormId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -232,6 +237,10 @@ namespace ORP_API.Migrations
 
             modelBuilder.Entity("ORP_API.Models.OvertimeFormEmployee", b =>
                 {
+                    b.HasOne("ORP_API.Models.DetailOvertimeRequest", null)
+                        .WithMany("OvertimeFormEmployees")
+                        .HasForeignKey("DetailOvertimeRequestId");
+
                     b.HasOne("ORP_API.Models.Employee", "Employee")
                         .WithMany("OvertimeFormEmployees")
                         .HasForeignKey("NIK");

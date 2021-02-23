@@ -12,20 +12,15 @@ namespace ORP_API.Repositories.Data
     public class OvertimeFormRepository : GeneralRepository<OvertimeForm, MyContext, int>
     {
         private readonly MyContext myContext;
-        public IConfiguration Configuration { get; }
-        public OvertimeFormRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
+        public OvertimeFormRepository(MyContext myContext) : base(myContext)
         {
             myContext.Set<OvertimeForm>();
             this.myContext = myContext;
-            this.Configuration = configuration;
         }
 
         public int Apply(OvertimeFormViewModels overtimeFormViewModels)
         {
-            TimeSpan difference = overtimeFormViewModels.EndTime - overtimeFormViewModels.StartTime;
-            int totalHours = difference.Hours;
-
-            DateTime date = DateTime.UtcNow;
+            DateTime date = DateTime.Now;
             var overtimeForm = new OvertimeForm()
             {
                 Name = overtimeFormViewModels.Name,
@@ -34,17 +29,19 @@ namespace ORP_API.Repositories.Data
             };
             myContext.Add(overtimeForm);
             var resultOvertimeForm = myContext.SaveChanges();
-
-            var detail = new Models.Details()
+                        
+            for (int i = 0; i < overtimeFormViewModels.listdetails.Count; i++)
             {
-                StartTime = overtimeFormViewModels.StartTime,
-                EndTime = overtimeFormViewModels.EndTime,
-                Activity = overtimeFormViewModels.Activity,
-                AdditionalSalary = totalHours * 100000,
-                OvertimeFormId = overtimeForm.Id
+                TimeSpan difference = overtimeFormViewModels.listdetails[i].EndTime - overtimeFormViewModels.listdetails[i].StartTime;
+                int totalHours = difference.Hours;
+                var listdata = new DetailOvertimeRequest();
+                listdata.StartTime = overtimeFormViewModels.listdetails[i].StartTime;
+                listdata.EndTime = overtimeFormViewModels.listdetails[i].EndTime;
+                listdata.Act = overtimeFormViewModels.listdetails[i].Act;
+                listdata.AdditionalSalary = totalHours * 100000;
+                listdata.OvertimeFormId = overtimeForm.Id;
+                myContext.Add(listdata);
             };
-
-            myContext.Add(detail);
             var resultDetails = myContext.SaveChanges();
 
             if (resultOvertimeForm > 0 && resultDetails > 0)

@@ -1,0 +1,91 @@
+﻿<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#changepassword">Change Password</a>
+
+<div class="modal fade" id="changepassword" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="registerform" action="Auth/ChangePassword">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">NIK</label>
+                        <input type="text" class="form-control" id="NIKchange" name="NIKchange">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Old Password</label>
+                        <input type="password" class="form-control" id="oldpassword" name="oldpassword">
+                        <input type="checkbox" class="col-form-label" onclick="myFunction1()"> Show Password
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">New Password</label>
+                        <input type="password" class="form-control" id="newpassword" name="newpassword">
+                        <input type="checkbox" class="col-form-label" onclick="myFunction2()"> Show Password
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmpassword" name="confirmpassword">
+                        <input type="checkbox" class="col-form-label" onclick="myFunction3()"> Show Password
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="ChangePassword()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function myFunction1() {
+        var x = document.getElementById("oldpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction2() {
+        var x = document.getElementById("newpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction3() {
+        var x = document.getElementById("confirmpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function ChangePassword() {
+        console.log("test");
+        var Account = new Object();
+        Account.NIK = $("#NIKchange").val();
+        Account.NewPassword = $("#newpassword").val();
+        Account.OldPassword = $("#oldpassword").val();
+        Account.ConfirmPassword = $("#confirmpassword").val();
+        $.ajax({
+            type: 'PUT',
+            url: '/Auth/ChangePassword',
+            data: Account
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Your Password has been Changed!");
+            }
+        }).fail((result) => {
+            console.log(result);
+            alert("Can Not Change Your Password");
+        })
+    }
+</script>
