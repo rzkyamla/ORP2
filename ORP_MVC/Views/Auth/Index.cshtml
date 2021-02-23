@@ -37,6 +37,33 @@
 </div>
 
 <script>
+    function myFunction1() {
+        var x = document.getElementById("oldpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction2() {
+        var x = document.getElementById("newpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction3() {
+        var x = document.getElementById("confirmpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
     function ChangePassword() {
         console.log("test");
         var Account = new Object();

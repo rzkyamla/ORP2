@@ -5,47 +5,72 @@
     <form id="formovertime" action="/action_page.php">
         <fieldset>
             <legend>Formulir Overtime Request:</legend>
-            <div>
-                <label for="id">NIK: </label>
-                <input type="text" id="nik" name="nik">
-            </div>
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name">
-            </div>
-            <div>
-                <label for="customerid">Customer Id:</label>
-                <input type="text" id="customerid" name="customerid">
-            </div>
-            <div>
-                <label for="subdate">Submission Date:</label>
-                <input type="date" id="date" name="date">
-            </div>
+            <table width="50%">
+                <thead>
+                    <tr>
+                        <th><label for="id">NIK</label></th>
+                        <th><input type="text" id="nik" class="form-control" name="nik"></th>
+                    </tr>
+                    <tr>
+                        <th><label for="name">Name</label></th>
+                        <th><input type="text" id="name" class="form-control" name="name"></th>
+                    </tr>
+                    <tr>
+                        <th><label for="customerid">Customer</label></th>
+                        <th><select id="customerid" class="form-control" name="customer">
+                                <option value="1">Metrodata MII</option>
+                                <option value="2">Bnak BCA</option>
+                                <option value="3">Bank BNI</option>
+                                <option value="4">Bank BRI</option>
+                            </select></th>
+                    </tr>
+                    <tr>
+                        <th><label for="subdate">Submission Date:</label></th>
+                        <th><input type="date" id="date" class="form-control" name="date"></th>
+                    </tr>
+                </thead>
+            </table>
         </fieldset>
+        <br>
     </form>
     <form>
-        <div>
-            <label for="starttime">Start Time (hh:mm:ss):</label><br>
-            <input type="datetime" id="stime" name="stime"><br><br>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="starttime">Start Time</label><br>
+                    <input type="time" id="stime" class="form-control" name="stime">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="endtime">End Time</label><br>
+                    <input type="time" id="etime" class="form-control" name="etime">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="act">Act</label><br>
+                    <input type="text" id="act" class="form-control" name="act">
+                </div>
+            </div>
+            <div hidden>
+                <label for="addsalary">Additional Salary:</label><br>
+                <input type="text" id="addsalary" name="addsalary">
+            </div>
+            <div hidden>
+                <label for="overtimeformid">OvertimeForm Id: </label><br>
+                <input type="text" id="overtimeformid" name="overtimeformid">
+            </div>
         </div>
-        <div>
-            <label for="endtime">End Time (hh:mm:ss):</label><br>
-            <input type="datetime" id="etime" name="etime"><br><br>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <button type="button" class="btn btn-primary" onclick="">Add</button>
+            </div>
         </div>
-        <div>
-            <label for="act">Act:</label><br>
-            <input type="text" id="act" name="act"><br><br>
-        </div>
-        <div hidden>
-            <label for="addsalary">Additional Salary:</label><br>
-            <input type="text" id="addsalary" name="addsalary"><br><br>
-        </div>
-        <div hidden>
-            <label for="overtimeformid">OvertimeForm Id: </label><br>
-            <input type="text" id="overtimeformid" name="overtimeformid"><br><br>
-        </div>
-        <button type="button" class="btn btn-primary" onclick="">Add</button>
-    </form>
+            
+            
+</form>
 </body>
 </html>
 <div class="container-fluid mt-5">
@@ -73,10 +98,9 @@
         </tfoot>
     </table>
 </div>
-<button type="button" class="btn btn-primary" onclick="">Submit</button>
+<button type="button" class="btn btn-primary" onclick="ApplyRequest()">Submit</button>
 
 <script>
-
     var table = null;
     $(document).ready(function () {
         table = $("#mytables").DataTable({
@@ -87,7 +111,6 @@
             },
         });
     });
-
     function CreateOvertime() {
         var CreateOvertime = new Object();
         CreateOvertime.NIK = $("#NIK").val();
@@ -113,6 +136,28 @@
         }).fail((result) => {
             console.log(result);
             alert("Failed to Add OvertimeRequest!");
+            window.location.href = "https://localhost:44347/overtimeform";
+        })
+    }
+
+    function ApplyRequest() {
+        var applyRequest = new Object();
+        applyRequest.NIK = $("#nik").val();
+        applyRequest.CustomerId = $("#customerid").val();
+        applyRequest.OvertimeFormId = $("#overtimeformid").val();
+        $.ajax({
+            type: 'post',
+            url: '/ApplyRequest/ApplyRequest',
+            data: applyRequest
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Successed to Request Overtime!");
+                window.location.href = "https://localhost:44347/overtimeform";
+            }
+        }).fail((result) => {
+            console.log(result);
+            alert("Failed to Request Overtime!");
             window.location.href = "https://localhost:44347/overtimeform";
         })
     }

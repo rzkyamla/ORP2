@@ -19,7 +19,6 @@ namespace ORP_API.ViewModels
         public string Gender { get; set; }
         //[Required(ErrorMessage = "Tidak boleh kosong")]
         public string Religion { get; set; }
-        [Required(ErrorMessage = "Tidak boleh kosong"), EmailAddress(ErrorMessage = "Masukan format email yang valid")]
         public string Email { get; set; }
         //[Required(ErrorMessage = "Tidak boleh kosong"), RegularExpression(@"^08[0-9]{10,12}$", ErrorMessage = "Harus berupa angka diawali 08"), MinLength(10, ErrorMessage = "Minimal 10 karakter"), MaxLength(12, ErrorMessage = "Maksimal 12 karakter")]
         public string PhoneNumber { get; set; }
