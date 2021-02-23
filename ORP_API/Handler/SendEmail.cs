@@ -36,8 +36,128 @@ namespace ORP_API.Handler
 
             MailMessage mm = new MailMessage("1997HelloWorld1997@gmail.com", email)
             {
-                Subject = "Email Confirmation - " + time24 + ",",
+                Subject = "Email Register Confirmation - " + time24 + ",",
                 Body = "Hi," + "<br/> Your password is <b>B0o7c@mp</b>" + "<br/> Please login with your password.",
+
+                IsBodyHtml = true
+            };
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                EnableSsl = true
+            };
+            NetworkCredential NetworkCred = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.Port = 587;
+            smtp.Send(mm);
+        }
+
+        public void SendNotificationToEmployee(string email)
+        {
+            var time24 = DateTime.Now.ToString("HH:mm:ss");
+
+
+            MailMessage mm = new MailMessage("1997HelloWorld1997@gmail.com", email)
+            {
+                Subject = "Request Notification - " + time24 + ",",
+                Body = "Hi," + "<br/> Your approval has been sent to your Supervisor" + "<br/> Please Wait for a momment",
+
+                IsBodyHtml = true
+            };
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                EnableSsl = true
+            };
+            NetworkCredential NetworkCred = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.Port = 587;
+            smtp.Send(mm);
+        }
+
+        public void SendNotificationToSupervisor(string email)
+        {
+            var time24 = DateTime.Now.ToString("HH:mm:ss");
+
+
+            MailMessage mm = new MailMessage("1997HelloWorld1997@gmail.com", email)
+            {
+                Subject = "Request Notification - " + time24 + ",",
+                Body = "Hi," + "<br/> Your Employee Ask for Your Approval" + "<br/> Please Open Your Actual History",
+
+                IsBodyHtml = true
+            };
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                EnableSsl = true
+            };
+            NetworkCredential NetworkCred = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.Port = 587;
+            smtp.Send(mm);
+        }
+
+        public void SendNotificationToRelationalManager(string email)
+        {
+            var time24 = DateTime.Now.ToString("HH:mm:ss");
+
+
+            MailMessage mm = new MailMessage("1997HelloWorld1997@gmail.com", email)
+            {
+                Subject = "Request Notification - " + time24 + ",",
+                Body = "Hi," + "<br/> You have new Approval Request",
+
+                IsBodyHtml = true
+            };
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                EnableSsl = true
+            };
+            NetworkCredential NetworkCred = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.Port = 587;
+            smtp.Send(mm);
+        }
+
+        public void SendApproveNotificationToEmployee(string email)
+        {
+            var time24 = DateTime.Now.ToString("HH:mm:ss");
+
+
+            MailMessage mm = new MailMessage("1997HelloWorld1997@gmail.com", email)
+            {
+                Subject = "Approval Result - " + time24 + ",",
+                Body = "Hi," + "<br/> Your approval Has Been Approved" + "<br/> Have a Day Off",
+
+                IsBodyHtml = true
+            };
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                EnableSsl = true
+            };
+            NetworkCredential NetworkCred = new NetworkCredential("1997HelloWorld1997@gmail.com", "wwwsawwwsdwwwszwwwsx");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.Port = 587;
+            smtp.Send(mm);
+        }
+
+        public void SendRejectNotificationToEmployee(string email)
+        {
+            var time24 = DateTime.Now.ToString("HH:mm:ss");
+
+
+            MailMessage mm = new MailMessage("1997HelloWorld1997@gmail.com", email)
+            {
+                Subject = "Approval Result - " + time24 + ",",
+                Body = "Hi," + "<br/> Your approval Has Been Rejected" + "<br/> We are Sorry to Hear That",
 
                 IsBodyHtml = true
             };
