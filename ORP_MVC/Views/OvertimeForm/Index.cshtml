@@ -17,16 +17,20 @@
                 <label for="customerid">Customer Id:</label>
                 <input type="text" id="customerid" name="customerid">
             </div>
+            <div>
+                <label for="subdate">Submission Date:</label>
+                <input type="date" id="date" name="date">
+            </div>
         </fieldset>
     </form>
     <form>
         <div>
-            <label for="starttime">Start Time:</label><br>
-            <input type="text" id="stime" name="stime"><br><br>
+            <label for="starttime">Start Time (hh:mm:ss):</label><br>
+            <input type="datetime" id="stime" name="stime"><br><br>
         </div>
         <div>
-            <label for="endtime">End Time:</label><br>
-            <input type="text" id="etime" name="etime"><br><br>
+            <label for="endtime">End Time (hh:mm:ss):</label><br>
+            <input type="datetime" id="etime" name="etime"><br><br>
         </div>
         <div>
             <label for="act">Act:</label><br>
@@ -52,7 +56,7 @@
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Activity</th>
-                <th>Aditional Salary</th>
+                <th>Additional Salary</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -63,7 +67,7 @@
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Activity</th>
-                <th>Aditional Salary</th>
+                <th>Additional Salary</th>
                 <th>Action</th>
             </tr>
         </tfoot>
@@ -72,6 +76,18 @@
 <button type="button" class="btn btn-primary" onclick="">Submit</button>
 
 <script>
+
+    var table = null;
+    $(document).ready(function () {
+        table = $("#mytables").DataTable({
+            "ajax": {
+                "url": "https://localhost:44383/api/role",
+                "datatype": "json",
+                "dataSrc": "data"
+            },
+        });
+    });
+
     function CreateOvertime() {
         var CreateOvertime = new Object();
         CreateOvertime.NIK = $("#NIK").val();

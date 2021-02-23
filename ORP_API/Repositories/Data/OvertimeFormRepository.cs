@@ -29,15 +29,6 @@ namespace ORP_API.Repositories.Data
             };
             myContext.Add(overtimeForm);
             var resultOvertimeForm = myContext.SaveChanges();
-            var overtimeformemployee = new OvertimeFormEmployee()
-            {
-                NIK = overtimeFormViewModels.NIK,
-                Status = StatusRequest.Waiting,
-                CustomerId = overtimeFormViewModels.CustomerId,
-                OvertimeFormId = overtimeForm.Id
-            };
-            myContext.Add(overtimeformemployee);
-            var resulthistory = myContext.SaveChanges();
             //List<DetailOvertimeRequest> data = new List<DetailOvertimeRequest>();
             for(int i = 0; i < overtimeFormViewModels.listdetails.Count; i++)
             {
@@ -54,7 +45,7 @@ namespace ORP_API.Repositories.Data
             };
             var resultDetails = myContext.SaveChanges();
 
-            if (resultOvertimeForm > 0 && resultDetails > 0 && resulthistory > 0)
+            if (resultOvertimeForm > 0 && resultDetails > 0)
             {
                 return 1;
             }

@@ -25,6 +25,12 @@ namespace ORP_MVC.Controllers
             var result = httpClient.PostAsync("https://localhost:44346/api/OvertimeForm/Apply/", stringContent).Result;
             return result.StatusCode;
         }
-
+        [HttpDelete]
+        public HttpStatusCode Delete(int Id)
+        {
+            var httpClient = new HttpClient();
+            var response = httpClient.DeleteAsync("https://localhost:44346/api/detailovertimerequest/" + Id).Result;
+            return response.StatusCode;
+        }
     }
 }
