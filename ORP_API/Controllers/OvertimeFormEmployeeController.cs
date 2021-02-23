@@ -41,5 +41,37 @@ namespace ORP_API.Controllers
                 return BadRequest(new { status = "Bad request", errorMessage = "Data input is not valid" });
             }
         }
+
+        [HttpPut("Supervisor/Manage")]
+        public ActionResult SupervisorApproval(OvertimeFormEmployee overtimeFormEmployee)
+        {
+            {
+                try
+                {
+                    var data = overtimeFormEmployeeRepository.SupervisorApproval(overtimeFormEmployee);
+                    return Ok(new { status = "Ok" });
+                }
+                catch (Exception)
+                {
+                    return StatusCode(500, new { status = "Internal Server Error", errorMessage = "Failed to input the data" });
+                }
+            }
+        }
+
+        [HttpPut("RM/Manage")]
+        public ActionResult RelatonalManagerApproval(OvertimeFormEmployee overtimeFormEmployee)
+        {
+            {
+                try
+                {
+                    var data = overtimeFormEmployeeRepository.RelationalManagerApproval(overtimeFormEmployee);
+                    return Ok(new { status = "Ok" });
+                }
+                catch (Exception)
+                {
+                    return StatusCode(500, new { status = "Internal Server Error", errorMessage = "Failed to input the data" });
+                }
+            }
+        }
     }
 }

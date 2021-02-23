@@ -107,7 +107,7 @@ namespace ORP_API.Repositories.Data
                 sendEmail.SendNotification(resetCode, email);
                 return result;
             }
-            }
+        }
         public int ChangePassword(string NIK, string password)
         {
             Account acc = myContext.Account.Where(a => a.NIK == NIK).FirstOrDefault();

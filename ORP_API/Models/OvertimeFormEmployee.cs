@@ -26,9 +26,11 @@ namespace ORP_API.Models
     {
         [Display(Name = "Waiting For Approval")]
         Waiting = 0,
-        [Display(Name = "Request Approved")]
-        Approve = 1,
+        [Display(Name = "Request Approved By Supervisor")]
+        ApproveBySupervisor = 1,
+        [Display(Name = "Request Approved By Relational Manager")]
+        ApproveByRelatonalManager = 2,
         [Display(Name = "Request Rejected")]
-        Reject = 2
+        Reject = 3
     }
 }
