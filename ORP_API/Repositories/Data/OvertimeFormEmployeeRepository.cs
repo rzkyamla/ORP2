@@ -41,7 +41,6 @@ namespace ORP_API.Repositories.Data
             if (resultRequest > 0)
             {
                 RequestViewModels result = null;
-                RequestViewModels result2 = null;
 
                 string connectStr = Configuration.GetConnectionString("MyConnection");
                 var employeeCondition = myContext.Employee.Where(a => a.NIK == requestViewModels.NIK).FirstOrDefault();
@@ -54,16 +53,18 @@ namespace ORP_API.Repositories.Data
                         var parameter = new { NIK = requestViewModels.NIK, CustomerId = requestViewModels.CustomerId };
                         result = db.Query<RequestViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
                     }
+                }
+                sendEmail.SendNotificationToEmployee(result.Email);
 
-                    using (IDbConnection db2 = new SqlConnection(connectStr))
-                    {
-                        string readSp = "sp_get_email_supervisor";
-                        var parameter = new { CustomerId = requestViewModels.CustomerId };
-                        result2 = db2.Query<RequestViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
-                    }
+                RequestViewModels result2 = null;
+                using (IDbConnection db = new SqlConnection(connectStr))
+                {
+                    string readSp = "sp_get_email_supervisor";
+                    var parameter = new { CustomerId = result.CustomerId, RoleId = 3 };
+                    result2 = db.Query<RequestViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
                 sendEmail.SendNotificationToSupervisor(result2.Email);
-                sendEmail.SendNotificationToEmployee(result.Email);
+
                 return 1;
             }
             else
