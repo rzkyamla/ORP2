@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+    <h2>Overtime Request</h2>
+    <form id="formovertime" action="/action_page.php">
+        <fieldset>
+            <legend>Formulir Overtime Request:</legend>
+            <div>
+                <label for="id">NIK: </label>
+                <input type="text" id="nik" name="nik">
+            </div>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div>
+                <label for="customerid">Customer Id:</label>
+                <input type="text" id="customerid" name="customerid">
+            </div>
+        </fieldset>
+    </form>
+    <form>
+        <div>
+            <label for="starttime">Start Time:</label><br>
+            <input type="text" id="stime" name="stime"><br><br>
+        </div>
+        <div>
+            <label for="endtime">End Time:</label><br>
+            <input type="text" id="etime" name="etime"><br><br>
+        </div>
+        <div>
+            <label for="act">Act:</label><br>
+            <input type="text" id="act" name="act"><br><br>
+        </div>
+        <div hidden>
+            <label for="addsalary">Additional Salary:</label><br>
+            <input type="text" id="addsalary" name="addsalary"><br><br>
+        </div>
+        <div hidden>
+            <label for="overtimeformid">OvertimeForm Id: </label><br>
+            <input type="text" id="overtimeformid" name="overtimeformid"><br><br>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="">Add</button>
+    </form>
+</body>
+</html>
+<div class="container-fluid mt-5">
+    <table id="mytables" class="table table-striped table-bordered" styles="widht:100%">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Activity</th>
+                <th>Aditional Salary</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th>No</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Activity</th>
+                <th>Aditional Salary</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<button type="button" class="btn btn-primary" onclick="">Submit</button>
+
+<script>
+    function CreateOvertime() {
+        var CreateOvertime = new Object();
+        CreateOvertime.NIK = $("#NIK").val();
+        CreateOvertime.Name = $("#name").val();
+        CreateOvertime.CustomerId = $("#customerid").val();
+       @* CreateOvertime.StartTime = $("#stime").val();
+        CreateOvertime.EndTime = $("#etime").val();
+        CreateOvertime.Act = $("#act").val();*@
+        CreateOvertime.listdetails.StartTime = $("#stime").val();
+        CreateOvertime.listdetails.EndTime = $("#etime").val();
+        CreateOvertime.listdetails.Act = $("#act").val();
+        console.log(CreateOvertime);
+        $.ajax({
+            type: 'post',
+            url: '/overtimeform/CreateOvertimeForm',
+            data: CreateOvertime
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Successed to Add Overtime Request!");
+                window.location.href = "https://localhost:44347/overtimeform";
+            }
+        }).fail((result) => {
+            console.log(result);
+            alert("Failed to Add OvertimeRequest!");
+            window.location.href = "https://localhost:44347/overtimeform";
+        })
+    }
+</script>

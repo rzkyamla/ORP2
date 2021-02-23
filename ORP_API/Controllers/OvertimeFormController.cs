@@ -22,7 +22,7 @@ namespace ORP_API.Controllers
         {
             this.overtimeFormRepository = overtimeFormRepository;
         }
-        [HttpPost("add")]
+        [HttpPost("Apply")]
         public IActionResult AddOvertime(OvertimeFormViewModels overtimeFormViewModels)
         {
             if (ModelState.IsValid)

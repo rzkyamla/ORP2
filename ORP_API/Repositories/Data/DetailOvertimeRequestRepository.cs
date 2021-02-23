@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ORP_API.Repositories.Data
 {
-    public class DetailOvertimeRequestRepository : GeneralRepository<OvertimeFormEmployee, MyContext, int>
+    public class DetailOvertimeRequestRepository : GeneralRepository<DetailOvertimeRequest, MyContext, int>
     {
         public DetailOvertimeRequestRepository(MyContext myContext) : base(myContext)
         {

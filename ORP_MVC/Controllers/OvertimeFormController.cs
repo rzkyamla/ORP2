@@ -11,19 +11,20 @@ using System.Threading.Tasks;
 
 namespace ORP_MVC.Controllers
 {
-    public class ForgotPasswordController : Controller
+    public class OvertimeFormController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-        [HttpPut]
-        public HttpStatusCode ForgotPassword(RegisterViewModels registerVM)
+        [HttpPost]
+        public HttpStatusCode CreateOvertimeForm(OvertimeFormViewModels overtimeFormViewModels)
         {
             var httpClient = new HttpClient();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(registerVM), Encoding.UTF8, "application/json");
-            var result = httpClient.PutAsync("https://localhost:44346/api/Account/reset/", content).Result;
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(overtimeFormViewModels), Encoding.UTF8, "application/json");
+            var result = httpClient.PostAsync("https://localhost:44346/api/OvertimeForm/Apply/", stringContent).Result;
             return result.StatusCode;
         }
+
     }
 }

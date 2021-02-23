@@ -38,7 +38,7 @@ namespace ORP_API.Repositories.Data
             };
             myContext.Add(overtimeformemployee);
             var resulthistory = myContext.SaveChanges();
-            List<DetailOvertimeRequest> data = new List<DetailOvertimeRequest>();
+            //List<DetailOvertimeRequest> data = new List<DetailOvertimeRequest>();
             for(int i = 0; i < overtimeFormViewModels.listdetails.Count; i++)
             {
                 TimeSpan difference = overtimeFormViewModels.listdetails[i].EndTime - overtimeFormViewModels.listdetails[i].StartTime;
@@ -49,7 +49,7 @@ namespace ORP_API.Repositories.Data
                 listdata.Act = overtimeFormViewModels.listdetails[i].Act;
                 listdata.AdditionalSalary = totalHours * 100000;
                 listdata.OvertimeFormId = overtimeForm.Id;
-                data.Add(listdata);
+                //data.Add(listdata);
                 myContext.Add(listdata);
             };
             var resultDetails = myContext.SaveChanges();
