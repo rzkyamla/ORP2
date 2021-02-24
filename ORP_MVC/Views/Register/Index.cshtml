@@ -1,7 +1,4 @@
-﻿<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Register">Register</a>
-<a href="javascript:void(0)" class="btn bg-transparent text-success" data-toggle="modal" data-target="#Login">Login</a>
-
-<div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+﻿<div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -55,7 +52,7 @@
                                 <label for="name" class="col-form-label">Customer</label>
                                 <select id="customerid" class="form-control" name="customer">
                                     <option value="1">Metrodata MII</option>
-                                    <option value="2">Bnak BCA</option>
+                                    <option value="2">Bank BCA</option>
                                     <option value="3">Bank BNI</option>
                                     <option value="4">Bank BRI</option>
                                 </select>
@@ -80,106 +77,104 @@
     </div>
 </div>
 
-<div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="roleform" action="Auth/">
-                    <div class="form-group">
-                        <label for="name" class="col-form-label">Email</label>
-                        <input type="text" class="form-control" id="emaillogin" name="emaillogin">
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-form-label">Password</label>
-                        <input type="password" class="form-control" id="passwordlogin" name="passwordlogin">
-                        <input type="checkbox" class="col-form-label" onclick="myFunction1()"> Show Password
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-6">
-                            @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")
-                            @*<a href="#" class="text-dark" onclick="ForgotPassword()"><small>Forgot password?</small></a>*@
-                            @*<a href="javascript:void(0)" class="text-dark" data-toggle="modal" data-target="#forgotpassword"><small>Forgot password?</small></a>*@
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="Login()">Submit</button>
-            </div>
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+<form id="roleform">
+    <table width="25%">
+        <thead>
+            <tr>
+                <th><label for="email">Email</label></th>
+                <th><input type="text" id="emaillogin" class="form-control" name="email"></th>
+            </tr>
+            <tr>
+                <th><label for="pass">Password</label></th>
+                <th><input type="password" id="passwordlogin" class="form-control" name="pass"></th>
+            </tr>
+        </thead>
+        <!--<div>
+            <label for="email">Email</label>
+            <input type="text" id="emaillogin" name="emaillogin">
+        </div>
+        <div>
+            <label for="password" class="col-form-label">Password</label>
+            <input type="password" id="passwordlogin" name="passwordlogin">
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <a href="javascript:void(0)" class="col-6"><small> @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")</small></a>
+                <a href="javascript:void(0)" class="col-6 text-right" data-toggle="modal" data-target="#Register"><small>Register</small></a>-->
+        @*<a href="#" class="text-dark" onclick="ForgotPassword()"><small>Forgot password?</small></a>*@
+        @*<a href="javascript:void(0)" class="text-dark" data-toggle="modal" data-target="#forgotpassword"><small>Forgot password?</small></a>*@
+        <!--</div>
+        </div>-->
+    </table>
+    <div class="row mt-3">
+        <div class="col-6">
+            <a href="javascript:void(0)" class="col-6"><small> @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")</small></a>
+            <a href="javascript:void(0)" class="col-6 text-right" data-toggle="modal" data-target="#Register"><small>Register</small></a>
         </div>
     </div>
-</div>
+</form>
+    <div>
+        <button type="button" class="btn btn-primary" onclick="Login()">Submit</button>
+    </div>
+}
 
-<script>
-    function myFunction1() {
-        var x = document.getElementById("passwordlogin");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
-
-    function Register() {
-        var Register = new Object();
-        Register.NIK = $("#nik").val();
-        Register.Name = $("#name").val();
-        Register.BirthDate = $("#birthdate").val();
-        Register.Gender = $("#gender").val();
-        Register.Religion = $("#religion").val();
-        Register.Email = $("#email").val();
-        Register.PhoneNumber = $("#hp").val();
-        Register.CustomerId = $("#customerid").val();
-        console.log(Register);
-        $.ajax({
-            type: 'post',
-            url: '/register/register',
-            data: Register
-        }).done((result) => {
-            console.log(result);
-            if (result == 200) {
-                alert("Successed to Add Data!");
-                window.location.href = "https://localhost:44345/register";
-            }
+    <script>
+        function Register() {
+            var Register = new Object();
+            Register.NIK = $("#nik").val();
+            Register.Name = $("#name").val();
+            Register.BirthDate = $("#birthdate").val();
+            Register.Gender = $("#gender").val();
+            Register.Religion = $("#religion").val();
+            Register.Email = $("#email").val();
+            Register.PhoneNumber = $("#hp").val();
+            Register.CustomerId = $("#customerid").val();
+            console.log(Register);
+            $.ajax({
+                type: 'post',
+                url: '/register/register',
+                data: Register
+            }).done((result) => {
+                console.log(result);
+                if (result == 200) {
+                    alert("Successed to Add Data! Please Login!");
+                    window.location.href = "https://localhost:44347/Register";
+                }
             }).fail((result) => {
                 console.log(result);
                 alert("Failed to Add Data!");
-                window.location.href = "https://localhost:44345/register";
+                window.location.href = "https://localhost:44347/Register";
             })
-    }
+        }
 
-    function Login() {
-        var Login = new Object();
-        Login.Email = $("#emaillogin").val();
-        Login.Password = $("#passwordlogin").val();
-        console.log(Login);
-        $.ajax({
-            type: 'post',
-            url: '/login/login',
-            data: Login
-        }).done((result) => {
-            console.log(result);
-            if (result == 200) {
-                alert("Successed to Login");
-                window.location.href = "https://www.google.com/";
-            }
-            else {
-                alert("Failed to Login");
-                window.location.href = "https://www.youtube.com/";
-            }
-        }).fail((result) => {
-            console.log(result);
-            if (result != 200) {
-                alert("Failed to Login");
-                window.location.href = "https://localhost:44345/register";
-            }
-        })
-    }
+        function Login() {
+            var Login = new Object();
+            Login.Email = $("#emaillogin").val();
+            Login.Password = $("#passwordlogin").val();
+            console.log(Login);
+            $.ajax({
+                type: 'post',
+                url: '/login/login',
+                data: Login
+            }).done((result) => {
+                console.log(result);
+                if (result == 200) {
+                    alert("Successed to Login");
+                    window.location.href = "https://localhost:44347/dashboard";
+                }
+                else {
+                    alert("Failed to Login");
+                }
+            }).fail((result) => {
+                console.log(result);
+                if (result != 200) {
+                    alert("Failed to Login");
+                    window.location.href = "https://localhost:44347/Register";
+                }
+            })
+        }
 
-</script>
+    </script>
