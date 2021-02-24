@@ -18,7 +18,6 @@ namespace ORP_API.Context
         public DbSet<OvertimeForm> OvertimeForm { get; set; }
         public DbSet<DetailOvertimeRequest> DetailOvertimeRequests { get; set; }
         public DbSet<OvertimeFormEmployee> OvertimeFormEmployee { get; set; }
-        public DbSet<DetailOvertimeRequest> DetailOvertimeRequests { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().HasOne(x => x.Role).WithMany(z => z.Employees);

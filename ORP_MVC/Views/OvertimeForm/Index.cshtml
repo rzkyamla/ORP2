@@ -17,12 +17,14 @@
                     </tr>
                     <tr>
                         <th><label for="customerid">Customer</label></th>
-                        <th><select id="customerid" class="form-control" name="customer">
+                        <th>
+                            <select id="customerid" class="form-control" name="customer">
                                 <option value="1">Metrodata MII</option>
-                                <option value="2">Bnak BCA</option>
+                                <option value="2">Bank BCA</option>
                                 <option value="3">Bank BNI</option>
                                 <option value="4">Bank BRI</option>
-                            </select></th>
+                            </select>
+                        </th>
                     </tr>
                     <tr>
                         <th><label for="subdate">Submission Date:</label></th>
@@ -65,12 +67,12 @@
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4">
-                <button type="button" class="btn btn-primary" onclick="">Add</button>
+                <button type="button" class="btn btn-primary" onclick="AddListOvertime()">Add</button>
             </div>
         </div>
-            
-            
-</form>
+
+
+    </form>
 </body>
 </html>
 <div class="container-fluid mt-5">
@@ -98,45 +100,100 @@
         </tfoot>
     </table>
 </div>
-<button type="button" class="btn btn-primary" onclick="ApplyRequest()">Submit</button>
-
+<button type="button" class="btn btn-primary" onclick="CreateOvertime()">Submit</button>
+@section scripts
+{ 
 <script>
     var table = null;
+    var listOvertime = [];
+    var table = null;
     $(document).ready(function () {
-        table = $("#mytables").DataTable({
+        table = $("#myTable").DataTable({
+            "filter": true,
+            "orderMulti": false,
             "ajax": {
-                "url": "https://localhost:44383/api/role",
+                "url": "https://localhost:44383/api/detailovertimerequest",
+                "type": "get",
                 "datatype": "json",
                 "dataSrc": "data"
             },
+            "columns": [
+                {
+                    "data": null,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return row['starttime'];
+                    },
+                    "autoWidth": true
+                },
+                {
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return row['endtime'];
+                    },
+                    "autoWidth": true
+                },
+                {
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return row['act'];
+                    },
+                    "autoWidth": true
+                },
+                {
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return row['addsalary'];
+                    },
+                    "autoWidth": true
+                },
+                {
+                    "render": function (data, type, row, meta) {
+                        return '<a href="javascript:void(0)" class="far fa-edit table-action text-dark" data-toggle="tooltip" data-placement="top" title="Edit" onclick="Get(\'' + row['id'] + '\')"></a> ' +
+                            '<a href="javascript:void(0)" class="fa fa-trash table-action text-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['id'] + '\')"></a>'
+                    }
+                }
+            ]
         });
     });
+
+    function AddListOvertime() {
+        @*var difference = moment($("#etime").val(), 'hh:mm:ss').diff(moment($("#stime").val(), 'hh:mm:ss'), 'hours');*@
+        var tempList = {
+            StartTime: $("#stime").val(),
+            EndTime: $("#etime").val(),
+            Act: $("#act").val(),
+           @* AdditionalSalary: difference * 100000*@
+        }
+        listOvertime.push(tempList);
+    }
+
     function CreateOvertime() {
         var CreateOvertime = new Object();
-        CreateOvertime.NIK = $("#NIK").val();
+        CreateOvertime.NIK = $("#nik").val();
         CreateOvertime.Name = $("#name").val();
         CreateOvertime.CustomerId = $("#customerid").val();
-       @* CreateOvertime.StartTime = $("#stime").val();
-        CreateOvertime.EndTime = $("#etime").val();
-        CreateOvertime.Act = $("#act").val();*@
-        CreateOvertime.listdetails.StartTime = $("#stime").val();
-        CreateOvertime.listdetails.EndTime = $("#etime").val();
-        CreateOvertime.listdetails.Act = $("#act").val();
+        CreateOvertime.listdetails = listOvertime;
         console.log(CreateOvertime);
         $.ajax({
             type: 'post',
             url: '/overtimeform/CreateOvertimeForm',
             data: CreateOvertime
         }).done((result) => {
-            console.log(result);
+            console.log(result,"Success");
             if (result == 200) {
                 alert("Successed to Add Overtime Request!");
-                window.location.href = "https://localhost:44347/overtimeform";
+                @*window.location.href = "https://localhost:44347/overtimeform";*@
             }
         }).fail((result) => {
-            console.log(result);
+            console.log(result, "Gagal");
             alert("Failed to Add OvertimeRequest!");
-            window.location.href = "https://localhost:44347/overtimeform";
+           @* window.location.href = "https://localhost:44347/overtimeform";*@
         })
     }
 
@@ -153,12 +210,14 @@
             console.log(result);
             if (result == 200) {
                 alert("Successed to Request Overtime!");
-                window.location.href = "https://localhost:44347/overtimeform";
+                @*window.location.href = "https://localhost:44347/overtimeform";*@
             }
         }).fail((result) => {
             console.log(result);
             alert("Failed to Request Overtime!");
-            window.location.href = "https://localhost:44347/overtimeform";
+            @*window.location.href = "https://localhost:44347/overtimeform";*@
         })
     }
 </script>
+<script src="https://momentjs.com/downloads/moment.js"></script>
+}

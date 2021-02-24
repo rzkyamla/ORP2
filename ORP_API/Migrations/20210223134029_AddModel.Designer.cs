@@ -10,13 +10,8 @@ using ORP_API.Context;
 namespace ORP_API.Migrations
 {
     [DbContext(typeof(MyContext))]
-<<<<<<< HEAD:ORP_API/Migrations/20210222081744_AddModel.Designer.cs
-    [Migration("20210222081744_AddModel")]
+    [Migration("20210223134029_AddModel")]
     partial class AddModel
-=======
-    [Migration("20210223080723_InitProject")]
-    partial class InitProject
->>>>>>> tresna:ORP_API/Migrations/20210223080723_InitProject.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
