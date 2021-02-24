@@ -32,7 +32,7 @@ namespace ORP_API.Handler
                     new Claim("Email", loginViewModels.Email),
                     new Claim(ClaimTypes.Role, loginViewModels.RoleName)
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(20),
+                    Expires = DateTime.UtcNow.AddMonths(12),
                     SigningCredentials = new SigningCredentials(
                         new SymmetricSecurityKey(key),
                         SecurityAlgorithms.HmacSha256Signature)
