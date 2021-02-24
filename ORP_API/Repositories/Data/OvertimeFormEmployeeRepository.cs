@@ -18,51 +18,78 @@ namespace ORP_API.Repositories.Data
     {
         private readonly MyContext myContext;
         private readonly SendEmail sendEmail = new SendEmail();
+        private readonly OvertimeFormRepository overtimeFormRepository;
         public IConfiguration Configuration { get; }
-        public OvertimeFormEmployeeRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
+        public OvertimeFormEmployeeRepository(MyContext myContext, IConfiguration configuration, OvertimeFormRepository overtimeFormRepository) : base(myContext)
         {
             myContext.Set<OvertimeFormEmployee>();
             this.myContext = myContext;
             this.Configuration = configuration;
+            this.overtimeFormRepository = overtimeFormRepository;
         }
 
-        public int ApplyRequest(RequestViewModels requestViewModels)
+        public int ApplyRequest(OvertimeFormViewModels overtimeFormViewModels)
         {
-            var addRequest = new OvertimeFormEmployee()
-            {
-                NIK = requestViewModels.NIK,  //get from session
-                CustomerId = requestViewModels.CustomerId,
-                OvertimeFormId = requestViewModels.OvertimeFormId,
-                Status = StatusRequest.Waiting
-            };
+            var condition = myContext.OvertimeForm.Where(a => a.Name == overtimeFormViewModels.Name).FirstOrDefault();
 
-            myContext.Add(addRequest);
+            if(condition != null)
+            {
+                OvertimeFormViewModels result = null;
+
+                string connectStr = Configuration.GetConnectionString("MyConnection");
+
+                using (IDbConnection db = new SqlConnection(connectStr))
+                {
+                    string readSp = "sp_get_info";
+                    var parameter = new { Name = overtimeFormViewModels.Name };
+                    result = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                }
+
+                OvertimeFormViewModels result2 = null;
+
+                using (IDbConnection db = new SqlConnection(connectStr))
+                {
+                    string readSp = "sp_get_id";
+                    var parameter = new { Id = condition.Id + (result.Amount - 1) };
+                    result2 = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                }
+
+                var addRequest = new OvertimeFormEmployee()
+                {
+                    NIK = overtimeFormViewModels.NIK,  //get from session
+                    CustomerId = overtimeFormViewModels.CustomerId,
+                    OvertimeFormId = result2.Id,
+                    Status = StatusRequest.Waiting
+                };
+
+                myContext.Add(addRequest);
+            }
             var resultRequest = myContext.SaveChanges();
 
             if (resultRequest > 0)
             {
-                RequestViewModels result = null;
+                OvertimeFormViewModels result = null;
 
                 string connectStr = Configuration.GetConnectionString("MyConnection");
-                var employeeCondition = myContext.Employee.Where(a => a.NIK == requestViewModels.NIK).FirstOrDefault();
+                var employeeCondition = myContext.Employee.Where(a => a.NIK == overtimeFormViewModels.NIK).FirstOrDefault();
 
                 if (employeeCondition != null)
                 {
                     using (IDbConnection db = new SqlConnection(connectStr))
                     {
                         string readSp = "sp_get_email_employee";
-                        var parameter = new { NIK = requestViewModels.NIK, CustomerId = requestViewModels.CustomerId };
-                        result = db.Query<RequestViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                        var parameter = new { NIK = overtimeFormViewModels.NIK, CustomerId = overtimeFormViewModels.CustomerId };
+                        result = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
                     }
                 }
                 sendEmail.SendNotificationToEmployee(result.Email);
 
-                RequestViewModels result2 = null;
+                OvertimeFormViewModels result2 = null;
                 using (IDbConnection db = new SqlConnection(connectStr))
                 {
                     string readSp = "sp_get_email_supervisor";
                     var parameter = new { CustomerId = result.CustomerId, RoleId = 3 };
-                    result2 = db.Query<RequestViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    result2 = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
                 sendEmail.SendNotificationToSupervisor(result2.Email);
 
@@ -90,14 +117,14 @@ namespace ORP_API.Repositories.Data
 
             if (result.Status == StatusRequest.ApproveBySupervisor)
             {
-                RequestViewModels result3 = null;
+                OvertimeFormViewModels result3 = null;
 
                 string connectStr = Configuration.GetConnectionString("MyConnection");
                 using (IDbConnection db = new SqlConnection(connectStr))
                 {
                     string readSp = "sp_get_email_relational_manager";
                     var parameter = new { CustomerId = 1, RoleId = 2 };
-                    result3 = db.Query<RequestViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    result3 = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
                 sendEmail.SendNotificationToRelationalManager(result3.Email);
             }
@@ -144,6 +171,7 @@ namespace ORP_API.Repositories.Data
                     result3 = db.Query<RequestViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
                 sendEmail.SendRejectNotificationToEmployee(result3.Email);
+
             }
 
             return finalResult;

@@ -22,11 +22,11 @@ namespace ORP_API.Controllers
         }
 
         [HttpPost("Request")]
-        public IActionResult RequestOvertime(RequestViewModels requestViewModels)
+        public IActionResult RequestOvertime(OvertimeFormViewModels overtimeFormViewModels)
         {
             if (ModelState.IsValid)
             {
-                var data = overtimeFormEmployeeRepository.ApplyRequest(requestViewModels);
+                var data = overtimeFormEmployeeRepository.ApplyRequest(overtimeFormViewModels);
                 if (data > 0)
                 {
                     return Ok(new { status = "Request Added" });
