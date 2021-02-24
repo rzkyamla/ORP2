@@ -177,4 +177,31 @@
             })
         }
 
-    </script>
+    function Login() {
+        var Login = new Object();
+        Login.Email = $("#emaillogin").val();
+        Login.Password = $("#passwordlogin").val();
+        console.log(Login);
+        $.ajax({
+            type: 'post',
+            url: '/login/login',
+            data: Login
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Successed to Login");
+                window.location.href = "https://localhost:44345/dashboard";
+            }
+            else {
+                alert("Failed to Login");
+                window.location.href = "https://localhost:44345/register";
+            }
+        }).fail((result) => {
+            console.log(result);
+            if (result != 200) {
+                alert("Failed to Login");
+                window.location.href = "https://localhost:44345/register";
+            }
+        })
+    }
+</script>
