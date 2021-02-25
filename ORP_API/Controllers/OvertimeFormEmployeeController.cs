@@ -21,27 +21,6 @@ namespace ORP_API.Controllers
             this.overtimeFormEmployeeRepository = overtimeFormEmployeeRepository;
         }
 
-        [HttpPost("Request")]
-        public IActionResult RequestOvertime(OvertimeFormViewModels overtimeFormViewModels)
-        {
-            if (ModelState.IsValid)
-            {
-                var data = overtimeFormEmployeeRepository.ApplyRequest(overtimeFormViewModels);
-                if (data > 0)
-                {
-                    return Ok(new { status = "Request Added" });
-                }
-                else
-                {
-                    return StatusCode(500, new { status = "Internal server error" });
-                }
-            }
-            else
-            {
-                return BadRequest(new { status = "Bad request", errorMessage = "Data input is not valid" });
-            }
-        }
-
         [HttpPut("Supervisor/Manage")]
         public ActionResult SupervisorApproval(OvertimeFormEmployee overtimeFormEmployee)
         {

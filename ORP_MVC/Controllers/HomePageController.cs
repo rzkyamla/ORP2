@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ORP_MVC.Controllers
 {
-    public class RegisterController : Controller
+    public class HomePageController : Controller
     {
         public IActionResult Index()
         {

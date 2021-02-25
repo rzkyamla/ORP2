@@ -115,34 +115,34 @@
    
 }
 
-    <script>
-        function Register() {
-            var Register = new Object();
-            Register.NIK = $("#nik").val();
-            Register.Name = $("#name").val();
-            Register.BirthDate = $("#birthdate").val();
-            Register.Gender = $("#gender").val();
-            Register.Religion = $("#religion").val();
-            Register.Email = $("#email").val();
-            Register.PhoneNumber = $("#hp").val();
-            Register.CustomerId = $("#customerid").val();
-            console.log(Register);
-            $.ajax({
-                type: 'post',
-                url: '/register/register',
-                data: Register
-            }).done((result) => {
-                console.log(result);
-                if (result == 200) {
-                    alert("Successed to Add Data! Please Login!");
-                    window.location.href = "https://localhost:44347/Register";
-                }
-            }).fail((result) => {
-                console.log(result);
-                alert("Failed to Add Data!");
-                window.location.href = "https://localhost:44347/Register";
-            })
-        }
+<script>
+    function Register() {
+        var Register = new Object();
+        Register.NIK = $("#nik").val();
+        Register.Name = $("#name").val();
+        Register.BirthDate = $("#birthdate").val();
+        Register.Gender = $("#gender").val();
+        Register.Religion = $("#religion").val();
+        Register.Email = $("#email").val();
+        Register.PhoneNumber = $("#hp").val();
+        Register.CustomerId = $("#customerid").val();
+        console.log(Register);
+        $.ajax({
+            type: 'post',
+            url: '/HomePage/register',
+            data: Register
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Successed to Add Data! Please Login!");
+                window.location.href = "https://localhost:44347/HomePage";
+            }
+        }).fail((result) => {
+            console.log(result);
+            alert("Failed to Add Data!");
+            window.location.href = "https://localhost:44347/HomePage";
+        })
+    }
 
     function Login() {
         var Login = new Object();
@@ -151,7 +151,7 @@
         console.log(Login);
         $.ajax({
             type: 'post',
-            url: '/login/login',
+            url: '/Login/Login',
             data: Login
         }).done((result) => {
             console.log(result);
@@ -161,13 +161,13 @@
             }
             else {
                 alert("Failed to Login");
-                window.location.href = "https://localhost:44347/register";
+                window.location.href = "https://localhost:44347/HomePage";
             }
         }).fail((result) => {
             console.log(result);
             if (result != 200) {
                 alert("Failed to Login");
-                window.location.href = "https://localhost:44347/register";
+                window.location.href = "https://localhost:44347/HomePage";
             }
         })
     }

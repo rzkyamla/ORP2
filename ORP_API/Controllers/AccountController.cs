@@ -54,7 +54,7 @@ namespace ORP_API.Controllers
             return (data > 0) ? (ActionResult)Ok(new { message = "Email has been Sent, password changed", status = "Ok" }) : NotFound(new { message = "Data not exist in our database, please register first", status = 404 });
         }
 
-        /*[HttpPut("ChangePassword/{NIK}")]*/
+        
         [HttpPut("ChangePassword")]
         public ActionResult ChangePassword(ChangePasswordViewModels changePasswordVM)
         {
