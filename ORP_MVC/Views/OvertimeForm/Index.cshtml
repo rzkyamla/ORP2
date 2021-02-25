@@ -1,183 +1,179 @@
 ﻿<!DOCTYPE html>
-<html>
-<body>
-    <h2>Overtime Request</h2>
-    <form id="formovertime" action="/action_page.php">
-        <fieldset>
-            <legend>Formulir Overtime Request:</legend>
-            <table width="50%">
-                <thead>
-                    <tr>
-                        <th><label for="id">NIK</label></th>
-                        <th><input type="text" id="nik" class="form-control" name="nik"></th>
-                    </tr>
-                    <tr>
-                        <th><label for="name">Name</label></th>
-                        <th><input type="text" id="name" class="form-control" name="name"></th>
-                    </tr>
-                    <tr>
-                        <th><label for="customerid">Customer</label></th>
-                        <th>
-                            <select id="customerid" class="form-control" name="customer">
-                                <option value="1">Metrodata MII</option>
-                                <option value="2">Bank BCA</option>
-                                <option value="3">Bank BNI</option>
-                                <option value="4">Bank BRI</option>
-                            </select>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th><label for="subdate">Submission Date:</label></th>
-                        <th><input type="date" id="date" class="form-control" name="date"></th>
-                    </tr>
-                </thead>
-            </table>
-        </fieldset>
-        <br>
-    </form>
-    <form>
-        <div class="row">
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="starttime">Start Time</label><br>
-                    <input type="time" id="stime" class="form-control" name="stime">
-                </div>
+    <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">Overtime Request Formulir</h3>
             </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="endtime">End Time</label><br>
-                    <input type="time" id="etime" class="form-control" name="etime">
-                </div>
+            <div class="card-header">
+                    <form id="formovertime" action="/action_page.php">
+                            <table width="50%">
+                                <thead>
+                                    <tr>
+                                        <th><label for="id">NIK</label></th>
+                                        <th><input type="text" id="nik" class="form-control" name="nik"></th>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="name">Name</label></th>
+                                        <th><input type="text" id="name" class="form-control" name="name"></th>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="customerid">Customer</label></th>
+                                        <th>
+                                            <select id="customerid" class="form-control" name="customer">
+                                                <option value="1">Metrodata MII</option>
+                                                <option value="2">Bank BCA</option>
+                                                <option value="3">Bank BNI</option>
+                                                <option value="4">Bank BRI</option>
+                                            </select>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="subdate">Submission Date:</label></th>
+                                        <th><input type="date" id="date" class="form-control" name="date"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                    </form>
+                    <br/>
+                    <form>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="starttime">Start Time</label><br>
+                                    <input type="time" id="stime" class="form-control" name="stime">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="endtime">End Time</label><br>
+                                    <input type="time" id="etime" class="form-control" name="etime">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="act">Act</label><br>
+                                    <input type="text" id="act" class="form-control" name="act">
+                                </div>
+                            </div>
+                            <div hidden>
+                                <label for="addsalary">Additional Salary:</label><br>
+                                <input type="text" id="addsalary" name="addsalary">
+                            </div>
+                            <div hidden>
+                                <label for="overtimeformid">OvertimeForm Id: </label><br>
+                                <input type="text" id="overtimeformid" name="overtimeformid">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-primary" onclick="AddListOvertime()">Add</button>
+                            </div>
+                        </div>
+                    </form>
+            <div class="container-fluid mt-5">
+                <table id="mytables" class="table table-striped table-bordered" styles="widht:100%">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Activity</th>
+                            <th>Additional Salary</th>
+                            @*<th>Action</th>*@
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Activity</th>
+                            <th>Additional Salary</th>
+                            @*<th>Action</th>*@
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="act">Act</label><br>
-                    <input type="text" id="act" class="form-control" name="act">
-                </div>
-            </div>
-            <div hidden>
-                <label for="addsalary">Additional Salary:</label><br>
-                <input type="text" id="addsalary" name="addsalary">
-            </div>
-            <div hidden>
-                <label for="overtimeformid">OvertimeForm Id: </label><br>
-                <input type="text" id="overtimeformid" name="overtimeformid">
-            </div>
+            <button type="button" class="btn btn-primary" onclick="CreateOvertime()">Submit</button>
         </div>
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4">
-                <button type="button" class="btn btn-primary" onclick="AddListOvertime()">Add</button>
-            </div>
         </div>
-
-
-    </form>
-</body>
-</html>
-<div class="container-fluid mt-5">
-    <table id="mytables" class="table table-striped table-bordered" styles="widht:100%">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Activity</th>
-                <th>Additional Salary</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-        <tfoot>
-            <tr>
-                <th>No</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Activity</th>
-                <th>Additional Salary</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
-    </table>
 </div>
-<button type="button" class="btn btn-primary" onclick="CreateOvertime()">Submit</button>
+
 @section scripts
-{ 
-<script>
-    var table = null;
-    var listOvertime = [];
-    var table = null;
-    var rowIndex = 0;
-    function AddListOvertime() {
-        var difference = moment($("#etime").val(), 'hh:mm:ss').diff(moment($("#stime").val(), 'hh:mm:ss'), 'hours');
-        var tempList = {
-            StartTime: $("#stime").val(),
-            EndTime: $("#etime").val(),
-            Act: $("#act").val(),
-            AdditionalSalary: difference * 100000
+    {
+    <script>
+        var table = null;
+        var listOvertime = [];
+        var table = null;
+        var rowIndex = 0;
+
+        function AddListOvertime() {
+            var difference = moment($("#etime").val(), 'hh:mm:ss').diff(moment($("#stime").val(), 'hh:mm:ss'), 'hours');
+            var tempList = {
+                StartTime: $("#stime").val(),
+                EndTime: $("#etime").val(),
+                Act: $("#act").val(),
+                AdditionalSalary: difference * 100000
+            }
+            listOvertime.push(tempList);
+            var tableBody = document.querySelector('table > tbody');
+            const row = tableBody.insertRow(rowIndex);
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            const cell4 = row.insertCell(3);
+            const cell5 = row.insertCell(4);
+            const cell6 = row.insertCell(5);
+            cell1.textContent = rowIndex + 1;
+            cell2.textContent = document.getElementById("stime").value;
+            cell3.textContent = document.getElementById("etime").value;
+            cell4.textContent = document.getElementById("act").value;
+            cell5.textContent = difference * 100000;
+            rowIndex = rowIndex + 1;
         }
-        listOvertime.push(tempList);
-        var tableBody = document.querySelector('table > tbody');
-        const row = tableBody.insertRow(rowIndex);
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-        const cell3 = row.insertCell(2);
-        const cell4 = row.insertCell(3);
-        const cell5 = row.insertCell(4);
-        const cell6 = row.insertCell(5);
-        cell1.textContent = rowIndex + 1;
-        cell2.textContent = document.getElementById("stime").value;
-        cell3.textContent = document.getElementById("etime").value;
-        cell4.textContent = document.getElementById("act").value;
-        cell5.textContent = difference * 100000;
-        rowIndex = rowIndex + 1;
-    }
 
-    function CreateOvertime() {
-        var CreateOvertime = new Object();
-        CreateOvertime.NIK = $("#nik").val();
-        CreateOvertime.Name = $("#name").val();
-        CreateOvertime.CustomerId = $("#customerid").val();
-        CreateOvertime.listdetails = listOvertime;
-        console.log(CreateOvertime);
-        $.ajax({
-            type: 'post',
-            url: '/overtimeform/CreateOvertimeForm',
-            data: CreateOvertime
-        }).done((result) => {
-            console.log(result,"Success");
-            if (result == 200) {
-                alert("Successed to Add Overtime Request!");
-                @*window.location.href = "https://localhost:44347/overtimeform";*@
-            }
-        }).fail((result) => {
-            console.log(result, "Gagal");
-            alert("Failed to Add OvertimeRequest!");
-           @* window.location.href = "https://localhost:44347/overtimeform";*@
-        })
-    }
-
-    function ApplyRequest() {
-        var applyRequest = new Object();
-        applyRequest.NIK = $("#nik").val();
-        applyRequest.CustomerId = $("#customerid").val();
-        applyRequest.OvertimeFormId = $("#overtimeformid").val();
-        $.ajax({
-            type: 'post',
-            url: '/ApplyRequest/ApplyRequest',
-            data: applyRequest
-        }).done((result) => {
-            console.log(result);
-            if (result == 200) {
-                alert("Successed to Request Overtime!");
-                @*window.location.href = "https://localhost:44347/overtimeform";*@
-            }
-        }).fail((result) => {
-            console.log(result);
-            alert("Failed to Request Overtime!");
-            @*window.location.href = "https://localhost:44347/overtimeform";*@
-        })
-    }
-</script>
-<script src="https://momentjs.com/downloads/moment.js"></script>
+        function CreateOvertime() {
+            var CreateOvertime = new Object();
+            CreateOvertime.NIK = $("#nik").val();
+            CreateOvertime.Name = $("#name").val();
+            CreateOvertime.CustomerId = $("#customerid").val();
+            CreateOvertime.listdetails = listOvertime;
+            console.log(CreateOvertime);
+            $.ajax({
+                type: 'post',
+                url: '/overtimeform/CreateOvertimeForm',
+                data: CreateOvertime
+            }).done((result) => {
+                console.log(result, "Success");
+                if (result == 200) {
+                    alert("Successed to Add Overtime Request!");
+                }
+            }).fail((result) => {
+                console.log(result, "Gagal");
+                alert("Failed to Add OvertimeRequest!");
+            })
+         }
+         function ApplyRequest() {
+            var applyRequest = new Object();
+            applyRequest.NIK = $("#nik").val();
+            applyRequest.CustomerId = $("#customerid").val();
+            applyRequest.OvertimeFormId = $("#overtimeformid").val();
+            $.ajax({
+                type: 'post',
+                url: '/ApplyRequest/ApplyRequest',
+                data: applyRequest
+                    }).done((result) => {
+                        console.log(result);
+                        if (result == 200) {
+                            alert("Successed to Request Overtime!");
+                    }
+                    }).fail((result) => {
+                        console.log(result);
+                        alert("Failed to Request Overtime!");
+                    });
+                 }
+    </script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
 }
