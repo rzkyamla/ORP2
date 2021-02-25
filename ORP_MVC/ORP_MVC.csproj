@@ -8,4 +8,8 @@
     <ProjectReference Include="..\ORP_API\ORP_API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Login\" />
+  </ItemGroup>
+
 </Project>

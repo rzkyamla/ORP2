@@ -24,6 +24,7 @@ namespace ORP_API.ViewModels
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Act { get; set; }
+        public int AdditionalSalary { get; set; }
     }
 
 }

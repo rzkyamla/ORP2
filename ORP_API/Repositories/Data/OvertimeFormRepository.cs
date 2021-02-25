@@ -32,13 +32,13 @@ namespace ORP_API.Repositories.Data
             //List<DetailOvertimeRequest> data = new List<DetailOvertimeRequest>();
             for(int i = 0; i < overtimeFormViewModels.listdetails.Count; i++)
             {
-                TimeSpan difference = overtimeFormViewModels.listdetails[i].EndTime - overtimeFormViewModels.listdetails[i].StartTime;
-                int totalHours = difference.Hours;
+               /* TimeSpan difference = overtimeFormViewModels.listdetails[i].EndTime - overtimeFormViewModels.listdetails[i].StartTime;
+                int totalHours = difference.Hours;*/
                 var listdata = new DetailOvertimeRequest();
                 listdata.StartTime = overtimeFormViewModels.listdetails[i].StartTime;
                 listdata.EndTime = overtimeFormViewModels.listdetails[i].EndTime;
                 listdata.Act = overtimeFormViewModels.listdetails[i].Act;
-                listdata.AdditionalSalary = totalHours * 100000;
+                listdata.AdditionalSalary = overtimeFormViewModels.listdetails[i].AdditionalSalary;
                 listdata.OvertimeFormId = overtimeForm.Id;
                 //data.Add(listdata);
                 myContext.Add(listdata);

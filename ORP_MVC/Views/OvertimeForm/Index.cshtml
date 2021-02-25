@@ -107,70 +107,30 @@
     var table = null;
     var listOvertime = [];
     var table = null;
-    $(document).ready(function () {
-        table = $("#myTable").DataTable({
-            "filter": true,
-            "orderMulti": false,
-            "ajax": {
-                "url": "https://localhost:44383/api/detailovertimerequest",
-                "type": "get",
-                "datatype": "json",
-                "dataSrc": "data"
-            },
-            "columns": [
-                {
-                    "data": null,
-                    "render": function (data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    }
-                },
-                {
-                    "data": null,
-                    "render": function (data, type, row) {
-                        return row['starttime'];
-                    },
-                    "autoWidth": true
-                },
-                {
-                    "data": null,
-                    "render": function (data, type, row) {
-                        return row['endtime'];
-                    },
-                    "autoWidth": true
-                },
-                {
-                    "data": null,
-                    "render": function (data, type, row) {
-                        return row['act'];
-                    },
-                    "autoWidth": true
-                },
-                {
-                    "data": null,
-                    "render": function (data, type, row) {
-                        return row['addsalary'];
-                    },
-                    "autoWidth": true
-                },
-                {
-                    "render": function (data, type, row, meta) {
-                        return '<a href="javascript:void(0)" class="far fa-edit table-action text-dark" data-toggle="tooltip" data-placement="top" title="Edit" onclick="Get(\'' + row['id'] + '\')"></a> ' +
-                            '<a href="javascript:void(0)" class="fa fa-trash table-action text-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['id'] + '\')"></a>'
-                    }
-                }
-            ]
-        });
-    });
-
+    var rowIndex = 0;
     function AddListOvertime() {
-        @*var difference = moment($("#etime").val(), 'hh:mm:ss').diff(moment($("#stime").val(), 'hh:mm:ss'), 'hours');*@
+        var difference = moment($("#etime").val(), 'hh:mm:ss').diff(moment($("#stime").val(), 'hh:mm:ss'), 'hours');
         var tempList = {
             StartTime: $("#stime").val(),
             EndTime: $("#etime").val(),
             Act: $("#act").val(),
-           @* AdditionalSalary: difference * 100000*@
+            AdditionalSalary: difference * 100000
         }
         listOvertime.push(tempList);
+        var tableBody = document.querySelector('table > tbody');
+        const row = tableBody.insertRow(rowIndex);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2);
+        const cell4 = row.insertCell(3);
+        const cell5 = row.insertCell(4);
+        const cell6 = row.insertCell(5);
+        cell1.textContent = rowIndex + 1;
+        cell2.textContent = document.getElementById("stime").value;
+        cell3.textContent = document.getElementById("etime").value;
+        cell4.textContent = document.getElementById("act").value;
+        cell5.textContent = difference * 100000;
+        rowIndex = rowIndex + 1;
     }
 
     function CreateOvertime() {

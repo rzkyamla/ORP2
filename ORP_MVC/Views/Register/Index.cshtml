@@ -80,45 +80,39 @@
 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-<form id="roleform">
-    <table width="25%">
-        <thead>
-            <tr>
-                <th><label for="email">Email</label></th>
-                <th><input type="text" id="emaillogin" class="form-control" name="email"></th>
-            </tr>
-            <tr>
-                <th><label for="pass">Password</label></th>
-                <th><input type="password" id="passwordlogin" class="form-control" name="pass"></th>
-            </tr>
-        </thead>
-        <!--<div>
-            <label for="email">Email</label>
-            <input type="text" id="emaillogin" name="emaillogin">
+<div class="container-fluid ">
+    <div class="col-lg-6 m-5">
+        <div class=" card" style="margin-left:250px; width:550px">
+            <div class="card-body m-2">
+                <form id="roleform">
+
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input type="text" id="emaillogin" class="form-control" name="email">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="pass">Password</label>
+                        <input type="password" id="passwordlogin" class="form-control" name="pass">
+                    </div>
+                    <div class="mb-1 d-flex">
+                        <a href="javascript:void(0)" >
+                            <small class="mt-1">
+                                @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")
+                            </small>
+                        </a>
+                        <a href="javascript:void(0)"  data-toggle="modal" data-target="#Register">
+                            <small class="m-3">Register</small>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-primary mt-3" onclick="Login()">Submit</button>
+                </form>
+                    
+                </div>
+            </div>
+            </div>
         </div>
-        <div>
-            <label for="password" class="col-form-label">Password</label>
-            <input type="password" id="passwordlogin" name="passwordlogin">
-        </div>
-        <div class="row mt-3">
-            <div class="col-6">
-                <a href="javascript:void(0)" class="col-6"><small> @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")</small></a>
-                <a href="javascript:void(0)" class="col-6 text-right" data-toggle="modal" data-target="#Register"><small>Register</small></a>-->
-        @*<a href="#" class="text-dark" onclick="ForgotPassword()"><small>Forgot password?</small></a>*@
-        @*<a href="javascript:void(0)" class="text-dark" data-toggle="modal" data-target="#forgotpassword"><small>Forgot password?</small></a>*@
-        <!--</div>
-        </div>-->
-    </table>
-    <div class="row mt-3">
-        <div class="col-6">
-            <a href="javascript:void(0)" class="col-6"><small> @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")</small></a>
-            <a href="javascript:void(0)" class="col-6 text-right" data-toggle="modal" data-target="#Register"><small>Register</small></a>
-        </div>
-    </div>
-</form>
-    <div>
-        <button type="button" class="btn btn-primary" onclick="Login()">Submit</button>
-    </div>
+   
 }
 
     <script>
@@ -150,33 +144,6 @@
             })
         }
 
-        function Login() {
-            var Login = new Object();
-            Login.Email = $("#emaillogin").val();
-            Login.Password = $("#passwordlogin").val();
-            console.log(Login);
-            $.ajax({
-                type: 'post',
-                url: '/login/login',
-                data: Login
-            }).done((result) => {
-                console.log(result);
-                if (result == 200) {
-                    alert("Successed to Login");
-                    window.location.href = "https://localhost:44347/dashboard";
-                }
-                else {
-                    alert("Failed to Login");
-                }
-            }).fail((result) => {
-                console.log(result);
-                if (result != 200) {
-                    alert("Failed to Login");
-                    window.location.href = "https://localhost:44347/Register";
-                }
-            })
-        }
-
     function Login() {
         var Login = new Object();
         Login.Email = $("#emaillogin").val();
@@ -190,17 +157,17 @@
             console.log(result);
             if (result == 200) {
                 alert("Successed to Login");
-                window.location.href = "https://localhost:44345/dashboard";
+                window.location.href = "https://localhost:44347/dashboard";
             }
             else {
                 alert("Failed to Login");
-                window.location.href = "https://localhost:44345/register";
+                window.location.href = "https://localhost:44347/register";
             }
         }).fail((result) => {
             console.log(result);
             if (result != 200) {
                 alert("Failed to Login");
-                window.location.href = "https://localhost:44345/register";
+                window.location.href = "https://localhost:44347/register";
             }
         })
     }
