@@ -1,0 +1,81 @@
+﻿@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div>
+            <form id="registerform" action="Auth/ChangePassword">
+                <div class="form-group">
+                    <label for="name" class="col-form-label">NIK</label>
+                    <input type="text" class="form-control" id="NIKchange" name="NIKchange">
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-form-label">Old Password</label>
+                    <input type="text" class="form-control" id="oldpassword" name="oldpassword">
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-form-label">New Password</label>
+                    <input type="text" class="form-control" id="newpassword" name="newpassword">
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-form-label">Confirm Password</label>
+                    <input type="text" class="form-control" id="confirmpassword" name="confirmpassword">
+                </div>
+            </form>
+        </div>
+        <div>
+            <button type="button" onclick="ChangePassword()">Submit</button>
+        </div>
+    </div>
+}
+<script>
+    function myFunction1() {
+        var x = document.getElementById("oldpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction2() {
+        var x = document.getElementById("newpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction3() {
+        var x = document.getElementById("confirmpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function ChangePassword() {
+        console.log("test");
+        var Account = new Object();
+        Account.NIK = $("#NIKchange").val();
+        Account.NewPassword = $("#newpassword").val();
+        Account.OldPassword = $("#oldpassword").val();
+        Account.ConfirmPassword = $("#confirmpassword").val();
+        $.ajax({
+            type: 'PUT',
+            url: '/Auth/ChangePassword',
+            data: Account
+        }).done((result) => {
+            console.log(result);
+            if (result == 200) {
+                alert("Your Password has been Changed!");
+            }
+        }).fail((result) => {
+            console.log(result);
+            alert("Can Not Change Your Password");
+        })
+    }
+</script>

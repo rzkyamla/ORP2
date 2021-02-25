@@ -20,12 +20,12 @@ namespace ORP_API.Repositories.Data
 
         public int Apply(OvertimeFormViewModels overtimeFormViewModels)
         {
-            DateTime date = DateTime.Now;
+            /*DateTime date = DateTime.Now;*/
             var overtimeForm = new OvertimeForm()
             {
                 Name = overtimeFormViewModels.Name,
-                SubmissionDate = date,
-                CustomerId = overtimeFormViewModels.CustomerId
+                CustomerId = overtimeFormViewModels.CustomerId,
+                SubmissionDate = overtimeFormViewModels.SubmissionDate
             };
             myContext.Add(overtimeForm);
             var resultOvertimeForm = myContext.SaveChanges();
