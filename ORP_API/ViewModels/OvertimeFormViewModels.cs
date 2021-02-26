@@ -9,7 +9,6 @@ namespace ORP_API.ViewModels
 {
     public class OvertimeFormViewModels
     {
-        //[Required(ErrorMessage = "Data tidak boleh kosong"), MaxLength(50, ErrorMessage = "Maksimal 50 Karakter")]
         public int Amount { get; set; }
         public int Id { get; set; }
         public string NIK { get; set; }

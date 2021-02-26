@@ -1,0 +1,105 @@
+﻿<h3>Employee Request History</h3>
+<div class="container-fluid mt-5">
+    <table id="myTable" class="table table-striped table-bordered" styles="widht:100%">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Id</th>
+                <th>Customer (Client)</th>
+                <th>NIK</th>
+                <th>Overtime Form Id</th>
+                <th>Status</th>
+
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th>No</th>
+                <th>Id</th>
+                <th>Customer (Client)</th>
+                <th>NIK</th>
+                <th>Overtime Form Id</th>
+                <th>Status</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section scripts
+{
+    <script>
+        var table = null;
+        $(document).ready(function () {
+            table = $("#myTable").DataTable({
+                "filter": true,
+                "orderMulti": false,
+                "ajax": {
+                    "url": "https://localhost:44346/api/overtimeformemployee",
+                    "type": "get",
+                    "datatype": "json",
+                    "dataSrc": "data"
+                },
+                "columnDefs": [
+                    {
+                        "targets": [1],
+                        "visible": false,
+
+                    }
+                ],
+                "columns": [
+                    {
+                        "data": null,
+                        "render": function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        "data": 'id'
+                    },
+                    {
+                        "data": 'customerId',
+                        "render": function (customerId) {
+                            if (customerId == "1") {
+                                return "Metrodata MII";
+                            }
+                            else if (customerId == "2") {
+                                return "Bank BCA";
+                            }
+                            if (customerId == "3") {
+                                return "Bank BNI";
+                            }
+                            else {
+                                return "Bank BRI";
+                            }
+                        }
+
+                    },
+                    {
+                        "data": 'nik'
+                    },
+                    {
+                        "data": 'overtimeFormId'
+                    },
+                    {
+                        "data": 'status',
+                        "render": function (status) {
+                            if (status == "0") {
+                                return "Waiting for Approval";
+                            }
+                            else if (status == "1") {
+                                return "Approved by Supervisor";
+                            }
+                            else if (status == "2") {
+                                return "Approved by Manager";
+                            }
+                            else {
+                                return "Rejected";
+                            }
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+}

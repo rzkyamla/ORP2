@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace ORP_MVC.Controllers
 {
-    public class SupervisorApprovalController : Controller
+    public class EmployeeRequestController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
-        //public 
     }
 }

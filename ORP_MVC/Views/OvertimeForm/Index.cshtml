@@ -1,76 +1,80 @@
-﻿<!DOCTYPE html>
-    <div class="container-fluid">
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">Overtime Request Formulir</h3>
-            </div>
-            <div class="card-header">
-                    <form id="formovertime" action="/action_page.php">
-                            <table width="50%">
-                                <thead>
-                                    <tr>
-                                        <th><label for="id">NIK</label></th>
-                                        <th><input type="text" id="nik" class="form-control" name="nik"></th>
-                                    </tr>
-                                    <tr>
-                                        <th><label for="name">Name</label></th>
-                                        <th><input type="text" id="name" class="form-control" name="name"></th>
-                                    </tr>
-                                    <tr>
-                                        <th><label for="customerid">Customer</label></th>
-                                        <th>
-                                            <select id="customerid" class="form-control" name="customer">
-                                                <option value="1">Metrodata MII</option>
-                                                <option value="2">Bank BCA</option>
-                                                <option value="3">Bank BNI</option>
-                                                <option value="4">Bank BRI</option>
-                                            </select>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th><label for="subdate">Submission Date:</label></th>
-                                        <th><input type="date" id="date" class="form-control" name="date"></th>
-                                    </tr>
-                                </thead>
-                            </table>
-                    </form>
-                    <br/>
-                    <form>
-                        <div class="row">
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="starttime">Start Time</label><br>
-                                    <input type="time" id="stime" class="form-control" name="stime">
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="endtime">End Time</label><br>
-                                    <input type="time" id="etime" class="form-control" name="etime">
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="act">Act</label><br>
-                                    <input type="text" id="act" class="form-control" name="act">
-                                </div>
-                            </div>
-                            <div hidden>
-                                <label for="addsalary">Additional Salary:</label><br>
-                                <input type="text" id="addsalary" name="addsalary">
-                            </div>
-                            <div hidden>
-                                <label for="overtimeformid">OvertimeForm Id: </label><br>
-                                <input type="text" id="overtimeformid" name="overtimeformid">
-                            </div>
+﻿@{
+    ViewData["Title"] = "Overtime Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<div class="container-fluid">
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title">Overtime Request Form</h3>
+        </div>
+        <div class="card-header">
+            <form id="formovertime" action="/action_page.php">
+                <table width="50%">
+                    <thead>
+                        <tr>
+                            <th><label for="id">NIK</label></th>
+                            <th><input type="text" id="nik" class="form-control" name="nik"></th>
+                        </tr>
+                        <tr>
+                            <th><label for="name">Name</label></th>
+                            <th><input type="text" id="name" class="form-control" name="name"></th>
+                        </tr>
+                        <tr>
+                            <th><label for="customerid">Customer</label></th>
+                            <th>
+                                <select id="customerid" class="form-control" name="customer">
+                                    <option value="1">Metrodata MII</option>
+                                    <option value="2">Bank BCA</option>
+                                    <option value="3">Bank BNI</option>
+                                    <option value="4">Bank BRI</option>
+                                </select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th><label for="subdate">Submission Date:</label></th>
+                            <th><input type="date" id="date" class="form-control" name="date"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </form>
+            <br />
+            <form>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="starttime">Start Time</label><br>
+                            <input type="time" id="stime" class="form-control" name="stime">
                         </div>
-                        <div class="row">
-                            <div class="col-4"></div>
-                            <div class="col-4">
-                                <button type="button" class="btn btn-primary" onclick="AddListOvertime()">Add</button>
-                            </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="endtime">End Time</label><br>
+                            <input type="time" id="etime" class="form-control" name="etime">
                         </div>
-                    </form>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="act">Act</label><br>
+                            <input type="text" id="act" class="form-control" name="act">
+                        </div>
+                    </div>
+                    <div hidden>
+                        <label for="addsalary">Additional Salary:</label><br>
+                        <input type="text" id="addsalary" name="addsalary">
+                    </div>
+                    <div hidden>
+                        <label for="overtimeformid">OvertimeForm Id: </label><br>
+                        <input type="text" id="overtimeformid" name="overtimeformid">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-primary" onclick="AddListOvertime()">Add</button>
+                    </div>
+                </div>
+            </form>
             <div class="container-fluid mt-5">
                 <table id="mytables" class="table table-striped table-bordered" styles="widht:100%">
                     <thead>
@@ -98,7 +102,7 @@
             </div>
             <button type="button" class="btn btn-primary" onclick="CreateOvertime()">Submit</button>
         </div>
-        </div>
+    </div>
 </div>
 
 @section scripts
@@ -154,8 +158,8 @@
                 console.log(result, "Gagal");
                 alert("Failed to Add OvertimeRequest!");
             })
-         }
-         function ApplyRequest() {
+        }
+        function ApplyRequest() {
             var applyRequest = new Object();
             applyRequest.NIK = $("#nik").val();
             applyRequest.CustomerId = $("#customerid").val();
@@ -164,16 +168,16 @@
                 type: 'post',
                 url: '/ApplyRequest/ApplyRequest',
                 data: applyRequest
-                    }).done((result) => {
-                        console.log(result);
-                        if (result == 200) {
-                            alert("Successed to Request Overtime!");
-                    }
-                    }).fail((result) => {
-                        console.log(result);
-                        alert("Failed to Request Overtime!");
-                    });
-                 }
+            }).done((result) => {
+                console.log(result);
+                if (result == 200) {
+                    alert("Successed to Request Overtime!");
+                }
+            }).fail((result) => {
+                console.log(result);
+                alert("Failed to Request Overtime!");
+            });
+        }
     </script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
 }

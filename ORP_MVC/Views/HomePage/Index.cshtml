@@ -1,4 +1,9 @@
-﻿<div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+﻿@{
+    ViewData["Title"] = "Home Page ORP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,39 +85,39 @@
 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-<div class="container-fluid ">
-    <div class="col-lg-6 m-5">
-        <div class=" card" style="margin-left:250px; width:550px">
-            <div class="card-body m-2">
-                <form id="roleform">
+    <div class="container-fluid ">
+        <div class="col-lg-6 m-5">
+            <div class=" card" style="margin-left:250px; width:550px">
+                <div class="card-body m-2">
+                    <form id="roleform">
 
-                    <div class="mb-3">
-                        <label for="email">Email</label>
-                        <input type="text" id="emaillogin" class="form-control" name="email">
+                        <div class="mb-3">
+                            <label for="email">Email</label>
+                            <input type="text" id="emaillogin" class="form-control" name="email">
 
-                    </div>
-                    <div class="mb-3">
-                        <label for="pass">Password</label>
-                        <input type="password" id="passwordlogin" class="form-control" name="pass">
-                    </div>
-                    <div class="mb-1 d-flex">
-                        <a href="javascript:void(0)" >
-                            <small class="mt-1">
-                                @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")
-                            </small>
-                        </a>
-                        <a href="javascript:void(0)"  data-toggle="modal" data-target="#Register">
-                            <small class="m-3">Register</small>
-                        </a>
-                    </div>
-                    <button type="button" class="btn btn-primary mt-3" onclick="Login()">Submit</button>
-                </form>
-                    
+                        </div>
+                        <div class="mb-3">
+                            <label for="pass">Password</label>
+                            <input type="password" id="passwordlogin" class="form-control" name="pass">
+                        </div>
+                        <div class="mb-1 d-flex">
+                            <a href="javascript:void(0)">
+                                <small class="mt-1">
+                                    @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")
+                                </small>
+                            </a>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#Register">
+                                <small class="m-3">Register</small>
+                            </a>
+                        </div>
+                        <button type="button" class="btn btn-primary mt-3" onclick="Login()">Submit</button>
+                    </form>
+
                 </div>
             </div>
-            </div>
         </div>
-   
+    </div>
+
 }
 
 <script>
