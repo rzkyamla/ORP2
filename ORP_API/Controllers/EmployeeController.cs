@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ORP_API.Base.Controller;
 using ORP_API.Models;
 using ORP_API.Repositories.Data;
+using ORP_API.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,8 @@ namespace ORP_API.Controllers
     [ApiController]
     public class EmployeeController : BaseController<Employee, EmployeeRepository, string>
     {
-        public EmployeeController(EmployeeRepository employeeRepository) : base(employeeRepository)
+       public EmployeeController(EmployeeRepository employeeRepository) : base(employeeRepository)
         {
-
         }
     }
 }

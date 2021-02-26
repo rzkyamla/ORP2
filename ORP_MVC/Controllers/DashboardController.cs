@@ -12,6 +12,7 @@ namespace ORP_MVC.Controllers
         {
             return View();
         }
+        [HttpGet ("/Logout")]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

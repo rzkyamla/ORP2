@@ -42,6 +42,10 @@ namespace ORP_API
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44347"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +60,7 @@ namespace ORP_API
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCors(options => options.WithOrigins("https://localhost:44347"));
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

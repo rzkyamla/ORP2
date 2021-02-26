@@ -33,26 +33,20 @@
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Metrodata Request</span>
+                <span class="brand-text font-weight-light">Overtime Request</span>
             </a>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
-                            <p>
-                                Overtime Request
-                            </p>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://localhost:44347/overtimeform" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Apply Overtime Request
-                            </p>
-                        </a>
+                        <a class="nav-link" asp-area="" asp-controller="OvertimeForm" asp-action="Index"><i class="nav-icon fas fa-th"></i>Apply Overtime Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="ManageRole" asp-action="Index"><i class="nav-icon fas fa-th"></i>Manage Role</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -114,49 +108,16 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
-                                Tables
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="pages/tables/simple.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Simple Tables</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/tables/data.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>DataTables</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/tables/jsgrid.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>jsGrid</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
-                            <p>
                                 Profile
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="https://localhost:44347/changepass" class="nav-link">
-                                    <p>Change Password</p>
-                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="ChangePass" asp-action="Index">Change Password</a>
                             </li>
-                            <li class="nav-item" onclick="Logout()">
-                                <a class="nav-link">
-                                    <p>Logout</p>
-                                </a>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Register" asp-action="Index">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -296,14 +257,6 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.1.0-rc
-            </div>
-        </footer>
-
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -349,7 +302,7 @@
     function ChangePassword() {
         console.log("test");
         $.ajax({
-            type: 'Post',
+            type: 'get',
             url: '/Dashboard/Logout'
         })
     }
