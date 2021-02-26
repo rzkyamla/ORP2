@@ -39,6 +39,12 @@ namespace ORP_API
             services.AddScoped<OvertimeFormEmployeeRepository>();
             services.AddScoped<DetailOvertimeRequestRepository>();
             services.JwtConfigure(Configuration);
+            
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44347"));
+            });
+
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

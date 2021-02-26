@@ -1,4 +1,9 @@
-﻿<div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+﻿@{
+    ViewData["Title"] = "Home Page ORP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -227,7 +232,7 @@
         console.log(Login);
         $.ajax({
             type: 'post',
-            url: '/login/login',
+            url: '/Login/Login',
             data: Login
         }).done((result) => {
             console.log(result);
@@ -239,13 +244,13 @@
             }
             else {
                 alert("Failed to Login");
-                window.location.href = "https://localhost:44347/register";
+                window.location.href = "https://localhost:44347/HomePage";
             }
         }).fail((result) => {
             console.log(result);
             if (result != 200) {
                 alert("Failed to Login");
-                window.location.href = "https://localhost:44347/register";
+                window.location.href = "https://localhost:44347/HomePage";
             }
         })
     }

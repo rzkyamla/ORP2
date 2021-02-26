@@ -17,6 +17,7 @@ namespace ORP_MVC.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public HttpStatusCode CreateOvertimeForm(OvertimeFormViewModels overtimeFormViewModels)
         {
@@ -25,6 +26,7 @@ namespace ORP_MVC.Controllers
             var result = httpClient.PostAsync("https://localhost:44346/api/OvertimeForm/Apply/", stringContent).Result;
             return result.StatusCode;
         }
+
         [HttpDelete]
         public HttpStatusCode Delete(int Id)
         {

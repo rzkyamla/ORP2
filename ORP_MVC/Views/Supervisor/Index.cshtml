@@ -1,0 +1,259 @@
+﻿<h3>Supervisor Approval Page</h3>
+<div class="container-fluid mt-5">
+    <table id="myTable" class="table table-striped table-bordered" styles="widht:100%">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Id</th>
+                <th>Customer (Client)</th>
+                <th>NIK</th>
+                <th>Overtime Form Id</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th>No</th>
+                <th>Id</th>
+                <th>Customer (Ciient)</th>
+                <th>NIK</th>
+                <th>Overtime Form Id</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header badge-info">
+                <h5 class="modal-title" id="addModalLabel">Details</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="Close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formRole">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group" hidden>
+                                <label for="id" class="col-form-label">Id</label>
+                                <input type="text" class="form-control" id="id">
+                            </div>
+                            <div class="form-group">
+                                <label for="customerId" class="col-form-label">Customer Id</label>
+                                <input type="text" class="form-control" id="customerId" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="nik" class="col-form-label">NIK</label>
+                                <input type="text" class="form-control" id="nik" readonly>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="overtimeFormId" class="col-form-label">Overtime Form Id</label>
+                                <input type="text" class="form-control" id="overtimeFormId" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="status" class="col-form-label">Status</label>
+                                <input type="text" class="form-control" id="status" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </form>
+            </div>
+            <div class="modal-footer badge-info">
+                <button type="button" class="btn btn-success" onclick="Approve()">Approve</button>
+                <button type="button" class="btn btn-danger" onclick="Reject()">Reject</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        var table = null;
+        $(document).ready(function () {
+            table = $("#myTable").DataTable({
+                "filter": true,
+                "orderMulti": false,
+                "ajax": {
+                    "url": "https://localhost:44346/api/overtimeformemployee",
+                    "type": "get",
+                    "datatype": "json",
+                    "dataSrc": "data"
+                },
+                "columnDefs": [
+                    {
+                        "targets": [1],
+                        "visible": false,
+
+                    }
+                ],
+                "columns": [
+                    {
+                        "data": null,
+                        "render": function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        "data": 'id'
+                    },
+                    {
+                        "data": 'customerId',
+                        "render": function (customerId) {
+                            if (customerId == "1") {
+                                return "Metrodata MII";
+                            }
+                            else if (customerId == "2") {
+                                return "Bank BCA";
+                            }
+                            if (customerId == "3") {
+                                return "Bank BNI";
+                            }
+                            else {
+                                return "Bank BRI";
+                            }
+                        }
+                    },
+                    {
+                        "data": 'nik'
+                    },
+                    {
+                        "data": 'overtimeFormId'
+                    },
+                    {
+                        "data": 'status',
+                        "render": function (status) {
+                            if (status == "0") {
+                                return "Waiting for Approval";
+                            }
+                            else if (status == "1") {
+                                return "Approved by Supervisor";
+                            }
+                            else if (status == "2") {
+                                return "Approved by Manager";
+                            }
+                            else {
+                                return "Rejected";
+                            }
+                        }
+                    },
+                    {
+                        "render": function (data, type, row, meta) {
+                            return '<a href="javascript:void(0)" class="fas fa-check-circle text-success" data-toggle="tooltip" data-placement="top" title="Approve" onclick="Get(\'' + row['id'] + '\')"></a> '
+                                
+                        }
+                    }
+                ]
+            });
+        });
+
+        function Close() {
+            $("#id").val(null);
+            $("#customerId").val(null);
+            $("#nik").val(null);
+            $("#overtimeFormId").val(null);
+            $("#status").val(null);
+        }
+
+        function Get(id) {
+            $.ajax({
+                url: "/Supervisor/Get",
+                data: { id: id }
+            }).done((result) => {
+                console.log(result);
+                var obj = JSON.parse(result);
+                $("#addModal").modal("show");
+                $("#id").val(obj.data.id);
+                $("#customerId").val(obj.data.customerId);
+                $("#nik").val(obj.data.nik);
+                $("#overtimeFormId").val(obj.data.overtimeFormId);
+                $("#status").val(obj.data.status);
+            }).fail((error) => {
+                console.log(error);
+            })
+        }
+
+        function Approve(id) {
+            
+            var approve = new Object();
+            approve.id = $("#id").val();
+            approve.customerId = $("#customerId").val();
+            approve.nik = $("#nik").val();
+            approve.overtimeFormId = $("#overtimeFormId").val();
+            approve.status = 1;
+            console.log(approve);
+            $.ajax({
+                url: "/Supervisor/SupervisorApproval",
+                type: "put",
+                data: approve
+            }).done((result) => {
+                if (result == 200) {
+                    swal({
+                        title: "Success!",
+                        text: "Data Updated",
+                        icon: "success",
+                        button: "Ok",
+                    });
+                    table.ajax.reload();
+                } else if (result == 400) {
+                    swal("failed to Update data", {
+                        icon: "warning",
+                    });
+                } else {
+                    swal("failed to Update data", {
+                        icon: "warning",
+                    });
+                }
+            }).fail((error) => {
+                console.log(error);
+            });
+        }
+
+        function Reject(id) {
+
+            var approve = new Object();
+            approve.id = $("#id").val();
+            approve.customerId = $("#customerId").val();
+            approve.nik = $("#nik").val();
+            approve.overtimeFormId = $("#overtimeFormId").val();
+            approve.status = 3;
+            console.log(approve);
+            $.ajax({
+                url: "/Supervisor/SupervisorApproval",
+                type: "put",
+                data: approve
+            }).done((result) => {
+                if (result == 200) {
+                    swal({
+                        title: "Success!",
+                        text: "Data Updated",
+                        icon: "success",
+                        button: "Ok",
+                    });
+                    table.ajax.reload();
+                } else if (result == 400) {
+                    swal("failed to Update data", {
+                        icon: "warning",
+                    });
+                } else {
+                    swal("failed to Update data", {
+                        icon: "warning",
+                    });
+                }
+            }).fail((error) => {
+                console.log(error);
+            });
+        }
+    </script>
+}

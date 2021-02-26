@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,7 +42,7 @@ namespace ORP_API.Repositories.Data
                 Religion = registerViewModels.Religion,
                 Email = registerViewModels.Email,
                 PhoneNumber = registerViewModels.PhoneNumber,
-                RoleId = 1,
+                RoleId = 4,
                 CustomerId = registerViewModels.CustomerId
             };
             var account = new Account()
@@ -103,21 +104,12 @@ namespace ORP_API.Repositories.Data
                 sendEmail.SendNotification(resetCode, email);
                 return result;
             }
-            }
-        /* public int ChangePassword(string NIK, string password)
-         {
-             Account acc = myContext.Account.Where(a => a.NIK == NIK).FirstOrDefault();
-             acc.Password = Hashing.HashPassword(password);
-             myContext.Entry(acc).State = EntityState.Modified;
-             var result = myContext.SaveChanges();
-             return result;
-         }
- */
+        }
+
         public int ChangePassword(ChangePasswordViewModels changePasswordViewModels)
         {
             Account acc = myContext.Account.Where(a => a.NIK == changePasswordViewModels.NIK).FirstOrDefault();
             acc.Password = Hashing.HashPassword(changePasswordViewModels.NewPassword);
-            //myContext.Entry(acc).State = EntityState.Modified;
             var result = myContext.SaveChanges();
             return result;
         }
