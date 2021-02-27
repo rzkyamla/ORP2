@@ -27,7 +27,6 @@ namespace ORP_MVC.Controllers
             return apiResponse.Result;
         }
 
-
         [HttpPut]
         public HttpStatusCode SupervisorApproval(SupervisorApprovalViewModels supervisorApprovalViewModels)
         {
@@ -37,6 +36,15 @@ namespace ORP_MVC.Controllers
 
             var result = httpClient.PutAsync("https://localhost:44346/api/OvertimeFormEmployee/Supervisor/Manage", content).Result;
             return result.StatusCode;
+        }
+
+        [HttpGet]
+        public String GetSpecificForm(int Id)
+        {
+            var httpClient = new HttpClient();
+            var response = httpClient.GetAsync("https://localhost:44346/api/OvertimeFormEmployee/get/" + Id).Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            return apiResponse.Result;
         }
     }
 }

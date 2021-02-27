@@ -53,10 +53,11 @@ namespace ORP_API.Controllers
             }
         }
 
-        //[HttpGet("CustomerId")]
-        //public ActionResult GetForm()
-        //{
-        //    var data = 
-        //}
+        [HttpGet("Get/{CustomerId}")]
+        public ActionResult GetForm(int CustomerId)
+        {
+            var data = overtimeFormEmployeeRepository.GetSpecificForm(CustomerId);
+            return (data != null) ? (ActionResult)Ok(new { data = data, status = "Ok" }) : NotFound(new { data = data, status = "Not Found", errorMessage = "ID is not identified" });
+        }
     }
 }

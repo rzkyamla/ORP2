@@ -1,4 +1,10 @@
-﻿<h3>Supervisor Approval Page</h3>
+﻿@{
+    ViewData["Title"] = "Supervisor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Supervisor Approval Page</h3>
 <div class="container-fluid mt-5">
     <table id="myTable" class="table table-striped table-bordered" styles="widht:100%">
         <thead>
@@ -65,8 +71,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
                 </form>
             </div>
             <div class="modal-footer badge-info">
@@ -81,12 +87,12 @@
 {
     <script>
         var table = null;
-        $(document).ready(function () {
+        $(document).ready(function (id) {
             table = $("#myTable").DataTable({
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
-                    "url": "https://localhost:44346/api/overtimeformemployee",
+                    "url": "Supervisor/GetSpecificForm",
                     "type": "get",
                     "datatype": "json",
                     "dataSrc": "data"
@@ -151,7 +157,7 @@
                     {
                         "render": function (data, type, row, meta) {
                             return '<a href="javascript:void(0)" class="fas fa-check-circle text-success" data-toggle="tooltip" data-placement="top" title="Approve" onclick="Get(\'' + row['id'] + '\')"></a> '
-                                
+
                         }
                     }
                 ]
@@ -185,7 +191,7 @@
         }
 
         function Approve(id) {
-            
+
             var approve = new Object();
             approve.id = $("#id").val();
             approve.customerId = $("#customerId").val();

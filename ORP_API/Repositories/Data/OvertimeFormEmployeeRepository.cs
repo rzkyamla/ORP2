@@ -117,7 +117,7 @@ namespace ORP_API.Repositories.Data
             return finalResult;
         }
 
-        public OvertimeFormEmployee GetSpecificForm(OvertimeFormViewModels overtimeFormViewModels)
+        public IEnumerable<OvertimeFormEmployee> GetSpecificForm(int CustomerId)
         {
             OvertimeFormViewModels result = null;
 
@@ -125,10 +125,10 @@ namespace ORP_API.Repositories.Data
             using (IDbConnection db = new SqlConnection(connectStr))
             {
                 string readSp = "sp_get_specific_form";
-                var parameter = new { CustomerId = overtimeFormViewModels.CustomerId };
+                var parameter = new { CustomerId = CustomerId };
                 result = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
-            return myContext.Set<OvertimeFormEmployee>().Find(result.CustomerId);
+            return myContext.Set<OvertimeFormEmployee>().AsEnumerable();
         }
     }
 }
