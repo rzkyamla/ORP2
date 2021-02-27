@@ -14,6 +14,8 @@ namespace ORP_API.ViewModels
         public string NIK { get; set; }
         public string Name { get; set; }
         public int CustomerId { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        public DateTime SubmissionDate { get; set; }
         public string Email { get; set; }
         public int RoleId { get; set; }
         public List<DetailsOvertimeRequest> listdetails { get; set; }

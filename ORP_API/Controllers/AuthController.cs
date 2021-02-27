@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ORP_API.Controllers
 {
-    [Authorize]
+   /* [Authorize]*/
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase

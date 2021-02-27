@@ -13,7 +13,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="roleform" action="Auth/Register">
+                <form id="regist">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -81,44 +81,86 @@
         </div>
     </div>
 </div>
-
-@using (Html.BeginForm("Login", "Login", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    <div class="container-fluid ">
+<div class="modal fade" id="forgotpassword" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Forgot Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="forgotpass">
+                    <div class="form-group">
+                        <label for="emailforgot" class="col-form-label">Email</label>
+                        <input type="text" class="form-control" id="emailforgot" name="emailforgot">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="ForgotPassword()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Overtime Request | Log in</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body>
+    <div class="login-box">
         <div class="col-lg-6 m-5">
-            <div class=" card" style="margin-left:250px; width:550px">
+            <div class="card" style="margin-left:300px; width:400px">
                 <div class="card-body m-2">
-                    <form id="roleform">
-
-                        <div class="mb-3">
-                            <label for="email">Email</label>
-                            <input type="text" id="emaillogin" class="form-control" name="email">
-
+                    <div class="login-logo">
+                        <a><b>Overtime Request</b></a>
+                    </div>
+                    <p class="login-box-msg">Please Sign In!</p>
+                    <form id="login">
+                        <div class="input-group mb-3">
+                            <input type="email" id ="emailsignin" class="form-control" placeholder="Email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="pass">Password</label>
-                            <input type="password" id="passwordlogin" class="form-control" name="pass">
+                        <div class="input-group mb-3">
+                            <input type="password" id ="passwordsignin" class="form-control" placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-1 d-flex">
-                            <a href="javascript:void(0)">
-                                <small class="mt-1">
-                                    @Html.ActionLink("Forgot Password?", "ForgotPassword", "Forgot")
-                                </small>
-                            </a>
-                            <a href="javascript:void(0)" data-toggle="modal" data-target="#Register">
-                                <small class="m-3">Register</small>
-                            </a>
-                        </div>
-                        <button type="button" class="btn btn-primary mt-3" onclick="Login()">Submit</button>
                     </form>
-
+                    <div class="mb-1 d-flex">
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#forgotpassword">
+                            <small class="m-3">Forgot Password</small>
+                        </a>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#Register">
+                            <small class="m-3">Register</small>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-primary mt-3" onclick="Login()">Submit</button>
                 </div>
             </div>
         </div>
     </div>
-
-}
+</body>
+</html>
 
 <script>
     function Register() {
@@ -134,35 +176,79 @@
         console.log(Register);
         $.ajax({
             type: 'post',
-            url: '/HomePage/register',
+            url: '/register/register',
             data: Register
         }).done((result) => {
             console.log(result);
             if (result == 200) {
                 alert("Successed to Add Data! Please Login!");
-                window.location.href = "https://localhost:44347/HomePage";
+                window.location.href = "https://localhost:44347/Register";
+                $('#Register').modal('hide')
+                $('#nik').val(null);
+                $('#name').val(null);
+                $('#birthdate').val(null);
+                $('#gender').val(null);
+                $('#religion').val(null);
+                $('#email').val(null);
+                $('#hp').val(null);
+                $('#customerid').val(null);
             }
         }).fail((result) => {
             console.log(result);
             alert("Failed to Add Data!");
-            window.location.href = "https://localhost:44347/HomePage";
+            window.location.href = "https://localhost:44347/Register";
+        })
+    }
+
+    function ForgotPassword() {
+        console.log("test");
+        var Employee = new Object();
+        Employee.Email = $("#emailforgot").val();
+        $.ajax({
+            type: 'PUT',
+            url: '/Forgot/ForgotPassword',
+            data: Employee
+        }).done((result) => {
+            console.log(result, "testok");
+            if (result == 200) {
+                alert("Check Your Email for New Password!");
+                window.location.href = "https://localhost:44347/homepage";
+                $('#forgotpassword').modal('hide')
+                $('#emailforgot').val(null);
+            }
+        }).fail((result) => {
+            console.log(result, "testgagal");
+            alert("Failed to Send Email!");
+            window.location.href = "https://localhost:44347/Forgot/ForgotPassword";
+            $('#forgotpassword').modal('hide')
+            $('#emailforgot').val(null);
         })
     }
 
     function Login() {
         var Login = new Object();
-        Login.Email = $("#emaillogin").val();
-        Login.Password = $("#passwordlogin").val();
+        Login.Email = $("#emailsignin").val();
+        Login.Password = $("#passwordsignin").val();
         console.log(Login);
         $.ajax({
             type: 'post',
             url: '/Login/Login',
-            data: Login
+            datatype: "json",
+            data: {
+                email: $("#emailsignin").val(),
+                password: $("#passwordsignin").val()
+            }
         }).done((result) => {
             console.log(result);
             if (result == 200) {
                 alert("Successed to Login");
                 window.location.href = "https://localhost:44347/dashboard";
+                localStorage.setItem("email", $("#emailsignin").val());
+                //localStorage.setItem("dateLogin", Date.now());
+                 //localStorage.clear();
+                $("#emaillogin").val(null);
+                $("#passwordlogin").val(null);
+
             }
             else {
                 alert("Failed to Login");
@@ -177,3 +263,9 @@
         })
     }
 </script>
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>

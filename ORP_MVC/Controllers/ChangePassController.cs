@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using ORP_API.Context;
 using ORP_API.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,11 +12,14 @@ using System.Threading.Tasks;
 
 namespace ORP_MVC.Controllers
 {
-    public class AuthController : Controller
+    public class ChangePassController : Controller
     {
-        private MyContext myContext = new MyContext();
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("index", "HomePage");
+            }
             return View();
         }
         [HttpPut]
@@ -25,9 +27,8 @@ namespace ORP_MVC.Controllers
         {
             var httpClient = new HttpClient();
             StringContent content = new StringContent(JsonConvert.SerializeObject(changePasswordViewModels), Encoding.UTF8, "application/json");
-            var result = httpClient.PutAsync("https://localhost:44346/api/Account/ChangePassword/" , content).Result;
+            var result = httpClient.PutAsync("https://localhost:44346/api/Account/ChangePassword/", content).Result;
             return result.StatusCode;
         }
-
     }
 }
