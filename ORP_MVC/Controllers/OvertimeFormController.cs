@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ORP_API.ViewModels;
 using System;
@@ -15,6 +16,11 @@ namespace ORP_MVC.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Emailvalue"] = HttpContext.Session.GetString("email");
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("index", "HomePage");
+            }
             return View();
         }
 

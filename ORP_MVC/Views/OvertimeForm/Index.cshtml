@@ -117,7 +117,7 @@
                                 <a class="nav-link" asp-area="" asp-controller="ChangePass" asp-action="Index">Change Password</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Register" asp-action="Index">Logout</a>
+                                <a class="nav-link" asp-area="" asp-controller="HomePage" asp-action="Index">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -169,18 +169,18 @@
 </html>
 
 <div class="container-fluid">
-    <div class="card card-default" style="margin-left:150px; width:600px">
+    <div class="card card-default" style="margin-left:150px; width:1050px">
         <div class="card-header">
             <h3 class="card-title">Overtime Request Formulir</h3>
         </div>
         <div class="card-header">
             <form id="formovertime" action="/action_page.php">
-                <table width="90%">
+                <table width="80%">
                     <thead>
                         <tr>
                             <th><label for="id">NIK</label></th>
                             <th><input type="text" id="nik" class="form-control" name="nik"></th>
-                            <th style="padding-left: 15px;"><label for="customerid">Customer</label></th>
+                            <th style="padding-left: 20px;"><label for="customerid">Customer</label></th>
                             <th>
                                 <select id="customerid" class="form-control" name="customer">
                                     <option value="1">Metrodata MII</option>
@@ -193,8 +193,12 @@
                         <tr>
                             <th><label for="name">Name</label></th>
                             <th><input type="text" id="name" class="form-control" name="name"></th>
-                            <th style="padding-left: 15px;"><label for="subdate">Submission Date:</label></th>
+                            <th style="padding-left: 20px;"><label for="subdate">Submission Date</label></th>
                             <th><input type="date" id="date" class="form-control" name="date"></th>
+                        </tr>
+                        <tr>
+                            <th><label for="email">Email</label></th>
+                            <th><input disabled value="@ViewData["Emailvalue"]" id="email" class="form-control" name="email"></th>
                         </tr>
                     </thead>
                 </table>
@@ -232,6 +236,7 @@
                         <input type="text" id="overtimeformid" name="overtimeformid">
                     </div>
                 </div>
+                <div id="disclaimerOvertime" style="color: red; font-size: 15px; display: none;">Quota of overtime per day should not exceed 3 hours!!</div>
                 <div class="row" style="width:25%">
                    @* <div class="col-4"></div>*@
                     @*<div class="col-4">
@@ -239,8 +244,8 @@
                     </div>*@
                 </div>
             </form>
-            <div class="container-fluid mt-5">
-                <table id="mytables" class="table table-striped table-bordered" style="width:100%">
+            <div class="container-fluid mt-3">
+                <table id="mytables" class="table table-striped table-bordered" style="width:90%">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -275,36 +280,47 @@
 @section scripts
     {
     <script>
+
         var table = null;
         var listOvertime = [];
+        var totalOvertime = 0;
         var table = null;
         var rowIndex = 0;
+        $(document).ready(function () {
+            //document.getElementById("name").value = localStorage.getItem("email");
+        });
 
         function AddListOvertime() {
             var difference = moment($("#etime").val(), 'hh:mm:ss').diff(moment($("#stime").val(), 'hh:mm:ss'), 'hours');
-            var tempList = {
-                StartTime: $("#stime").val(),
-                EndTime: $("#etime").val(),
-                Act: $("#act").val(),
-                AdditionalSalary: difference * 100000
+            totalOvertime = totalOvertime + difference;
+            if (totalOvertime > 3) {
+                document.getElementById("disclaimerOvertime").style.display = "block";
+            } else {
+                document.getElementById("disclaimerOvertime").style.display = "none";
+                var tempList = {
+                    StartTime: $("#stime").val(),
+                    EndTime: $("#etime").val(),
+                    Act: $("#act").val(),
+                    AdditionalSalary: difference * 100000
+                }
+                listOvertime.push(tempList);
+                var tableBody = document.querySelector('table > tbody');
+                const row = tableBody.insertRow(rowIndex);
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+                const cell4 = row.insertCell(3);
+                const cell5 = row.insertCell(4);
+                cell1.textContent = rowIndex + 1;
+                cell2.textContent = document.getElementById("stime").value;
+                cell3.textContent = document.getElementById("etime").value;
+                cell4.textContent = document.getElementById("act").value;
+                cell5.textContent = difference * 100000;
+                rowIndex = rowIndex + 1;
+                $("#stime").val(null);
+                $("#etime").val(null);
+                $("#etime").val(null);
             }
-            listOvertime.push(tempList);
-            var tableBody = document.querySelector('table > tbody');
-            const row = tableBody.insertRow(rowIndex);
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            const cell3 = row.insertCell(2);
-            const cell4 = row.insertCell(3);
-            const cell5 = row.insertCell(4);
-            cell1.textContent = rowIndex + 1;
-            cell2.textContent = document.getElementById("stime").value;
-            cell3.textContent = document.getElementById("etime").value;
-            cell4.textContent = document.getElementById("act").value;
-            cell5.textContent = difference * 100000;
-            rowIndex = rowIndex + 1;
-            $("#stime").val(null);
-            $("#etime").val(null);
-            $("#etime").val(null);
         }
 
         function CreateOvertime() {

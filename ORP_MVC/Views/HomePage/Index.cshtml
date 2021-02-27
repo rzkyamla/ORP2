@@ -212,7 +212,7 @@
             console.log(result, "testok");
             if (result == 200) {
                 alert("Check Your Email for New Password!");
-                window.location.href = "https://localhost:44347/Register";
+                window.location.href = "https://localhost:44347/homepage";
                 $('#forgotpassword').modal('hide')
                 $('#emailforgot').val(null);
             }
@@ -233,14 +233,22 @@
         $.ajax({
             type: 'post',
             url: '/Login/Login',
-            data: Login
+            datatype: "json",
+            data: {
+                email: $("#emailsignin").val(),
+                password: $("#passwordsignin").val()
+            }
         }).done((result) => {
             console.log(result);
             if (result == 200) {
                 alert("Successed to Login");
                 window.location.href = "https://localhost:44347/dashboard";
+                localStorage.setItem("email", $("#emailsignin").val());
+                //localStorage.setItem("dateLogin", Date.now());
+                 //localStorage.clear();
                 $("#emaillogin").val(null);
                 $("#passwordlogin").val(null);
+
             }
             else {
                 alert("Failed to Login");
