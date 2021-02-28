@@ -130,14 +130,6 @@
                     <p class="login-box-msg">Please Sign In!</p>
                     <form id="login">
                         <div class="input-group mb-3">
-                            <input type="text" id="niksignin" class="form-control" placeholder="NIK">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
                             <input type="email" id="emailsignin" class="form-control" placeholder="Email">
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -235,7 +227,6 @@
 
     function Login() {
         var Login = new Object();
-        Login.NIK = $("#niksignin").val();
         Login.Email = $("#emailsignin").val();
         Login.Password = $("#passwordsignin").val();
         console.log(Login);

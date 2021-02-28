@@ -29,7 +29,7 @@ namespace ORP_API.Repositories.Data
         {
             var correction = myContext.Employee.Where(a => a.NIK == overtimeFormViewModels.NIK).FirstOrDefault();
 
-            if (correction.Email == overtimeFormViewModels.Email)
+            if (correction.CustomerId == overtimeFormViewModels.CustomerId)
             {
                 var overtimeForm = new OvertimeForm()
                 {

@@ -179,7 +179,7 @@
                     <thead>
                         <tr>
                             <th><label for="id">NIK</label></th>
-                            <th><input disabled value="@ViewData["nikValue"]" id="nik" class="form-control" name="nik"></th>
+                            <th><input disabled value="@ViewData["NIKValue"]" id="nik" class="form-control" name="nik"></th>
                             @*<th><input type="text" id="nik" class="form-control" name="nik"></th>*@
                             <th style="padding-left: 20px;"><label for="customerid">Customer</label></th>
                             <th>
@@ -193,14 +193,10 @@
                         </tr>
                         <tr>
                             <th><label for="name">Name</label></th>
-                            <th><input type="text" id="name" class="form-control" name="name"></th>
+                            <th><input disabled value="@ViewData["NameValue"]" id="nik" class="form-control" name="nik"></th>
                             <th style="padding-left: 20px;"><label for="subdate">Submission Date</label></th>
                             <th><input type="date" id="date" class="form-control" name="date"></th>
                         </tr>
-                       @* <tr>
-                            <th><label for="email">Email</label></th>
-                            <th><input disabled value="@ViewData["Emailvalue"]" id="email" class="form-control" name="email"></th>
-                        </tr>*@
                     </thead>
                 </table>
             </form>
@@ -326,7 +322,6 @@
 
         function CreateOvertime() {
             var CreateOvertime = new Object();
-            CreateOvertime.Email = $("#email").val();
             CreateOvertime.NIK = $("#nik").val();
             CreateOvertime.Name = $("#name").val();
             CreateOvertime.CustomerId = $("#customerid").val();
