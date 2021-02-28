@@ -16,6 +16,7 @@ namespace ORP_MVC.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["nikValue"] = HttpContext.Session.GetString("nik");
             if (HttpContext.Session.GetString("email") == null)
             {
                 return RedirectToAction("index", "HomePage");

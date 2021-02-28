@@ -17,6 +17,7 @@ namespace ORP_MVC.Controllers
         [HttpPost]
         public HttpStatusCode Login(LoginViewModels loginViewModels)
         {
+            HttpContext.Session.SetString("nik", loginViewModels.NIK);
             HttpContext.Session.SetString("email", loginViewModels.Email);
             var httpclient = new HttpClient();
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(loginViewModels), Encoding.UTF8, "application/json");

@@ -130,7 +130,7 @@
                     <p class="login-box-msg">Please Sign In!</p>
                     <form id="login">
                         <div class="input-group mb-3">
-                            <input type="email" id ="emailsignin" class="form-control" placeholder="Email">
+                            <input type="text" id="niksignin" class="form-control" placeholder="NIK">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -138,7 +138,15 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" id ="passwordsignin" class="form-control" placeholder="Password">
+                            <input type="email" id="emailsignin" class="form-control" placeholder="Email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" id="passwordsignin" class="form-control" placeholder="Password">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -227,6 +235,7 @@
 
     function Login() {
         var Login = new Object();
+        Login.NIK = $("#niksignin").val();
         Login.Email = $("#emailsignin").val();
         Login.Password = $("#passwordsignin").val();
         console.log(Login);
@@ -234,21 +243,17 @@
             type: 'post',
             url: '/Login/Login',
             datatype: "json",
-            data: {
-                email: $("#emailsignin").val(),
-                password: $("#passwordsignin").val()
-            }
+            data: Login
         }).done((result) => {
             console.log(result);
             if (result == 200) {
                 alert("Successed to Login");
                 window.location.href = "https://localhost:44347/dashboard";
-                localStorage.setItem("email", $("#emailsignin").val());
+                //localStorage.setItem("email", $("#emailsignin").val());
                 //localStorage.setItem("dateLogin", Date.now());
                  //localStorage.clear();
                 $("#emaillogin").val(null);
                 $("#passwordlogin").val(null);
-
             }
             else {
                 alert("Failed to Login");
