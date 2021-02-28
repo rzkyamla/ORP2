@@ -11,9 +11,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="HomePage" asp-action="Index"><b>Overtime Request Project</b></a>
+                <a class="navbar-brand" asp-area="" asp-controller="HomePage" asp-action="Index" style="color:white"><b>Overtime Request Project</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,14 +21,11 @@
                 <div class="" style="width:350px; margin-right:0px;">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" style="color:white">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy" style="color:white">Privacy</a>
                         </li>
-                       @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Index">Overtime Request</a>
-                        </li>*@
                     </ul>
                 </div>
             </div>
@@ -41,7 +38,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container" style="width: 850px; margin-right: 0px; ">
             &copy; 2021 - ORP_MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             <strong style="margin-left:35px;">Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
             All rights reserved.  <b>Version</b> 3.1.0-rc

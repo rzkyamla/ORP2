@@ -117,18 +117,17 @@ namespace ORP_API.Repositories.Data
             return finalResult;
         }
 
-        public IEnumerable<OvertimeFormEmployee> GetSpecificForm(int CustomerId)
+        public IEnumerable<OvertimeFormEmployee> GetSpecificForm(string NIK)
         {
-            OvertimeFormViewModels result = null;
+            var getInfo = myContext.Employee.Where(a => a.NIK == NIK).FirstOrDefault();
 
-            string connectStr = Configuration.GetConnectionString("MyConnection");
-            using (IDbConnection db = new SqlConnection(connectStr))
+            if (getInfo == null)
             {
-                string readSp = "sp_get_specific_form";
-                var parameter = new { CustomerId = CustomerId };
-                result = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return null;
             }
-            return myContext.Set<OvertimeFormEmployee>().AsEnumerable();
+            var getResult = myContext.OvertimeFormEmployee.Where(b => b.CustomerId == getInfo.CustomerId).AsEnumerable();
+            
+            return getResult;
         }
     }
 }

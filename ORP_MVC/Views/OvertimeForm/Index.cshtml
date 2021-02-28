@@ -59,15 +59,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/layout/top-nav.html" class="nav-link">
+                                <a class="nav-link" asp-area="" asp-controller="Supervisor" asp-action="Index">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Actual</p>
+                                    <p>Supervisor</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                <a class="nav-link" asp-area="" asp-controller="RelationalManager" asp-action="Index">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>History</p>
+                                    <p>Relational Manager</p>
                                 </a>
                             </li>
                         </ul>
@@ -169,9 +169,9 @@
 </html>
 
 <div class="container-fluid">
-    <div class="card card-default" style="margin-left:150px; width:1050px">
+    <div class="card card-default" style="margin-left:150px; width:1050px;margin-bottom:150px">
         <div class="card-header">
-            <h3 class="card-title">Overtime Request Formulir</h3>
+            <h3 class="card-title">Overtime Request Form</h3>
         </div>
         <div class="card-header">
             <form id="formovertime" action="/action_page.php">
@@ -325,6 +325,7 @@
 
         function CreateOvertime() {
             var CreateOvertime = new Object();
+            CreateOvertime.Email = $("#email").val();
             CreateOvertime.NIK = $("#nik").val();
             CreateOvertime.Name = $("#name").val();
             CreateOvertime.CustomerId = $("#customerid").val();

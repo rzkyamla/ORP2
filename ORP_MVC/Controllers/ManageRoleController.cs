@@ -16,11 +16,15 @@ namespace ORP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetString("email") == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return RedirectToAction("index", "HomePage");
+                if (HttpContext.Session.GetString("rolename") == "Admin")
+                {
+                    return View();
+                }
+                return RedirectToAction("index", "Dashboard");
             }
-            return View();
+            return RedirectToAction("index", "HomePage");
         }
         [HttpPut]
         public HttpStatusCode UpdateRole(RegisterViewModels registerViewModels)

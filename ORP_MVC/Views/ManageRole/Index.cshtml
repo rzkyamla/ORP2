@@ -59,15 +59,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/layout/top-nav.html" class="nav-link">
+                                <a class="nav-link" asp-area="" asp-controller="Supervisor" asp-action="Index">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Actual</p>
+                                    <p>Supervisor</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                <a class="nav-link" asp-area="" asp-controller="RelationalManager" asp-action="Index">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>History</p>
+                                    <p>Relational Manager</p>
                                 </a>
                             </li>
                         </ul>
@@ -168,7 +168,7 @@
 </body>
 </html>
 <div class="container-fluid mt-5">
-    <div class="card card-default" style="margin-left:150px;">
+    <div class="card card-default" style="margin-left:150px;margin-bottom:150px">
         <table id="myTable" class="table table-striped table-bordered" styles="widht:100%">
             <thead>
                 <tr>
@@ -243,9 +243,10 @@
                             <div class="form-group">
                                 <label for="roleId" class="col-form-label">Role</label>
                                 <select id="roleid" class="form-control" name="roleid">
-                                    <option value="1">Employee</option>
-                                    <option value="2">Supervisor</option>
-                                    <option value="2">RM</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Relational Manager</option>
+                                    <option value="3">Supervisor</option>
+                                    <option value="4">Employee</option>
                                 </select>
                             </div>
                             <div class="form-group" hidden>
@@ -314,13 +315,16 @@
                             "data": "roleId",
                             "render": function (roleId) {
                                 if (roleId == "1") {
-                                    return "Employee";
+                                    return "Admin";
                                 }
                                 else if (roleId == "2") {
-                                    return "Supervisor";
+                                    return "Relational Manager";
                                 }
                                 else if (roleId == "3") {
-                                    return "Manager";
+                                    return "Supervisor";
+                                }
+                                else {
+                                    return "Employee"
                                 }
                             }
                         },

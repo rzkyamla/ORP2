@@ -17,11 +17,15 @@ namespace ORP_MVC.Controllers
         public IActionResult Index()
         {
             ViewData["Emailvalue"] = HttpContext.Session.GetString("email");
-            if (HttpContext.Session.GetString("email") == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return RedirectToAction("index", "HomePage");
+                if (HttpContext.Session.GetString("rolename") == "Employee")
+                {
+                    return View();
+                }
+                return RedirectToAction("index", "Dashboard");
             }
-            return View();
+            return RedirectToAction("index", "HomePage");
         }
 
         [HttpPost]
