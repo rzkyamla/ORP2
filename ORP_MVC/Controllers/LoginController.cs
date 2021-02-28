@@ -38,7 +38,6 @@ namespace ORP_MVC.Controllers
                 var parameter = new { Email = loginViewModels.Email, Password = loginViewModels.Password };
                 tempResult = db.Query<LoginViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
-
             HttpContext.Session.SetString("email", loginViewModels.Email);
             HttpContext.Session.SetString("rolename", tempResult.RoleName);
             var httpclient = new HttpClient();

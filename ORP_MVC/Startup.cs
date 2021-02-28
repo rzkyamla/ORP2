@@ -27,10 +27,10 @@ namespace ORP_MVC
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
+                options.IdleTimeout = TimeSpan.FromHours(12);//You can set Time   
             });
             services.AddMvc(option => option.EnableEndpointRouting = false);
-            services.AddMvc();
+            //services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
