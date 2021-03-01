@@ -354,7 +354,7 @@
             approve.status = 3;
             console.log(approve);
             $.ajax({
-                url: "/RelationalManager/RelationalManagerApproval",
+                url: "/RelationalManager/RelationalManagerRejected",
                 type: "put",
                 data: approve
             }).done((result) => {

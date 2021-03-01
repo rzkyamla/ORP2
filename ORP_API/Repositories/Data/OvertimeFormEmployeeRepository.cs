@@ -28,22 +28,47 @@ namespace ORP_API.Repositories.Data
             this.overtimeFormRepository = overtimeFormRepository;
         }
 
-        public int SupervisorApproval(OvertimeFormEmployee overtimeFormEmployee)
+        public IEnumerable<OvertimeFormEmployee> GetSpecificForm(string NIK)
         {
-            var result = new OvertimeFormEmployee()
-            {
-                Id = overtimeFormEmployee.Id,
-                CustomerId = overtimeFormEmployee.CustomerId,
-                NIK = overtimeFormEmployee.NIK,
-                Status = overtimeFormEmployee.Status,
-                OvertimeFormId = overtimeFormEmployee.OvertimeFormId
-            };
+            var getInfo = myContext.Employee.Where(a => a.NIK == NIK).FirstOrDefault();
 
-            myContext.Entry(result).State = EntityState.Modified;
-            var finalResult = myContext.SaveChanges();
-
-            if (result.Status == StatusRequest.ApproveBySupervisor)
+            if (getInfo != null)
             {
+                var getresult = myContext.OvertimeFormEmployee.Where(a => a.CustomerId == getInfo.CustomerId).AsEnumerable();
+                return getresult;
+            }
+            else 
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<OvertimeFormEmployee> GetHistoryRequest(string NIK)
+        {
+            var getInfo = myContext.OvertimeFormEmployee.Where(a => a.NIK == NIK).AsEnumerable();       
+            return getInfo;
+        }
+
+        public int ApprovedSupervisor(OvertimeFormViewModels overtimeFormVM)
+        {
+            var data = myContext.OvertimeFormEmployee.Where(e => e.Id == overtimeFormVM.Id).FirstOrDefault();
+            if (data == null)
+            {
+                return 0;
+            }
+            if (data.Status == StatusRequest.ApproveByRelatonalManager)
+            {
+                return 0;
+            }
+            if (data.Status == StatusRequest.Reject) 
+            {
+                return 0;
+            }
+            if (data.Status == StatusRequest.Waiting)
+            {
+                data.Status = StatusRequest.ApproveBySupervisor;
+                myContext.Update(data);
+
                 OvertimeFormViewModels result3 = null;
 
                 string connectStr = Configuration.GetConnectionString("MyConnection");
@@ -57,89 +82,127 @@ namespace ORP_API.Repositories.Data
             }
             else
             {
-                OvertimeFormViewModels result3 = null;
-
-                string connectStr = Configuration.GetConnectionString("MyConnection");
-                using (IDbConnection db = new SqlConnection(connectStr))
-                {
-                    string readSp = "sp_get_email_employee";
-                    var parameter = new { NIK = overtimeFormEmployee.NIK, CustomerId = overtimeFormEmployee.CustomerId };
-                    result3 = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
-                }
-                sendEmail.SendRejectNotificationToEmployee(result3.Email);
+                return 0;
             }
-
-            return finalResult;
+            myContext.SaveChanges();
+            return 1;
         }
-
-        public int RelationalManagerApproval(OvertimeFormEmployee overtimeFormEmployee)
+        public int ApprovedRM(OvertimeFormViewModels overtimeFormVM)
         {
-            var result = new OvertimeFormEmployee()
+            var data = myContext.OvertimeFormEmployee.Where(e => e.Id == overtimeFormVM.Id).FirstOrDefault();
+            if (data == null)
             {
-                Id = overtimeFormEmployee.Id,
-                CustomerId = overtimeFormEmployee.CustomerId,
-                NIK = overtimeFormEmployee.NIK,
-                Status = overtimeFormEmployee.Status,
-                OvertimeFormId = overtimeFormEmployee.OvertimeFormId
-            };
-
-            myContext.Entry(result).State = EntityState.Modified;
-            var finalResult = myContext.SaveChanges();
-
-            if (result.Status == StatusRequest.ApproveByRelatonalManager)
+                return 0;
+            }
+            if (data.Status == StatusRequest.Waiting)
             {
+                return 0;
+            }
+            if (data.Status == StatusRequest.Reject)
+            {
+                return 0;
+            }
+            if (data.Status == StatusRequest.ApproveBySupervisor)
+            {
+                data.Status = StatusRequest.ApproveByRelatonalManager;
+                myContext.Update(data);
+
                 RequestViewModels result3 = null;
 
                 string connectStr = Configuration.GetConnectionString("MyConnection");
                 using (IDbConnection db = new SqlConnection(connectStr))
                 {
                     string readSp = "sp_get_email_employee";
-                    var parameter = new { NIK = overtimeFormEmployee.NIK, CustomerId = overtimeFormEmployee.CustomerId };
+                    var parameter = new { NIK = data.NIK, CustomerId = data.CustomerId };
                     result3 = db.Query<RequestViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
                 sendEmail.SendApproveNotificationToEmployee(result3.Email);
             }
             else
             {
-                RequestViewModels result3 = null;
+                return 0;
+            }
+            myContext.SaveChanges();
+            return 1;
+        }
+        public int RejectSupervisor(OvertimeFormViewModels overtimeFormVM)
+        {
+            var data = myContext.OvertimeFormEmployee.Where(e => e.Id == overtimeFormVM.Id).FirstOrDefault();
+            if (data == null)
+            {
+                return 0;
+            }
+            if (data.Status == StatusRequest.ApproveBySupervisor)
+            {
+                return 0;
+            }
+            if (data.Status == StatusRequest.ApproveByRelatonalManager)
+            {
+                return 0;
+            }
+
+            if (data.Status == StatusRequest.Waiting)
+            {
+                data.Status = StatusRequest.Reject;
+                myContext.Update(data);
+
+                OvertimeFormViewModels result3 = null;
 
                 string connectStr = Configuration.GetConnectionString("MyConnection");
                 using (IDbConnection db = new SqlConnection(connectStr))
                 {
                     string readSp = "sp_get_email_employee";
-                    var parameter = new { NIK = overtimeFormEmployee.NIK, CustomerId = overtimeFormEmployee.CustomerId };
+                    var parameter = new { NIK = overtimeFormVM.NIK, CustomerId = overtimeFormVM.CustomerId};
+                    result3 = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                }
+                sendEmail.SendRejectNotificationToEmployee(result3.Email);
+            }
+            else
+            {
+                return 0;
+            }
+            myContext.SaveChanges();
+            return 1;
+        }
+        public int RejectRM(OvertimeFormViewModels overtimeFormVM)
+        {
+            var data = myContext.OvertimeFormEmployee.Where(e => e.Id == overtimeFormVM.Id).FirstOrDefault();
+            if (data == null)
+            {
+                return 0;
+            }
+            if (data.Status == StatusRequest.Waiting)
+            {
+                return 0;
+            }
+            if (data.Status == StatusRequest.ApproveByRelatonalManager)
+            {
+                return 0;
+            }
+
+            if (data.Status == StatusRequest.ApproveBySupervisor)
+            {
+                data.Status = StatusRequest.Reject;
+                myContext.Update(data);
+                RequestViewModels result3 = null;
+
+                string connectStr = Configuration.GetConnectionString("MyConnection");
+
+                using (IDbConnection db = new SqlConnection(connectStr))
+                {
+                    string readSp = "sp_get_email_employee";
+                    var parameter = new { NIK = overtimeFormVM.NIK, CustomerId = overtimeFormVM.CustomerId };
                     result3 = db.Query<RequestViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
                 sendEmail.SendRejectNotificationToEmployee(result3.Email);
-
             }
-
-            return finalResult;
+            else
+            {
+                return 0;
+            }
+            myContext.SaveChanges();
+            return 1;
         }
 
-        //public IEnumerable<OvertimeFormEmployee> GetSpecificForm(string NIK)
-        //{
-        //    var getInfo = myContext.Employee.Where(a => a.NIK == NIK).FirstOrDefault();
-
-        //    if (getInfo == null)
-        //    {
-        //        OvertimeFormViewModels result1 = null;
-
-        //        string connectStr = Configuration.GetConnectionString("MyConnection");
-        //        using (IDbConnection db = new SqlConnection(connectStr))
-        //        {
-        //            string readSp = "sp_get_specific_form";
-        //            var parameter = new { CustomerId = getInfo.CustomerId };
-        //            result1 = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
-        //        }
-        //        return result1;
-        //    }
-        //}
-
-        public IEnumerable<OvertimeFormEmployee> GetHistoryRequest(string NIK)
-        {
-            var getInfo = myContext.OvertimeFormEmployee.Where(a => a.NIK == NIK).AsEnumerable();       
-            return getInfo;
-        }
     }
 }

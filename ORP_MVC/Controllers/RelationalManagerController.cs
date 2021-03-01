@@ -37,7 +37,6 @@ namespace ORP_MVC.Controllers
             return apiResponse.Result;
         }
 
-
         [HttpPut]
         public HttpStatusCode RelationalManagerApproval(RelationalManagerViewModels relationalManagerViewModels)
         {
@@ -45,7 +44,17 @@ namespace ORP_MVC.Controllers
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(relationalManagerViewModels), Encoding.UTF8, "application/json");
 
-            var result = httpClient.PutAsync("https://localhost:44346/api/OvertimeFormEmployee/RM/Manage", content).Result;
+            var result = httpClient.PutAsync("https://localhost:44346/api/OvertimeFormEmployee/SubmitApprovedRM/", content).Result;
+            return result.StatusCode;
+        }
+        [HttpPut]
+        public HttpStatusCode RelationalManagerRejected(RelationalManagerViewModels relationalManagerViewModels)
+        {
+            var httpClient = new HttpClient();
+
+            StringContent content = new StringContent(JsonConvert.SerializeObject(relationalManagerViewModels), Encoding.UTF8, "application/json");
+
+            var result = httpClient.PutAsync("https://localhost:44346/api/OvertimeFormEmployee/SubmitRejectRM/", content).Result;
             return result.StatusCode;
         }
     }

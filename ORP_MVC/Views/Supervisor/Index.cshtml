@@ -371,7 +371,7 @@
             approve.status = 3;
             console.log(approve);
             $.ajax({
-                url: "/Supervisor/SupervisorApproval",
+                url: "/Supervisor/SupervisorRejected",
                 type: "put",
                 data: approve
             }).done((result) => {
