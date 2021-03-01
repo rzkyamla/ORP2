@@ -176,13 +176,13 @@
         console.log(Register);
         $.ajax({
             type: 'post',
-            url: '/register/register',
+            url: '/homepage/register',
             data: Register
         }).done((result) => {
             console.log(result);
             if (result == 200) {
                 alert("Successed to Add Data! Please Login!");
-                window.location.href = "https://localhost:44347/Register";
+                window.location.href = "https://localhost:44347/HomePage";
                 $('#Register').modal('hide')
                 $('#nik').val(null);
                 $('#name').val(null);
@@ -196,7 +196,7 @@
         }).fail((result) => {
             console.log(result);
             alert("Failed to Add Data!");
-            window.location.href = "https://localhost:44347/Register";
+            window.location.href = "https://localhost:44347/HomePage";
         })
     }
 

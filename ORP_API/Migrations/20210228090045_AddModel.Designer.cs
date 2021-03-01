@@ -10,7 +10,7 @@ using ORP_API.Context;
 namespace ORP_API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210223134029_AddModel")]
+    [Migration("20210228090045_AddModel")]
     partial class AddModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

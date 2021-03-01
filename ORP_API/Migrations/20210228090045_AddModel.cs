@@ -27,8 +27,8 @@ namespace ORP_API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
-                    SubmissionDate = table.Column<DateTime>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: false)
+                    CustomerId = table.Column<int>(nullable: false),
+                    SubmissionDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
