@@ -25,6 +25,7 @@ namespace ORP_MVC.Controllers
                 return RedirectToAction("index", "Dashboard");
             }
             return RedirectToAction("index", "HomePage");
+            /* return View();*/
         }
 
         [HttpGet]

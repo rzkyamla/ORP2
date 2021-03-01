@@ -24,7 +24,12 @@ namespace ORP_MVC.Controllers
                 }
                 return RedirectToAction("index", "Dashboard");
             }
-            return RedirectToAction("index", "HomePage");
+            /*  if (HttpContext.Session.GetString("email") == null) 
+              {
+                  return RedirectToAction("index", "HomePage");
+              }
+              return View();*/
+            return RedirectToAction("index", "Dashboard");
         }
         [HttpPut]
         public HttpStatusCode UpdateRole(RegisterViewModels registerViewModels)

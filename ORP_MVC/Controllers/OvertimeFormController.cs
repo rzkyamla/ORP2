@@ -18,6 +18,7 @@ namespace ORP_MVC.Controllers
         {
             ViewData["NIKvalue"] = HttpContext.Session.GetString("nik");
             ViewData["Namevalue"] = HttpContext.Session.GetString("name");
+            ViewData["customerId"] = HttpContext.Session.GetString("customerid");
             if (HttpContext.Session.GetString("email") != null)
             {
                 if (HttpContext.Session.GetString("rolename") == "Employee")
