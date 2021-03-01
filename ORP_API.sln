@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORP_API", "ORP_API\ORP_API.csproj", "{AF73B336-332A-45C6-91A8-51B032DCE5D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORP_MVC", "ORP_MVC\ORP_MVC.csproj", "{9F8674BD-D173-457C-A803-89F609E30A73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORP_MVC", "ORP_MVC\ORP_MVC.csproj", "{9F8674BD-D173-457C-A803-89F609E30A73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

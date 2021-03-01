@@ -129,5 +129,11 @@ namespace ORP_API.Repositories.Data
             
             return getResult;
         }
+
+        public IEnumerable<OvertimeFormEmployee> GetHistoryRequest(string NIK)
+        {
+            var getInfo = myContext.OvertimeFormEmployee.Where(a => a.NIK == NIK).AsEnumerable();       
+            return getInfo;
+        }
     }
 }

@@ -13,12 +13,29 @@ namespace ORP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetString("email") == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return RedirectToAction("index", "HomePage");
+                if (HttpContext.Session.GetString("rolename") == "Admin")
+                {
+                    return View();
+                }
+                else if (HttpContext.Session.GetString("rolename") == "Relational Manager")
+                {
+                    return RedirectToAction("index", "RMDashboard");
+                }
+                else if (HttpContext.Session.GetString("rolename") == "Supervisor")
+                {
+                    return RedirectToAction("index", "SupervisorDashboard");
+                }
+                else
+                {
+                    return RedirectToAction("index", "EmployeeDashboard");
+                }
             }
-            return View();
+            return RedirectToAction("index", "HomePage");
+
         }
+
         [HttpGet ("/Logout")]
         public IActionResult Logout()
         {

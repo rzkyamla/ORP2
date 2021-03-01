@@ -35,7 +35,7 @@ namespace ORP_MVC.Controllers
             return result.StatusCode;
         }
         [HttpGet]
-        public String Get(int Id)
+        public String Get(string Id)
         {
             var httpClient = new HttpClient();
             var response = httpClient.GetAsync("https://localhost:44346/api/employee/" + Id).Result;

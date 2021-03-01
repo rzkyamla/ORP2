@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ORP_API.ViewModels;
 using System;
@@ -15,7 +16,15 @@ namespace ORP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("rolename") == "Relational Manager")
+                {
+                    return View();
+                }
+                return RedirectToAction("index", "Dashboard");
+            }
+            return RedirectToAction("index", "HomePage");
         }
 
         [HttpGet]

@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Manage Role";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -29,95 +34,36 @@
     <div class="wrapper">
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#2E8BC0">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Metrodata Request</span>
+                <span class="brand-text font-weight-light"><b>Overtime Request</b></span>
             </a>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index">Home</a>
+                        <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index" style="color:white">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="OvertimeForm" asp-action="Index"><i class="nav-icon fas fa-th"></i>Apply Overtime Request</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="ManageRole" asp-action="Index"><i class="nav-icon fas fa-th"></i>Manage Role</a>
+                        <a class="nav-link" asp-area="" asp-controller="ManageRole" asp-action="Index" style="color:white"><i class="nav-icon fas fa-th" style="color:white"></i>Manage Role</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Check Request Overtime
-                                <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right"></span>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Supervisor" asp-action="Index">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Supervisor</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="RelationalManager" asp-action="Index">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Relational Manager</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-chart-pie"></i>
-                            <p>
-                                Report
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Employees Request Overtime
-                                <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right"></span>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="pages/layout/top-nav.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Actual</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>History</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
-                            <p>
+                            <i class="nav-icon fas fa-table" style="color:white"></i>
+                            <p style="color:white">
                                 Profile
-                                <i class="fas fa-angle-left right"></i>
+                                <i class="fas fa-angle-left right" style="color:white"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="ChangePass" asp-action="Index">Change Password</a>
+                                <a class="nav-link" asp-area="" asp-controller="ChangePass" asp-action="Index" style="color:white">Change Password</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Logout">Logout</a>
+                                <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Logout" style="color:white">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -168,9 +114,9 @@
 </body>
 </html>
 <div class="container-fluid mt-5">
-    <div class="card card-default" style="margin-left:150px;margin-bottom:150px">
+    <div class="card card-default" style="margin-left:150px;margin-bottom:150px;">
         <table id="myTable" class="table table-striped table-bordered" styles="widht:100%">
-            <thead>
+            <thead style="background-color:#2E8BC0">
                 <tr>
                     <th>No</th>
                     <th>NIK</th>
@@ -186,7 +132,7 @@
                 </tr>
             </thead>
             <tbody></tbody>
-            <tfoot>
+            <tfoot style="background-color:#2E8BC0">
                 <tr>
                     <th>No</th>
                     <th>NIK</th>
@@ -206,8 +152,8 @@
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header badge-dark">
-                    <h5 class="modal-title" id="addModalLabel">Change Role</h5>
+                <div class="modal-header" style="background-color:#2E8BC0">
+                    <h5 class="modal-title" id="addModalLabel" style="color:white"><b>Change Role</b></h5>
                 </div>
                 <div class="modal-body">
                     <form id="formRole">
@@ -256,153 +202,153 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer badge-dark">
-                    <button type="button" class="btn btn-default" onclick="UpdateRole()">Submit</button>
+                <div class="modal-footer" style="background-color:#2E8BC0">
+                    <button type="button" class="btn btn-success" onclick="UpdateRole()">Submit</button>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    @section scripts
+</div>
+@section scripts
 {
-        <script>
-            var table = null;
-            $(document).ready(function () {
-                table = $("#myTable").DataTable({
-                    "filter": true,
-                    "orderMulti": false,
-                    "ajax": {
-                        "url": "https://localhost:44346/api/employee",
-                        "type": "get",
-                        "datatype": "json",
-                        "dataSrc": "data"
+    <script>
+        var table = null;
+        $(document).ready(function () {
+            table = $("#myTable").DataTable({
+                "filter": true,
+                "orderMulti": false,
+                "ajax": {
+                    "url": "https://localhost:44346/api/employee",
+                    "type": "get",
+                    "datatype": "json",
+                    "dataSrc": "data"
+                },
+                "columnDefs": [
+                    {
+                        "targets": [3, 4, 5, 7],
+                        "visible": false,
+                    }
+                ],
+                "columns": [
+                    {
+                        "data": null,
+                        "render": function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
                     },
-                    "columnDefs": [
-                        {
-                            "targets": [3, 4, 5, 7],
-                            "visible": false,
-                        }
-                    ],
-                    "columns": [
-                        {
-                            "data": null,
-                            "render": function (data, type, row, meta) {
-                                return meta.row + meta.settings._iDisplayStart + 1;
+                    {
+                        "data": 'nik'
+                    },
+                    {
+                        "data": 'name'
+                    },
+                    {
+                        "data": 'birthDate'
+                    },
+                    {
+                        "data": 'gender'
+                    },
+                    {
+                        "data": 'religion'
+                    },
+                    {
+                        "data": 'email'
+                    },
+                    {
+                        "data": 'phoneNumber'
+                    },
+                    {
+                        "data": "roleId",
+                        "render": function (roleId) {
+                            if (roleId == "1") {
+                                return "Admin";
                             }
-                        },
-                        {
-                            "data": 'nik'
-                        },
-                        {
-                            "data": 'name'
-                        },
-                        {
-                            "data": 'birthDate'
-                        },
-                        {
-                            "data": 'gender'
-                        },
-                        {
-                            "data": 'religion'
-                        },
-                        {
-                            "data": 'email'
-                        },
-                        {
-                            "data": 'phoneNumber'
-                        },
-                        {
-                            "data": "roleId",
-                            "render": function (roleId) {
-                                if (roleId == "1") {
-                                    return "Admin";
-                                }
-                                else if (roleId == "2") {
-                                    return "Relational Manager";
-                                }
-                                else if (roleId == "3") {
-                                    return "Supervisor";
-                                }
-                                else {
-                                    return "Employee"
-                                }
+                            else if (roleId == "2") {
+                                return "Relational Manager";
                             }
-                        },
-                        {
-                            "data": 'customerId',
-                            "render": function (customerId) {
-                                if (customerId == "1") {
-                                    return "Metrodata MII";
-                                }
-                                else if (customerId == "2") {
-                                    return "Bank BCA";
-                                }
-                                if (customerId == "3") {
-                                    return "Bank BNI";
-                                }
-                                else {
-                                    return "Bank BRI";
-                                }
+                            else if (roleId == "3") {
+                                return "Supervisor";
                             }
-                        },
-                        {
-                            "render": function (data, type, row, meta) {
-                                return '<a href="javascript:void(0)" class="far fa-edit table-action text-dark" data-toggle="tooltip" data-placement="top" title="Edit" onclick="Get(\'' + row['nik'] + '\')"></a>'
+                            else {
+                                return "Employee"
                             }
                         }
-                    ]
-                });
+                    },
+                    {
+                        "data": 'customerId',
+                        "render": function (customerId) {
+                            if (customerId == "1") {
+                                return "Metrodata MII";
+                            }
+                            else if (customerId == "2") {
+                                return "Bank BCA";
+                            }
+                            if (customerId == "3") {
+                                return "Bank BNI";
+                            }
+                            else {
+                                return "Bank BRI";
+                            }
+                        }
+                    },
+                    {
+                        "render": function (data, type, row, meta) {
+                            return '<a href="javascript:void(0)" class="far fa-edit table-action text-dark" data-toggle="tooltip" data-placement="top" title="Edit" onclick="Get(\'' + row['nik'] + '\')"></a>'
+                        }
+                    }
+                ]
             });
+        });
 
-            function Get(id) {
-                console.log(id);
-                $.ajax({
-                    url: "/ManageRole/Get",
-                    data: { id: id }
-                }).done((result) => {
+        function Get(id) {
+            console.log(id);
+            $.ajax({
+                url: "/ManageRole/Get",
+                data: { id: id }
+            }).done((result) => {
+                console.log(result);
+                var obj = JSON.parse(result);
+                $("#addModal").modal("show");
+                $("#nik").val(obj.data.nik);
+                $("#name").val(obj.data.name);
+                $("#birthdate").val(obj.data.birthDate);
+                $("#gender").val(obj.data.gender);
+                $("#religion").val(obj.data.religion);
+                $("#email").val(obj.data.email);
+                $("#phonenumber").val(obj.data.phoneNumber);
+                $("#roleid").val(obj.data.roleId);
+                $("#customerid").val(obj.data.customerId);
+            }).fail((error) => {
+                console.log(error);
+            })
+        }
+
+        function UpdateRole(nik) {
+            var Employee = new Object();
+            Employee.nik = $("#nik").val();
+            Employee.name = $("#name").val();
+            Employee.birthDate = $("#birthdate").val();
+            Employee.gender = $("#gender").val();
+            Employee.religion = $("#religion").val();
+            Employee.email = $("#email").val();
+            Employee.phoneNumber = $("#phonenumber").val();
+            Employee.roleId = $("#roleid").val();
+            Employee.customerId = $("#customerid").val();
+            $.ajax({
+                type: "put",
+                url: '/ManageRole/UpdateRole',
+                data: Employee
+            }).done((result) => {
+                if (result == 200) {
+                    swal("Data Succesfully Updated");
+                    $('#addModal').modal('hide')
+                    table.ajax.reload();
+                }
+                else {
                     console.log(result);
-                    var obj = JSON.parse(result);
-                    $("#addModal").modal("show");
-                    $("#nik").val(obj.data.nik);
-                    $("#name").val(obj.data.name);
-                    $("#birthdate").val(obj.data.birthDate);
-                    $("#gender").val(obj.data.gender);
-                    $("#religion").val(obj.data.religion);
-                    $("#email").val(obj.data.email);
-                    $("#phonenumber").val(obj.data.phoneNumber);
-                    $("#roleid").val(obj.data.roleId);
-                    $("#customerid").val(obj.data.customerId);
-                }).fail((error) => {
-                    console.log(error);
-                })
-            }
-
-            function UpdateRole(nik) {
-                var Employee = new Object();
-                Employee.nik = $("#nik").val();
-                Employee.name = $("#name").val();
-                Employee.birthDate = $("#birthdate").val();
-                Employee.gender = $("#gender").val();
-                Employee.religion = $("#religion").val();
-                Employee.email = $("#email").val();
-                Employee.phoneNumber = $("#phonenumber").val();
-                Employee.roleId = $("#roleid").val();
-                Employee.customerId = $("#customerid").val();
-                $.ajax({
-                    type: "put",
-                    url: '/ManageRole/UpdateRole',
-                    data: Employee
-                }).done((result) => {
-                    if (result == 200) {
-                        swal("Data Succesfully Updated");
-                        $('#addModal').modal('hide')
-                        table.ajax.reload();
-                    }
-                    else {
-                        console.log(result);
-                        swal("Data Failed Updated");
-                    }
-                })
-            }
-        </script>
-    }
+                    swal("Data Failed Updated");
+                }
+            })
+        }
+    </script>
+}

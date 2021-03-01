@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,16 @@ namespace ORP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            ViewData["NIKvalue"] = HttpContext.Session.GetString("nik");
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("rolename") == "Employee")
+                {
+                    return View();
+                }
+                return RedirectToAction("index", "Dashboard");
+            }
+            return RedirectToAction("index", "HomePage");
         }
     }
 }
