@@ -19,26 +19,12 @@ namespace ORP_MVC.Controllers
             ViewData["NIKValue"] = HttpContext.Session.GetString("nik");
             if (HttpContext.Session.GetString("email") != null)
             {
-                if (HttpContext.Session.GetString("rolename") == "Admin")
-                {
-                    return View();
-                }
-                else if (HttpContext.Session.GetString("rolename") == "Relational Manager")
-                {
-                    return RedirectToAction("index", "RMChangePass");
-                }
-                else if (HttpContext.Session.GetString("rolename") == "Supervisor")
-                {
-                    return RedirectToAction("index", "SupervisorChangePass");
-                }
-                else
-                {
-                    return RedirectToAction("index", "EmployeeChangePass");
-                }
+                return View();
             }
-            return RedirectToAction("Index", "HomePage");
-            
+            return RedirectToAction("Index", "HomePage");   
         }
+
+
         [HttpPut]
         public HttpStatusCode ChangePassword(ChangePasswordViewModels changePasswordViewModels)
         {
