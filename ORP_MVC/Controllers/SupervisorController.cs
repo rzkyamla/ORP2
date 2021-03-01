@@ -17,7 +17,7 @@ namespace ORP_MVC.Controllers
 
         public IActionResult Index()
         {
-            ViewData["NIKvalue"] = HttpContext.Session.GetString("nik");
+            ViewData["NIKValue"] = HttpContext.Session.GetString("nik");
             if (HttpContext.Session.GetString("email") != null)
             {
                 if (HttpContext.Session.GetString("rolename") == "Supervisor")

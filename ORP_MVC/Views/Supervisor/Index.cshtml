@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Supervisor";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout - Supervisor.cshtml";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -33,95 +33,51 @@
     <div class="wrapper">
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#CBAE11">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Metrodata Request</span>
+                <span class="brand-text font-weight-light"><b>Overtime Request</b></span>
             </a>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="OvertimeForm" asp-action="Index"><i class="nav-icon fas fa-th"></i>Apply Overtime Request</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="ManageRole" asp-action="Index"><i class="nav-icon fas fa-th"></i>Manage Role</a>
+                        <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index" style="color:white">Home</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
+                            <i class="nav-icon fas fa-copy" style="color:white"></i>
+                            <p style="color:white">
                                 Check Request Overtime
-                                <i class="fas fa-angle-left right"></i>
+                                <i class="fas fa-angle-left right" style="color:white"></i>
                                 <span class="badge badge-info right"></span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Supervisor" asp-action="Index">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Supervisor</p>
-                                </a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="RelationalManager" asp-action="Index">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Relational Manager</p>
+                                    <i class="far fa-circle nav-icon" style="color:white"></i>
+                                    <p style="color:white">Relational Manager</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-chart-pie"></i>
-                            <p>
-                                Report
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Employees Request Overtime
-                                <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right"></span>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="pages/layout/top-nav.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Actual</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>History</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
-                            <p>
+                            <i class="nav-icon fas fa-table" style="color:white"></i>
+                            <p style="color:white">
                                 Profile
-                                <i class="fas fa-angle-left right"></i>
+                                <i class="fas fa-angle-left right" style="color:white"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="ChangePass" asp-action="Index">Change Password</a>
+                                <a class="nav-link" asp-area="" asp-controller="SupervisorChangePass" asp-action="Index" style="color:white">Change Password</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Logout">Logout</a>
+                                <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Logout" style="color:white">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -193,7 +149,7 @@
         </div>
         <br />
         <table id="myTable" class="table table-striped table-bordered" styles="widht:100%">
-            <thead>
+            <thead style="background-color:#CBAE11">
                 <tr>
                     <th>No</th>
                     <th>Id</th>
@@ -206,7 +162,7 @@
                 </tr>
             </thead>
             <tbody></tbody>
-            <tfoot>
+            <tfoot style="background-color:#CBAE11">
                 <tr>
                     <th>No</th>
                     <th>Id</th>
@@ -224,45 +180,34 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header badge-info">
-                <h5 class="modal-title" id="addModalLabel">Details</h5>
-                <button type="button" class="close" data-dismiss="modal" onclick="Close()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-header" style="background-color:#CBAE11">
+                <h5 class="modal-title" id="addModalLabel"><b>Details</b></h5>
             </div>
             <div class="modal-body">
                 <form id="formRole">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group" hidden>
-                                <label for="id" class="col-form-label">Id</label>
-                                <input type="text" class="form-control" id="id">
-                            </div>
-                            <div class="form-group">
-                                <label for="customerId" class="col-form-label">Customer Id</label>
-                                <input type="text" class="form-control" id="customerId" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="nik" class="col-form-label">NIK</label>
-                                <input type="text" class="form-control" id="nik" readonly>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="overtimeFormId" class="col-form-label">Overtime Form Id</label>
-                                <input type="text" class="form-control" id="overtimeFormId" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="status" class="col-form-label">Status</label>
-                                <input type="text" class="form-control" id="status" readonly>
-                            </div>
-                        </div>
+                    <div class="form-group" hidden>
+                        <label for="id" class="col-form-label">Id</label>
+                        <input type="text" class="form-control" id="id">
                     </div>
-
-
+                    <div class="form-group">
+                        <label for="customerId" class="col-form-label">Customer Id</label>
+                        <input type="text" class="form-control" id="customerId" readonly>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label for="nik" class="col-form-label">NIK</label>
+                        <input type="text" class="form-control" id="nik" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="overtimeFormId" class="col-form-label">Overtime Form Id</label>
+                        <input type="text" class="form-control" id="overtimeFormId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="status" class="col-form-label">Status</label>
+                        <input type="text" class="form-control" id="status" readonly>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer badge-info">
+            <div class="modal-footer" style="background-color:#CBAE11">
                 <button type="button" class="btn btn-success" onclick="Approve()">Approve</button>
                 <button type="button" class="btn btn-danger" onclick="Reject()">Reject</button>
             </div>

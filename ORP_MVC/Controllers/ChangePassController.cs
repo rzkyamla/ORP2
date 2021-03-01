@@ -17,11 +17,27 @@ namespace ORP_MVC.Controllers
         public IActionResult Index()
         {
             ViewData["NIKValue"] = HttpContext.Session.GetString("nik");
-            if (HttpContext.Session.GetString("email") == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return RedirectToAction("index", "HomePage");
+                if (HttpContext.Session.GetString("rolename") == "Admin")
+                {
+                    return View();
+                }
+                else if (HttpContext.Session.GetString("rolename") == "Relational Manager")
+                {
+                    return RedirectToAction("index", "RMChangePass");
+                }
+                else if (HttpContext.Session.GetString("rolename") == "Supervisor")
+                {
+                    return RedirectToAction("index", "SupervisorChangePass");
+                }
+                else
+                {
+                    return RedirectToAction("index", "EmployeeChangePass");
+                }
             }
-            return View();
+            return RedirectToAction("Index", "HomePage");
+            
         }
         [HttpPut]
         public HttpStatusCode ChangePassword(ChangePasswordViewModels changePasswordViewModels)

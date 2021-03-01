@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Change Password";
-    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+    Layout = "~/Views/Shared/_Layout - Supervisor.cshtml";
 }
 
 <!DOCTYPE html>
@@ -45,11 +45,11 @@
     <div class="wrapper">
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#2E8BC0">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#CBAE11">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Overtime Request</span>
+                <span class="brand-text font-weight-light"><b>Overtime Request</b></span>
             </a>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
@@ -59,7 +59,22 @@
                         <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index" style="color:white">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="ManageRole" asp-action="Index" style="color:white"><i class="nav-icon fas fa-th" style="color:white"></i>Manage Role</a>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy" style="color:white"></i>
+                            <p style="color:white">
+                                Check Request Overtime
+                                <i class="fas fa-angle-left right" style="color:white"></i>
+                                <span class="badge badge-info right"></span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="RelationalManager" asp-action="Index">
+                                    <i class="far fa-circle nav-icon" style="color:white"></i>
+                                    <p style="color:white">Relational Manager</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -71,7 +86,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="ChangePass" asp-action="Index" style="color:white">Change Password</a>
+                                <a class="nav-link" asp-area="" asp-controller="SupervisorChangePass" asp-action="Index" style="color:white">Change Password</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Logout" style="color:white">Logout</a>
@@ -80,16 +95,17 @@
                     </li>
                 </ul>
             </nav>
+            <!-- /.sidebar-menu -->
+            <!-- /.sidebar -->
         </aside>
     </div>
     <div class="login-box">
         <div class="col-lg-6 m-5">
-            <div class="card" style="margin-left:300px; width:400px; background-color:#2E8BC0">
+            <div class="card" style="margin-left:300px; width:400px; background-color:#CBAE11">
                 <div class="card-body m-2">
                     <form id="changepass">
                         <div class="input-group mb-3">
                             <input disabled value="@ViewData["NIKValue"]" id="nikchange" class="form-control" placeholder="NIK">
-                            @*<input type="text" id="nikchange" class="form-control" placeholder="NIK">*@
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -135,7 +151,7 @@
 </html>
 
 <script>
-    
+
     function ChangePassword() {
         console.log("test");
         var Account = new Object();

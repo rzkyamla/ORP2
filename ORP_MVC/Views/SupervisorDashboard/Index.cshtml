@@ -1,6 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Admin Page";
-    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+    ViewData["Title"] = "Supervisor Page";
+    Layout = "~/Views/Shared/_Layout - Supervisor.cshtml";
 }
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@
     <div class="wrapper">
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#2E8BC0">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#CBAE11">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -48,7 +48,22 @@
                         <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index" style="color:white">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="ManageRole" asp-action="Index" style="color:white"><i class="nav-icon fas fa-th" style="color:white"></i>Manage Role</a>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy" style="color:white"></i>
+                            <p style="color:white">
+                                Check Request Overtime
+                                <i class="fas fa-angle-left right" style="color:white"></i>
+                                <span class="badge badge-info right"></span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Supervisor" asp-action="Index">
+                                    <i class="far fa-circle nav-icon" style="color:white"></i>
+                                    <p style="color:white">Supervisor</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -60,7 +75,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="ChangePass" asp-action="Index" style="color:white">Change Password</a>
+                                <a class="nav-link" asp-area="" asp-controller="SupervisorChangePass" asp-action="Index" style="color:white">Change Password</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Logout" style="color:white">Logout</a>
@@ -204,7 +219,7 @@
         </div>
         <!-- /.content-wrapper -->
         <!-- Control Sidebar -->
-        <aside class="control-sidebar bg-blue">
+        <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
         </aside>
         <!-- /.control-sidebar -->
