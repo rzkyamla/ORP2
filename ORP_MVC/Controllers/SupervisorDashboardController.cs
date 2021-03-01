@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace ORP_MVC.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Namevalue"] = HttpContext.Session.GetString("name");
             return View();
         }
     }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Change Password";
+    ViewData["Title"] = "Employee Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,17 +29,6 @@
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Overtime Request | Log in</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -49,7 +38,7 @@
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Overtime Request</span>
+                <span class="brand-text font-weight-light"><b>Overtime Request</b></span>
             </a>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
@@ -59,7 +48,25 @@
                         <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index" style="color:white">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="ManageRole" asp-action="Index" style="color:white"><i class="nav-icon fas fa-th" style="color:white"></i>Manage Role</a>
+                        <a class="nav-link" asp-area="" asp-controller="OvertimeForm" asp-action="Index" style="color:white"><i class="nav-icon fas fa-th" style="color:white"></i>Apply Overtime Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy" style="color:white"></i>
+                            <p style="color:white">
+                                Check Request
+                                <i class="fas fa-angle-left right" style="color:white"></i>
+                                <span class="badge badge-info right"></span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="EmployeeRequest" asp-action="Index">
+                                    <i class="far fa-circle nav-icon" style="color:white"></i>
+                                    <p style="color:white">History</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -71,7 +78,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="ChangePass" asp-action="Index" style="color:white">Change Password</a>
+                                <a class="nav-link" asp-area="" asp-controller="EmployeeChangePass" asp-action="Index" style="color:white">Change Password</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Logout" style="color:white">Logout</a>
@@ -80,6 +87,8 @@
                     </li>
                 </ul>
             </nav>
+            <!-- /.sidebar-menu -->
+            <!-- /.sidebar -->
         </aside>
     </div>
     <div class="login-box">
@@ -133,9 +142,8 @@
     <!-- /.control-sidebar -->
 </body>
 </html>
-
 <script>
-    
+
     function ChangePassword() {
         console.log("test");
         var Account = new Object();
