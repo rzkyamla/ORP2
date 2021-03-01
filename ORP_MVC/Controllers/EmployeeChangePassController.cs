@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ORP_MVC.Controllers
 {
-    public class EmployeeDashboardController : Controller
+    public class EmployeeChangePassController : Controller
     {
         public IActionResult Index()
         {
-            ViewData["Namevalue"] = HttpContext.Session.GetString("name");
+            ViewData["NIKValue"] = HttpContext.Session.GetString("nik");
             return View();
         }
     }

@@ -13,6 +13,7 @@ namespace ORP_MVC.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Namevalue"] = HttpContext.Session.GetString("name");
             if (HttpContext.Session.GetString("email") != null)
             {
                 if (HttpContext.Session.GetString("rolename") == "Admin")

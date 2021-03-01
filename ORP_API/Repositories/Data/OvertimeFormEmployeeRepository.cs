@@ -123,11 +123,17 @@ namespace ORP_API.Repositories.Data
 
             if (getInfo == null)
             {
-                return null;
+                OvertimeFormViewModels result1 = null;
+
+                string connectStr = Configuration.GetConnectionString("MyConnection");
+                using (IDbConnection db = new SqlConnection(connectStr))
+                {
+                    string readSp = "sp_get_specific_form";
+                    var parameter = new { CustomerId = getInfo.CustomerId };
+                    result1 = db.Query<OvertimeFormViewModels>(readSp, parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                }
+                return result1;
             }
-            var getResult = myContext.OvertimeFormEmployee.Where(b => b.CustomerId == getInfo.CustomerId).AsEnumerable();
-            
-            return getResult;
         }
 
         public IEnumerable<OvertimeFormEmployee> GetHistoryRequest(string NIK)

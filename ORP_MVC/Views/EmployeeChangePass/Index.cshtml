@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Change Password";
+    ViewData["Title"] = "Employee Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,17 +29,6 @@
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Overtime Request | Log in</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -59,19 +48,22 @@
                         <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index" style="color:white">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="OvertimeForm" asp-action="Index" style="color:white"><i class="nav-icon fas fa-th" style="color:white"></i>Apply Overtime Request</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy" style="color:white"></i>
                             <p style="color:white">
-                                Check Request Overtime
+                                Check Request
                                 <i class="fas fa-angle-left right" style="color:white"></i>
                                 <span class="badge badge-info right"></span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="RelationalManager" asp-action="Index">
+                                <a class="nav-link" asp-area="" asp-controller="EmployeeRequest" asp-action="Index">
                                     <i class="far fa-circle nav-icon" style="color:white"></i>
-                                    <p style="color:white">Relational Manager</p>
+                                    <p style="color:white">History</p>
                                 </a>
                             </li>
                         </ul>
@@ -86,7 +78,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="RMChangePass" asp-action="Index" style="color:white">Change Password</a>
+                                <a class="nav-link" asp-area="" asp-controller="EmployeeChangePass" asp-action="Index" style="color:white">Change Password</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Logout" style="color:white">Logout</a>
@@ -106,6 +98,7 @@
                     <form id="changepass">
                         <div class="input-group mb-3">
                             <input disabled value="@ViewData["NIKValue"]" id="nikchange" class="form-control" placeholder="NIK">
+                            @*<input type="text" id="nikchange" class="form-control" placeholder="NIK">*@
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -149,9 +142,8 @@
     <!-- /.control-sidebar -->
 </body>
 </html>
-
 <script>
-    
+
     function ChangePassword() {
         console.log("test");
         var Account = new Object();
