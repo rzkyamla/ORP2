@@ -75,7 +75,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="RMChangePass" asp-action="Index" style="color:white">Change Password</a>
+                                <a class="nav-link" asp-area="" asp-controller="ChangePass" asp-action="Index" style="color:white">Change Password</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Logout" style="color:white">Logout</a>
@@ -354,7 +354,7 @@
             approve.status = 3;
             console.log(approve);
             $.ajax({
-                url: "/RelationalManager/RelationalManagerApproval",
+                url: "/RelationalManager/RelationalManagerRejected",
                 type: "put",
                 data: approve
             }).done((result) => {

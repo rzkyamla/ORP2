@@ -21,7 +21,7 @@ namespace ORP_API.Controllers
             this.overtimeFormEmployeeRepository = overtimeFormEmployeeRepository;
         }
 
-        [HttpPut("Supervisor/Manage")]
+        /*[HttpPut("Supervisor/Manage")]
         public ActionResult SupervisorApproval(OvertimeFormEmployee overtimeFormEmployee)
         {
             {
@@ -52,7 +52,7 @@ namespace ORP_API.Controllers
                 }
             }
         }
-
+*/
         [HttpGet("Get/{NIK}")]
         public ActionResult GetForm(string NIK)
         {
@@ -65,6 +65,65 @@ namespace ORP_API.Controllers
         {
             var data = overtimeFormEmployeeRepository.GetHistoryRequest(NIK);
             return (data != null) ? (ActionResult)Ok(new { data = data, status = "Ok" }) : NotFound(new { data = data, status = "Not Found", errorMessage = "ID is not identified" });
+        }
+        [HttpPut("SubmitApprovedSupervisor")]
+        public ActionResult SubmitApprovedHRD(OvertimeFormViewModels overtimeFormVM)
+        {
+            var data = overtimeFormEmployeeRepository.ApprovedSupervisor(overtimeFormVM);
+            if (data == 1)
+            {
+                return Ok(new { status = "Approved success" });
+            }
+            else
+            {
+                return StatusCode(500, new { status = "Internal Server Error" });
+            }
+
+        }
+
+        [HttpPut("SubmitRejectSupervisor")]
+        public ActionResult SubmitRejectSupervisor(OvertimeFormViewModels overtimeFormVM)
+        {
+            var data = overtimeFormEmployeeRepository.RejectSupervisor(overtimeFormVM);
+            if (data == 1)
+            {
+                return Ok(new { status = "Request Reject" });
+            }
+            else
+            {
+                return StatusCode(500, new { status = "Internal Server Error" });
+            }
+
+        }
+
+        [HttpPut("SubmitApprovedRM")]
+        public ActionResult SubmitApprovedRM(OvertimeFormViewModels overtimeFormVM)
+        {
+            var data = overtimeFormEmployeeRepository.ApprovedRM(overtimeFormVM);
+            if (data == 1)
+            {
+                return Ok(new { status = "Approved success" });
+            }
+            else
+            {
+                return StatusCode(500, new { status = "Internal Server Error" });
+            }
+
+        }
+
+        [HttpPut("SubmitRejectRM")]
+        public ActionResult SubmitRejectManager(OvertimeFormViewModels overtimeFormViewModels)
+        {
+            var data = overtimeFormEmployeeRepository.RejectRM(overtimeFormViewModels);
+            if (data == 1)
+            {
+                return Ok(new { status = "Reject success" });
+            }
+            else
+            {
+                return StatusCode(500, new { status = "Internal Server Error" });
+            }
+
         }
     }
 }

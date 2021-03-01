@@ -45,10 +45,20 @@ namespace ORP_MVC.Controllers
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(supervisorApprovalViewModels), Encoding.UTF8, "application/json");
 
-            var result = httpClient.PutAsync("https://localhost:44346/api/OvertimeFormEmployee/Supervisor/Manage", content).Result;
+            var result = httpClient.PutAsync("https://localhost:44346/api/OvertimeFormEmployee/SubmitApprovedSupervisor/", content).Result;
             return result.StatusCode;
         }
 
+        [HttpPut]
+        public HttpStatusCode SupervisorRejected(SupervisorApprovalViewModels supervisorApprovalViewModels)
+        {
+            var httpClient = new HttpClient();
+
+            StringContent content = new StringContent(JsonConvert.SerializeObject(supervisorApprovalViewModels), Encoding.UTF8, "application/json");
+
+            var result = httpClient.PutAsync("https://localhost:44346/api/OvertimeFormEmployee/SubmitRejectSupervisor/", content).Result;
+            return result.StatusCode;
+        }
         [HttpGet]
         public String GetSpecificForm(int Id)
         {
