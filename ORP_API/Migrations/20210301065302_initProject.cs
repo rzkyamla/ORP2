@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ORP_API.Migrations
 {
-    public partial class AddModel : Migration
+    public partial class initProject : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

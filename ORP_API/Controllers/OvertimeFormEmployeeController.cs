@@ -53,12 +53,12 @@ namespace ORP_API.Controllers
             }
         }
 
-        [HttpGet("Get/{NIK}")]
-        public ActionResult GetForm(string NIK)
-        {
-            var data = overtimeFormEmployeeRepository.GetSpecificForm(NIK);
-            return (data != null) ? (ActionResult)Ok(new { data = data, status = "Ok" }) : NotFound(new { data = data, status = "Not Found", errorMessage = "ID is not identified" });
-        }
+        //[HttpGet("Get/{NIK}")]
+        //public ActionResult GetForm(string NIK)
+        //{
+        //    var data = overtimeFormEmployeeRepository.GetSpecificForm(NIK);
+        //    return (data != null) ? (ActionResult)Ok(new { data = data, status = "Ok" }) : NotFound(new { data = data, status = "Not Found", errorMessage = "ID is not identified" });
+        //}
 
         [HttpGet("Employee/History/{NIK}")]
         public ActionResult GetRequest(string NIK)
