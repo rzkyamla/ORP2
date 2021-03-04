@@ -153,9 +153,9 @@
                 <tr>
                     <th>No</th>
                     <th>Id</th>
-                    <th>Customer (Client)</th>
+                    <th>Customer Name</th>
                     <th>Status</th>
-                    <th>More Action</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -163,9 +163,9 @@
                 <tr>
                     <th>No</th>
                     <th>Id</th>
-                    <th>Customer (Ciient)</th>
+                    <th>Customer Name</th>
                     <th>Status</th>
-                    <th>More Action</th>
+                    <th>Action</th>
                 </tr>
             </tfoot>
         </table>
@@ -298,7 +298,7 @@
                         },
                         {
                             "render": function (data, type, row, meta) {
-                                return '<a href="javascript:void(0)" class="fas fa-check-circle text-success" data-toggle="tooltip" data-placement="top" title="Approve" onclick="Get(\'' + row['id'] + '\')"></a> '
+                                return '<a href="javascript:void(0)" class="fas fa-plus-square text-dark" data-toggle="tooltip" data-placement="top" title="Approve" onclick="Get(\'' + row['id'] + '\')"></a> '
 
                             }
                         }

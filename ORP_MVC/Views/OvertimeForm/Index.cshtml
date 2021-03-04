@@ -247,9 +247,7 @@
         var totalOvertime = 0;
         var table = null;
         var rowIndex = 0;
-        $(document).ready(function () {
-        });
-
+      
         function AddListOvertime() {
             var difference = moment($("#etime").val(), 'hh:mm:ss').diff(moment($("#stime").val(), 'hh:mm:ss'), 'hours');
             totalOvertime = totalOvertime + difference;
