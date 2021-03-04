@@ -154,11 +154,8 @@
                     <th>No</th>
                     <th>Id</th>
                     <th>Customer (Client)</th>
-                    <th>NIK</th>
-                    <th>Overtime Form Id</th>
                     <th>Status</th>
-                    <th>Action</th>
-
+                    <th>More Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -167,10 +164,8 @@
                     <th>No</th>
                     <th>Id</th>
                     <th>Customer (Ciient)</th>
-                    <th>NIK</th>
-                    <th>Overtime Form Id</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>More Action</th>
                 </tr>
             </tfoot>
         </table>
@@ -189,7 +184,7 @@
                         <label for="id" class="col-form-label">Id</label>
                         <input type="text" class="form-control" id="id">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <label for="customerId" class="col-form-label">Customer Id</label>
                         <input type="text" class="form-control" id="customerId" readonly>
                     </div>
@@ -197,14 +192,30 @@
                         <label for="nik" class="col-form-label">NIK</label>
                         <input type="text" class="form-control" id="nik" readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <label for="overtimeFormId" class="col-form-label">Overtime Form Id</label>
                         <input type="text" class="form-control" id="overtimeFormId" readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <label for="status" class="col-form-label">Status</label>
                         <input type="text" class="form-control" id="status" readonly>
                     </div>
+                    <div class="form-group">
+                        <label for="employeeName" class="col-form-label">Employee Name</label>
+                        <input type="text" class="form-control" id="employeeName" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="subDate" class="col-form-label">Submission Date</label>
+                        <input type="text" class="form-control" id="subDate" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer" class="col-form-label">Company Client</label>
+                        <input type="text" class="form-control" id="customer" readonly>
+                    </div>
+                    <br />
+                    <h6><b>Request Details</b></h6>
+                    <ol id="reqList">
+                    </ol>
                 </form>
             </div>
             <div class="modal-footer">
@@ -234,8 +245,11 @@
                     "columnDefs": [
                         {
                             "targets": [1],
-                            "visible": false,
-
+                            "visible": false
+                        },
+                        {
+                            "targets": [4],
+                            "sortable": false
                         }
                     ],
                     "columns": [
@@ -266,12 +280,6 @@
                             }
                         },
                         {
-                            "data": 'nik'
-                        },
-                        {
-                            "data": 'overtimeFormId'
-                        },
-                        {
                             "data": 'status',
                             "render": function (status) {
                                 if (status == "0") {
@@ -299,27 +307,28 @@
             });
         }
 
-        function Close() {
-            $("#id").val(null);
-            $("#customerId").val(null);
-            $("#nik").val(null);
-            $("#overtimeFormId").val(null);
-            $("#status").val(null);
-        }
-
         function Get(id) {
+            debugger;
             $.ajax({
                 url: "/Supervisor/Get",
                 data: { id: id }
             }).done((result) => {
                 console.log(result);
                 var obj = JSON.parse(result);
+                let hasil = "";
                 $("#addModal").modal("show");
                 $("#id").val(obj.data.id);
                 $("#customerId").val(obj.data.customerId);
                 $("#nik").val(obj.data.nik);
                 $("#overtimeFormId").val(obj.data.overtimeFormId);
                 $("#status").val(obj.data.status);
+                $("#employeeName").val(obj.data.employee.name);
+                $("#customer").val(obj.data.employee.customer.name);
+                $("#subDate").val(moment(obj.data.overtimeForm.submissionDate).format('DD/MM/YYYY'));
+                $.each(obj.data.overtimeForm.detailOvertimeReq, function (key, value) {
+                    hasil += '<li>' + value.startTime + ' / ' + value.endTime + ' / ' + value.act + '</li>';
+                });
+                $("#reqList").html(hasil);
             }).fail((error) => {
                 console.log(error);
             })
