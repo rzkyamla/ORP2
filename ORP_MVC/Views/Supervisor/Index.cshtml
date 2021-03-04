@@ -149,23 +149,28 @@
         </div>
         <br />
         <table id="myTable" class="table table-striped table-bordered" styles="widht:100%">
-            <thead>
+            <thead style="background-color:#4E4F50">
                 <tr>
-                    <th>No</th>
-                    <th>Id</th>
-                    <th>Customer (Client)</th>
-                    <th>Status</th>
-                    <th>More Action</th>
+                    <th style="color:white">No</th>
+                    <th style="color:white">Id</th>
+                    <th style="color:white">Customer (Ciient)</th>
+                    <th style="color:white">NIK</th>
+                    <th style="color:white">Overtime Form Id</th>
+                    <th style="color:white">Status</th>
+                    <th style="color:white">Action</th>
+
                 </tr>
             </thead>
             <tbody></tbody>
-            <tfoot>
+            <tfoot style="background-color:#4E4F50">
                 <tr>
-                    <th>No</th>
-                    <th>Id</th>
-                    <th>Customer (Ciient)</th>
-                    <th>Status</th>
-                    <th>More Action</th>
+                    <th style="color:white">No</th>
+                    <th style="color:white">Id</th>
+                    <th style="color:white">Customer (Ciient)</th>
+                    <th style="color:white">NIK</th>
+                    <th style="color:white">Overtime Form Id</th>
+                    <th style="color:white">Status</th>
+                    <th style="color:white">Action</th>
                 </tr>
             </tfoot>
         </table>
@@ -248,7 +253,7 @@
                             "visible": false
                         },
                         {
-                            "targets": [4],
+                            "targets": [6],
                             "sortable": false
                         }
                     ],
@@ -278,6 +283,12 @@
                                     return "Bank BRI";
                                 }
                             }
+                        },
+                        {
+                            "data": 'nik'
+                        },
+                        {
+                            "data": 'overtimeFormId'
                         },
                         {
                             "data": 'status',
