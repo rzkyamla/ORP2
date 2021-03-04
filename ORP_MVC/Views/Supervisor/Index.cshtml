@@ -355,6 +355,7 @@
                         icon: "success",
                         button: "Ok",
                     });
+                    $('#addModal').modal('hide')
                     table.ajax.reload();
                 } else if (result == 400) {
                     swal("failed to Update data", {
@@ -372,37 +373,44 @@
 
         function Reject(id) {
 
-            var approve = new Object();
-            approve.id = $("#id").val();
-            approve.customerId = $("#customerId").val();
-            approve.nik = $("#nik").val();
-            approve.overtimeFormId = $("#overtimeFormId").val();
-            approve.status = 3;
-            console.log(approve);
+            var reject = new Object();
+            reject.id = $("#id").val();
+            reject.customerId = $("#customerId").val();
+            reject.nik = $("#nik").val();
+            reject.overtimeFormId = $("#overtimeFormId").val();
+            reject.status = 3;
+            console.log(reject);
             $.ajax({
                 url: "/Supervisor/SupervisorRejected",
                 type: "put",
-                data: approve
+                data: reject
             }).done((result) => {
                 if (result == 200) {
                     swal({
-                        title: "Success!",
+                        title: "Reject!",
                         text: "Data Updated",
                         icon: "success",
                         button: "Ok",
                     });
+                    $('#addModal').modal('hide')
                     table.ajax.reload();
                 } else if (result == 400) {
                     swal("failed to Update data", {
                         icon: "warning",
                     });
+                    $('#addModal').modal('hide')
                 } else {
                     swal("failed to Update data", {
                         icon: "warning",
                     });
+                    $('#addModal').modal('hide')
                 }
             }).fail((error) => {
                 console.log(error);
+                swal("failed to Update data", {
+                    icon: "warning",
+                });
+                $('#addModal').modal('hide')
             });
         }
     </script>

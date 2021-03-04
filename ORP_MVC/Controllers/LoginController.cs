@@ -41,7 +41,7 @@ namespace ORP_MVC.Controllers
             HttpContext.Session.SetString("nik", tempResult.NIK);
             HttpContext.Session.SetString("name", tempResult.Name);
             HttpContext.Session.SetString("customerid", tempResult.CustomerName);
-            HttpContext.Session.SetString("email", loginViewModels.Email);
+            HttpContext.Session.SetString("email", tempResult.Email);
             HttpContext.Session.SetString("rolename", tempResult.RoleName);
             var httpclient = new HttpClient();
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(loginViewModels), Encoding.UTF8, "application/json");
